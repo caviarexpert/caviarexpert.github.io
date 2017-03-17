@@ -19,19 +19,19 @@ script: npm run tsc
 
 #after_success:
 # - bash deploy/deploy.sh
-before_deploy:
-  - mkdir ~/output
-  - cp -r . ~/output/
-  - echo 'output dir created'
-  - cd ~/output
-  - echo `ls .`
-  - echo `ls deploy`
-  - cp deploy/README.md README.md
-  - cp deploy/deploy.gitignore .gitignore  
+#before_deploy:
+#  - mkdir ../output
+#  - cp -r . ../output/
+#  - echo 'output dir created'
+#  - cd ../output
+#  - echo `ls .`
+#  - echo `ls deploy`
+#  - cp deploy/README.md README.md
+#  - cp deploy/deploy.gitignore .gitignore  
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: ~/output
+  #local_dir: ../output
   on:
     branch: dev
   target_branch: master

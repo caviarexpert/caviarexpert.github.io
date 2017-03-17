@@ -20,10 +20,11 @@ script: npm run tsc
 #after_success:
 # - bash deploy/deploy.sh
 before_deploy:
-  - rm -rf out || exit 0;
-  - cp -r $(pwd) output
-  - cat output/deploy/README.md >> output/README.md
-  - cat output/deploy/deploy.gitignore >> .gitignore  
+  - cp -r . ~/ouput/
+  - echo 'output dir created'
+  - cd ~/output
+  - cat deploy/README.md >> README.md
+  - cat deploy/deploy.gitignore >> .gitignore  
 deploy:
   provider: pages
   skip_cleanup: true

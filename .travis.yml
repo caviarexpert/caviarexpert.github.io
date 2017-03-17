@@ -20,7 +20,7 @@ script: npm run tsc
 #after_success:
 # - bash deploy/deploy.sh
 before_deploy:
-  - cp -r . ~/output
+  - cp -r $(pwd) ~/output
   - cat ~/output/deploy/README.md >> ~/output/README.md
   - cat ~/output/deploy/deploy.gitignore >> .gitignore  
 deploy:

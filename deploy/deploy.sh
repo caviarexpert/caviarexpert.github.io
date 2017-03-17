@@ -22,4 +22,5 @@ git config --global user.name "Travis CI"
 git add .
 rev=$(git rev-parse --short HEAD)
 git commit -m "rebuild pages at ${rev}"
-git push --force --quiet "https://${GH_TOKEN}@${PUSH_GIT_REPO}" master:${PUSH_GIT_BRANCH} > /dev/null 2>&1
+#git push --force --quiet "https://${GH_TOKEN}@${PUSH_GIT_REPO}" master:${PUSH_GIT_BRANCH} > /dev/null 2>&1
+git push --force --quiet "https://${GH_TOKEN}@${PUSH_GIT_REPO}" master:${PUSH_GIT_BRANCH}

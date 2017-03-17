@@ -1,0 +1,10 @@
+/node_modules/
+/typings/
+/deploy/
+.travis.yml
+.yarnrc
+package.json
+README.md
+tsconfig.json
+typings.json
+yarn.lock

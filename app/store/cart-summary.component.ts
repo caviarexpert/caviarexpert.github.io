@@ -2,10 +2,11 @@ import { Component } from "@angular/core";
 import { Cart } from "../model/cart.model";
 
 @Component({
+    selector: "cart-summary",
     moduleId: module.id,
-    templateUrl: "cartDetail.component.html"
+    templateUrl: "cart-summary.component.html"
 })
-export class CartDetailComponent {
+export class CartSummaryComponent {
 
     constructor(public cart: Cart) { }
 }

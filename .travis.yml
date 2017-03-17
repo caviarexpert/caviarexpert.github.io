@@ -20,6 +20,7 @@ script: npm run tsc
 #after_success:
 # - bash deploy/deploy.sh
 before_deploy:
+  - mkdir ~/output
   - cp -r . ~/ouput/
   - echo 'output dir created'
   - cd ~/output

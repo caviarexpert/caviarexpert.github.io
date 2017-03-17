@@ -19,7 +19,8 @@ script: npm run tsc
 
 #after_success:
 # - bash deploy/deploy.sh
-#before_deploy:
+before_deploy:
+  - cat /dev/null > .gitignore
 #  - mkdir ../output
 #  - cp -r . ../output/
 #  - echo 'output dir created'

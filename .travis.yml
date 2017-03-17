@@ -20,11 +20,9 @@ script: npm run tsc
 #after_success:
 # - bash deploy/deploy.sh
 before_deploy:
-  - shopt -s dotglob
-  - cp -r . ~/output  
-  - mv ~/output/deploy/deploy.gitignore ~/output/deploy.gitignore
-  - mv deploy.gitingore .gitignore
-  - mv ~/output/deploy/README.md ~/output/README.md
+  - cp -r . ~/output
+  - cat ~/output/deploy/README.md >> ~/output/README.md
+  - cat ~/output/deploy/deploy.gitignore >> .gitignore  
 deploy:
   provider: pages
   skip_cleanup: true

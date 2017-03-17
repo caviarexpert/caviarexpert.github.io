@@ -22,6 +22,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   on:
-    branch: master
+    branch: dev
+  target_branch: master
   github_token:
     secure: zC7+eY9CovhP4xF2+86tsrkhKsnLNx2I6K/U78TSjQtT4RLt0mZm/47ZhTlenOyOGuLMdYqg3VRQIt2oo4Mv8PqS8pw5fMJgxwjIKP3Jr3zxDxUiMk2g6RmUlKn95A9xnarD2FR7eZsLhPZr66zv6r6kQdkYHo/Rlpz1OescSPL3J4VOQfFpoqMK2j/DO9eEJ0CQNS66kNGFFwNxYnUPEyRK8ruSMHvv6RgxqoQMdL21Z6N+VyW7Blltl51YQvyjMBKcklZNqGioZ54cY99nrf+Nt2g7k+WqpVYvKYzs4sf51WwBWng3urMw0cMJPgC2OmDCIXOXqE1R/Ghk/5GvKMsR79JYCytlODgRr0xRV/rp0AVzFFIRGvmR7XBlMpc2lMPdpS/1um9oYAOLyspDLeqFyo2TAbaNxQHvdAjk9MthTsWU3zU2NBFtULuq6p4qigy4m5Jsd63gNf6VBdB1Q13k9abEIXSpQx3tAP9UGTSqEjwfwAXKETzWRp3KStlTkE8k+Rebl8bcBDxsVlaS+VizJSei/s8fY9JqAnBS4uuEl9Iqj7UFnA9cQjQ8jApsLkaIEXYJZu7WTilfiqUb0Q1f1X9EuLi1nWCGwj9c4nIrvqrOTbZ4UIRn/xV+lIEsYAHGiKHxpwO+Cje0Du+wKuptyQp5lbk21KOTV1rTuZs=

@@ -21,7 +21,7 @@ script: npm run tsc
 # - bash deploy/deploy.sh
 before_deploy:
   - cp -R . ~/output/
-  - cp ~/output/deploy/.gitignore ~/output/.gitignore
+  - cp ~/output/deploy/deploy.gitignore ~/output/.gitignore
   - cp ~/output/deploy/README.md ~/output/README.md
 deploy:
   provider: pages

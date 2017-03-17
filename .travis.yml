@@ -22,7 +22,8 @@ script: npm run tsc
 before_deploy:
   - shopt -s dotglob
   - cp -r . ~/output  
-  - mv ~/output/deploy/deploy.gitignore ~/output/.gitignore
+  - mv ~/output/deploy/deploy.gitignore ~/output/deploy.gitignore
+  - mv deploy.gitingore .gitignore
   - mv ~/output/deploy/README.md ~/output/README.md
 deploy:
   provider: pages

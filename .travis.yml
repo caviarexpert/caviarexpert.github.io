@@ -24,6 +24,8 @@ before_deploy:
   - cp -r . ~/ouput/
   - echo 'output dir created'
   - cd ~/output
+  - echo `ls .`
+  - echo `ls deploy`
   - cp deploy/README.md README.md
   - cp deploy/deploy.gitignore .gitignore  
 deploy:

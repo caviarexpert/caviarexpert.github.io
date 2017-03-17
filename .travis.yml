@@ -24,8 +24,8 @@ before_deploy:
   - cp -r . ~/ouput/
   - echo 'output dir created'
   - cd ~/output
-  - cat deploy/README.md >> README.md
-  - cat deploy/deploy.gitignore >> .gitignore  
+  - cp deploy/README.md README.md
+  - cp deploy/deploy.gitignore .gitignore  
 deploy:
   provider: pages
   skip_cleanup: true

@@ -21,7 +21,7 @@ script: npm run tsc
 # - bash deploy/deploy.sh
 before_deploy:
   - mkdir ~/output
-  - cp -r . ~/ouput/
+  - cp -r . ~/output/
   - echo 'output dir created'
   - cd ~/output
   - echo `ls .`

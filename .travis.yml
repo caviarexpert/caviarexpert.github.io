@@ -2,13 +2,8 @@ language: node_js
 node_js:
 - node
 cache: yarn
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token:
-    secure: JCGHdrGQzxei0hgWKc3hXruxn21OK070GkYLYLQpGl47yaIUP5QZWVZ5TlkxrqF+UE7qjCDeTI9p6ljA86yVvFNXG1Y2iK4MlmlOAt7+9l3NXQxnpci+8/1uEnvem37pXaez2VkC9WurXCnetUZ7nFxJo2QwaOIeV9K/dRVISh+VzScUgxMq0aJZjrvr++kORwO1sxfgWXYaKt5cWzlKPP6PFlJco9P40Th+eb3mOu4x3C6VpZn6ApvSwBMNXZIwnLHOVnmQwFEdRCAF1GcwZHLteRwHnHOshIMJdlZXLOYFyDoL8YXFeKeBLiIN0oqODf5KKsMHI1nj5Jjlh0shMsUihCI/bAapPd/4051f28brblgxD8/+y9/7dUT10PzhXPWTqMTOWAePRDlvNvfBYbCNXeYlgXP+jZ6WjiJF8aC18Kr+qRL2n6914Tsi/JqG+I/3iXmnfwSt7fx1FUOj7KAwaZ4bNqL0wY08hQpgrRvQ8QjJK4GxdXlcJCdCiPQSWJL3hW4KW7MOqbFEhtWv9WTGzGveniG6NcKt2itBBPRHgLzCeAxah2u69i8Tpv10xs/sr79V/NvSJnEBv+Ta2uxOd++Dur7RN5U9Ypyk6jdJE2bFXZgJkLjA3xTdx8muiWCea3eQFYhWXHfkgUl109KYeaCgLsDqfDJl/2Bcbp4=
-  on:
-    branch: master
+after_success:
+  - bash deploy/deploy.sh
 branches:
   except:
   - master

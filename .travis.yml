@@ -26,7 +26,7 @@ before_deploy:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: ~/output/
+  local_dir: ~/output
   on:
     branch: dev
   target_branch: master

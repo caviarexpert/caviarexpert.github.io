@@ -21,6 +21,7 @@ script: npm run tsc
 # - bash deploy/deploy.sh
 before_deploy:
   - cat /dev/null > .gitignore
+  - touch .nojekyll
 #  - mkdir ../output
 #  - cp -r . ../output/
 #  - echo 'output dir created'

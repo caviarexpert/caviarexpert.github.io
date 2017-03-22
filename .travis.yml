@@ -15,6 +15,10 @@ env:
   - PUSH_GIT_BRANCH: master
   - secure_desc: GH_TOKEN=[TOKEN]
   - secure: yWL8DMPrNyKS5jKwfjKWPSrZ3USOkK5xzNNyuVEGoYkqcgEo+RdwrfwmgksvG9dlktq3lkLqPckEPZOc4KwlkU/p/F8j+MKiszm4yXhebnJI5nEjDm9p0Dqx015M2fKalNxQfI8Mf0XyVKb6N7O+Gt6g7FCuviQAatDtNhRjw7RW8pLzgd5SbHshuBrM1qzWzBbQarwcFRvDHb2X4/4RHpEqX0ApSlyFvHWqvQVvcJya6uMU2hRePTcaplAgpYfKrM9Wk19m9VKhswxoApP91cEgMNAuHIQyTuZue714DYoG9T3FrGAexZ08SQUZNJ65WWOYBTcmXmJKN2lbzUHVAhE4jSpykC5HclZuTmUN7W5ukKQRmorK/JiMQrd8nA9BDbtpfdU6IqaK71WOqnJQ9zPDUOLJFRHKVNN7E6+SfT2fgxAunpfx/kc/3yTm25kQyLQduHVgjvbpmGw9GqrjFQYIpqqr3DbwYtY2u05FUWgqa/0e8AWB2DOq/oH53tTrqMo0m//ZMNyQEh83sf3yXEnQuWdI0oQbck9weSm/aAoP5crSXlp7WjvNGbnyJ/TmjAEfAxj3LIfndbaUvIzGCP4s2swwXoS+UnfedXGU/5V2POYyQpdycjFIYg5RPIL9xF9djNxxJBddHCGdN3vFAGaoI3Iu9G4DBxhw8UZAtNk=
+
+before_install:
+  - cat /dev/null > .yarnrc
+
 script: npm run tsc
 
 #after_success:

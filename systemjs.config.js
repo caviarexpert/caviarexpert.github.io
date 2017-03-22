@@ -1,20 +1,26 @@
 (function (global) {
-
-    var paths = {
-        "@angular/*": "node_modules/@angular/*"
+    var maps = {
+        "rxjs": "node_modules/rxjs",
+        //"rxjs": "rxjs.module.min.js",
+        //"rxjs/*/*": "rxjs.module.min.js",
+        "@angular": "node_modules/@angular"
     }
+    var paths = {
+        //"@angular/*": "node_modules/@angular/*",
+        //"rxjs/*": "rxjs.module.min.js" //PROD
+    }
+    var packages = { 
+        "app": {},
+        "rxjs": { defaultExtension: "js"}
+        //"rxjs": { main: "rxjs.module.min.js" }
+    };
 
-    var packages = { "app": {} };
-
-    var angularModules = ["common", "compiler",
-     "core", "platform-browser", "platform-browser-dynamic",
-     "forms", "http", "router"];
-
-    angularModules.forEach(function (pkg) {
+    ["common", "compiler", "core", "platform-browser", "platform-browser-dynamic",
+     "forms", "http", "router"].forEach(function (pkg) {
         packages["@angular/" + pkg] = {
-            main: "/bundles/" + pkg + ".umd.min.js"
+            main: "bundles/" + pkg + ".umd.js"
         };
     });
 
-    System.config({ paths: paths, packages: packages });
+    System.config({ map:maps, paths:paths, packages: packages });
 })(this);

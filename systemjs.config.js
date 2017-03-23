@@ -1,6 +1,8 @@
 (function (global) {
+    //try to load angular from CDN https://plnkr.co/edit/gDTZRdPhbOhRL4irkbX9?p=info
     var paths = {
         "npm:": "./node_modules/",// PROD 'https://unpkg.com/',
+        "npmcdn:":"https://npmcdn.com/",
         //"libs:rxjs": "./node_modules/rxjs/bundles/Rx.js"
         "libs:rxjs" : "https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.js"
         //"@angular/*": "node_modules/@angular/*",
@@ -22,10 +24,11 @@
   }
 
     var maps = {       
-        "rxjs": "npm:rxjs",
+        "rxjs": "npmcdn:rxjs@5.2.0",
         //"rxjs": "rxjs.module.min.js",
         //"rxjs/*/*": "rxjs.module.min.js",
-        "@angular": "npm:@angular"
+        "@angular": "npmcdn:@angular",
+        //"@angular/router": "npmcdn:@angular/router@3.4.10"
     }
     var packages = { 
         "app": {},
@@ -40,5 +43,5 @@
         };
     });
 
-    System.config({ map:maps, paths:paths, bundles:bundles, packages: packages });
+    System.config({ map:maps, paths:paths,  packages: packages });
 })(this);

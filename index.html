@@ -4,22 +4,30 @@
     <base href="/" />
     <title>SportsStore</title>
     <meta charset="utf-8" />
-    <script src="node_modules/html5-history-api/history.min.js"></script>
-    <script src="node_modules/classlist.js/classList.min.js"></script>
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.8/history.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20150312/classList.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/shim.min.js"></script>
     <script src="node_modules/intl/dist/Intl.complete.js"></script>
-    <script src="node_modules/zone.js/dist/zone.min.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <!-- script src="rxjs.module.min.js"></script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zone.js/0.7.8/zone.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reflect-metadata/0.1.10/Reflect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.10/system.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.min.js"></script>
     <script src="systemjs.config.js"></script>
     <script>
-      System.import("app/main").catch(function(err){ console.error(err); });
+        console.log(System.normalize('//cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.min.js'));
+        System.set('rx', System.newModule({
+            "default": window.rxjsapp
+        }));
+        System.import("app/main")
+            .catch(function(err){ console.error(err); })
+            .then( m => {
+                console.log("normalized rx is ", System.normalize("//npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
+                console.log("has @angular: ", System.has("http://npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
+            });
+        
     </script>
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-        rel="stylesheet" />
-    <link href="node_modules/font-awesome/css/font-awesome.min.css" 
-          rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body class="m-a-1">
     <app>CaviarExpert store is loading ...</app>

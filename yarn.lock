@@ -2,41 +2,41 @@
 # yarn lockfile v1
 
 
-"@angular/common@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-2.2.0.tgz#b52686eafd71e053169ac0257f9135f9583247b6"
+"@angular/common@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-2.4.10.tgz#a3a682d2228fa30ec23dd0eb57c8e887fba26997"
 
-"@angular/compiler@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.2.0.tgz#154dfba521f2cce2655610f7d2e5065b04ea86b9"
+"@angular/compiler@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-2.4.10.tgz#f51fd34820b2a02c7cb61fbcf49873c58056fb0c"
 
-"@angular/core@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.2.0.tgz#7a3a8592b6731a65e5a9746ce45419d86d15fe56"
+"@angular/core@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-2.4.10.tgz#0b8320a65065965d998645b1f5cd3cf769b441ea"
 
-"@angular/forms@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-2.2.0.tgz#1e11781c740445ab5d08fd54f3b0d6f25d4ba34d"
+"@angular/forms@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-2.4.10.tgz#062133aaade1f3b3c962f1593208c541b622fd06"
 
-"@angular/http@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-2.2.0.tgz#7e44c820692be03b8c882531dbd697ee04a4e993"
+"@angular/http@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-2.4.10.tgz#ff6beade5b39c989ebf2393c49b34eebd43e9555"
 
-"@angular/platform-browser-dynamic@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.2.0.tgz#db044fbdf8caeb8c4cb3eb5f5a7a57bbcf2eb9eb"
+"@angular/platform-browser-dynamic@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.4.10.tgz#8df25dec2b06adc690cc9bc26448deccaebcd8ec"
 
-"@angular/platform-browser@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-2.2.0.tgz#6c39651ee861be9ca86ef6b7a21a160415b2ce8e"
+"@angular/platform-browser@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-2.4.10.tgz#cbf25608148fb4ffef96cc5005ba5d7b3e093906"
 
-"@angular/router@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-3.2.0.tgz#522585357ff9216e3ffae47e9045b3c150d00c7f"
+"@angular/router@^3.4.0":
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-3.4.10.tgz#a466a0918fc2882ece18ca12bd5aea298050e91e"
 
-"@angular/upgrade@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@angular/upgrade/-/upgrade-2.2.0.tgz#29a5a71463eb036d96d23e2be30920f65b1cc19a"
+"@angular/upgrade@^2.4.0":
+  version "2.4.10"
+  resolved "https://registry.yarnpkg.com/@angular/upgrade/-/upgrade-2.4.10.tgz#b69a3ee324d4450eb1696ddc9bded1a6ec06ca52"
 
 abbrev@1:
   version "1.1.0"
@@ -2552,9 +2552,9 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-reflect-metadata@0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.8.tgz#72426d570b60776e3688968bd5ab9537a15cecf6"
+reflect-metadata@^0.1.8:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
 
 regenerator-runtime@^0.10.0:
   version "0.10.3"
@@ -2700,9 +2700,9 @@ rx@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@5.0.0-beta.12:
-  version "5.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-beta.12.tgz#cdfde2d8c4639d20ae7794bff8fddf32da7ad337"
+rxjs@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.2.0.tgz#db537de8767c05fa73721587a29e0085307d318b"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -3024,11 +3024,15 @@ systemjs-builder@0.15.32:
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-systemjs@0.19.40, systemjs@^0.19.39:
+systemjs@^0.19.39:
   version "0.19.40"
   resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.40.tgz#158f64a9f4ef541a7fda6b40e527ee46b6c54cd0"
   dependencies:
     when "^3.7.5"
+
+systemjs@^0.20.10:
+  version "0.20.10"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.20.10.tgz#53ece512717fa10fcbf67b4e95fdb7c094219be8"
 
 tar-pack@~3.3.0:
   version "3.3.0"
@@ -3489,6 +3493,6 @@ zip-object@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/zip-object/-/zip-object-0.1.0.tgz#c1a0da04c88c837756e248680a03ff902ec3f53a"
 
-zone.js@0.6.26:
-  version "0.6.26"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.6.26.tgz#067c13b8b80223a89b62e9dc82680f09762c4636"
+zone.js@^0.7.8:
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.7.8.tgz#4f3fe8834d44597f2639053a0fa438df34fffded"

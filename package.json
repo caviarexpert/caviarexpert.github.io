@@ -38,7 +38,6 @@
     "lite": "lite-server",
     "json": "json-server data.js -p 3500 -m authMiddleware.js",
     "typings": "typings",
-    "set-typings": "typings install dt~core-js --save --global && typings install dt~node --save --global",
-    "postinstall": "typings install"
+    "postinstall": "typings install dt~core-js --save --global && typings install dt~node --save --global && typings install"
   }
 }

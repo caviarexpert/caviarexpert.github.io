@@ -1,16 +1,18 @@
 {
+  "name": "caviarexpert",
+  "description": "E-commerce store front-end.",
+  "version": "0.0.1",
+  "license": "Apache",
   "dependencies": {
-    "@angular/common": "^2.4.0",
-    "@angular/compiler": "^2.4.0",
-    "@angular/core": "^2.4.0",
-    "@angular/forms": "^2.4.0",
-    "@angular/http": "^2.4.0",
-    "@angular/platform-browser": "^2.4.0",
-    "@angular/platform-browser-dynamic": "^2.4.0",
-    "@angular/router": "^3.4.0",
-    "@angular/upgrade": "^2.4.0",
-    "@types/core-js": "^0.9.39",
-    "@types/leaflet": "^1.0.57",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "@angular/upgrade": "^4.0.0",
     "bootstrap": "4.0.0-alpha.4",
     "classlist.js": "1.1.20150312",
     "core-js": "2.4.1",
@@ -21,16 +23,19 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "^5.2.0",
     "systemjs": "^0.20.10",
-    "zone.js": "^0.7.8"
+    "zone.js": "0.8.5"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.39",
+    "@types/leaflet": "^1.0.57",
+    "@types/node": "^7.0.0",
     "concurrently": "2.2.0",
     "json-server": "0.8.21",
     "jsonwebtoken": "7.1.9",
     "lite-server": "2.2.2",
     "systemjs-builder": "0.15.32",
-    "typescript": "2.0.2",
-    "typings": "1.3.2"
+    "typescript": "2.2.1",
+    "typings": "2.1.0"
   },
   "scripts": {
     "start": "concurrently \"npm run tscwatch\" \"npm run lite\" \"npm run json\" ",
@@ -38,7 +43,6 @@
     "tscwatch": "tsc -w",
     "lite": "lite-server",
     "json": "json-server data.js -p 3500 -m authMiddleware.js",
-    "typings": "typings",
-    "postinstall": "typings install dt~core-js@0 --save --global && typings install dt~node@6 --save --global && typings install"
+    "typings": "typings"
   }
 }

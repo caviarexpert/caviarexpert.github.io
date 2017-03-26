@@ -3,5 +3,5 @@
   "files.exclude":{
     "**/*.js": { "when": "$(basename).ts"}
   },
-  "vsicons.presets.angular": true
+"vsicons.presets.angular": true
 }

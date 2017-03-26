@@ -4,7 +4,7 @@
         "npm:": "./node_modules/",// PROD 'https://unpkg.com/',
         "npmcdn:":"https://npmcdn.com/",
         //"libs:rxjs": "./node_modules/rxjs/bundles/Rx.js"
-        "libs:rxjs" : "https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.js"
+       // "libs:rxjs" : "https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.js"
         //"@angular/*": "node_modules/@angular/*",
         //"rxjs*": "node_modules/rxjs/bundles/Rx.js" //PROD
     }
@@ -28,6 +28,7 @@
         //"rxjs": "rxjs.module.min.js",
         //"rxjs/*/*": "rxjs.module.min.js",
         "@angular": "npmcdn:@angular",
+        "leaflet": "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js"
         //"@angular/router": "npmcdn:@angular/router@3.4.10"
     }
     var packages = { 

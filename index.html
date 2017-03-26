@@ -4,10 +4,11 @@
     <base href="/" />
     <title>SportsStore</title>
     <meta charset="utf-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-history-api/4.2.8/history.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20150312/classList.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/shim.min.js"></script>
-    <script src="node_modules/intl/dist/Intl.complete.js"></script>
+    <!-- script src="node_modules/intl/dist/Intl.complete.js"></script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zone.js/0.7.8/zone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reflect-metadata/0.1.10/Reflect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.10/system.js"></script>
@@ -35,16 +36,18 @@
         }));
         System.import("app/main")
             .catch(function(err){ console.error(err); })
-            .then( m => {
-                console.log("normalized rx is ", System.normalize("//npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
-                console.log("has @angular: ", System.has("http://npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
-            });
+            .then( 
+                function(m) {
+                    console.log("normalized rx is ", System.normalize("//npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
+                    console.log("has @angular: ", System.has("http://npmcdn.com/rxjs@5.2.0/util/tryCatch.js"));
+                }
+            );
         
-    </script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    </script>    
 </head>
 <body class="m-a-1">
     <app>CaviarExpert store is loading ...</app>
 </body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" rel="stylesheet" />
 </html>

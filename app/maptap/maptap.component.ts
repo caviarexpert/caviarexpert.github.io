@@ -47,8 +47,8 @@ export class MapTapComponent implements OnInit, AfterViewInit{
           map = L.map("map").setView([52, 12], 4);
 
           map.addControl(new MyControl());
-
-          L.tileLayer("http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png", {
+          //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
+          L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 18,
             //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);

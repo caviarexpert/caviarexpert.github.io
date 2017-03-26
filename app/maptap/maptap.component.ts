@@ -34,6 +34,7 @@ export class MapTapComponent implements OnInit, AfterViewInit{
                   var container = L.DomUtil.create('div', 'lc');
                   
                   container.innerHTML = "HELLO!!!";
+                  container.style.cursor = "crosshair";
                   L.DomUtil.disableTextSelection();
                   // ... initialize other DOM elements, add listeners, etc.
 

@@ -1,17 +1,22 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "es2015",
+    "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": false,
-    "lib": ["es2015", "dom"]
+    "alwaysStrict": true,
+    "types": ["node", "core-js"],
+    "lib": ["es6", "dom"]
   },
   "files": [
     "app/app.module.ts",
     "app/main.aot.ts"
   ],
+  "types" : [
+      "core-js"
+    ],
   "angularCompilerOptions": {
     "genDir": "aot",
     "skipMetadataEmit": true

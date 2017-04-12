@@ -25,6 +25,7 @@
 
     var maps = {       
         "rxjs": "npmcdn:rxjs@5.2.0",
+        "text": "systemjs.plugin.text.js",
         //"rxjs": "rxjs.module.min.js",
         //"rxjs/*/*": "rxjs.module.min.js",
         "@angular": "npmcdn:@angular",
@@ -32,7 +33,16 @@
         //"@angular/router": "npmcdn:@angular/router@3.4.10"
     }
     var packages = { 
-        "app": {},
+        "app": {
+            "meta": {
+                "*.html": {
+                    "loader": "text"
+                },
+                "*.css": {
+                    "loader": "text"
+                }
+            }
+        },
         "rxjs": { defaultExtension: "js"}
         //"rxjs": { main: "libs:rxjs" }
     };

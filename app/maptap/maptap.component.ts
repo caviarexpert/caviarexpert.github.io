@@ -1,5 +1,7 @@
+/// <reference path="../html.d.ts" />
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 //import { System } from "systemjs";
+import  * as template from "./maptap.css";
 import L = require("leaflet");
 import { GeocodingService } from "./geocoding.service";
 
@@ -7,10 +9,8 @@ import { GeocodingService } from "./geocoding.service";
 @Component({
   selector: "mapTap",
   moduleId: module.id,
-  styleUrls: ["./maptap.css"],
-  styles: [`
-    .lc.leaflet-control { cursor: crosshair}
-  `],
+  //styleUrls: ["./maptap.css"],
+  styles: [template+''],
   template: `<section id="map" style="height: 600px;" class="leaflet-crosshair"></section>`
 })
 export class MapTapComponent implements OnInit, AfterViewInit{

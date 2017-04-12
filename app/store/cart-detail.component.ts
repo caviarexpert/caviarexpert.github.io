@@ -3,7 +3,7 @@ import { Cart } from "../model/cart.model";
 
 @Component({
     moduleId: module.id,
-    templateUrl: "cart-detail.component.html"
+    templateUrl: "./cart-detail.component.html"
 })
 export class CartDetailComponent {
 

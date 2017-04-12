@@ -1,3 +1,6 @@
+/// <reference path="../html.d.ts" />
+//import  * as template from "./store.component.html!text";
+import  * as template from "./store.component.html";
 import { Component } from "@angular/core";
 import { Product } from "../model/product.model";
 import { ProductRepository } from "../model/product.repository";
@@ -7,7 +10,8 @@ import { Router } from "@angular/router";
 @Component({
     selector: "store",
     moduleId: module.id,
-    templateUrl: "store.component.html"
+    //template: `<h1>HELLO</h1>`
+    template: template + ''
 })
 export class StoreComponent {
     public selectedCategory = null;
@@ -16,7 +20,7 @@ export class StoreComponent {
 
     constructor(private repository: ProductRepository,
             private cart: Cart,
-            private router: Router) { }
+            private router: Router) {}
 
     get products(): Product[] {
         let pageIndex = (this.selectedPage - 1) * this.productsPerPage

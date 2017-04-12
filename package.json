@@ -26,6 +26,7 @@
     "zone.js": "0.8.5"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^4.0.0",
     "@types/core-js": "^0.9.39",
     "@types/leaflet": "^1.0.57",
     "@types/node": "^7.0.0",
@@ -34,7 +35,7 @@
     "jsonwebtoken": "7.1.9",
     "lite-server": "2.2.2",
     "systemjs-builder": "0.15.32",
-    "typescript": "2.2.1",
+    "typescript": "2.2.2",
     "typings": "2.1.0"
   },
   "scripts": {
@@ -43,6 +44,8 @@
     "tscwatch": "tsc -w",
     "lite": "lite-server",
     "json": "json-server data.js -p 3500 -m authMiddleware.js",
-    "typings": "typings"
+    "typings": "typings",
+    "ngc": "ngc -p tsconfig-aot.json",
+    "startbundle": "concurrently \"npm run lite\" \"npm run json\" "
   }
 }

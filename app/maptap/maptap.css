@@ -1,3 +1,4 @@
 .leaflet-clickable {
   cursor: crosshair !important;
 }
+.lc.leaflet-control { cursor: crosshair}

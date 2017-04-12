@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es6",
     "module": "commonjs",
+    "sourceMap": false,
+    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "target": "es5",
+    "alwaysStrict": true,
+    "types": ["node", "core-js"],
+    "lib": ["es6", "dom"]
   },
   "exclude": [ "node_modules" ],
   "types" : [

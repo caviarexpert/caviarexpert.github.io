@@ -43,9 +43,11 @@
     "tsc": "tsc",
     "tscwatch": "tsc -w",
     "lite": "lite-server",
+    "aotlite": "lite-server -c bs-config-aot.js",
     "json": "json-server data.js -p 3500 -m authMiddleware.js",
     "typings": "typings",
-    "ngc": "ngc -p tsconfig-aot.json",
+    "aot": "ngc -p tsconfig-aot.json",
+    "aotstart": "concurrently \"npm run tscwatch\" \"npm run aotlite\" \"npm run json\" ",
     "startbundle": "concurrently \"npm run lite\" \"npm run json\" "
   }
 }

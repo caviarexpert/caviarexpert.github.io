@@ -34,6 +34,7 @@
     }
     var packages = { 
         "app": {
+            "main": "aot/app",
             "meta": {
                 "*.html": {
                     "loader": "text"

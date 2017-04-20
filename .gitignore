@@ -3,3 +3,4 @@
 /app/**/*.js
 typings.json
 *.log
+/aot/

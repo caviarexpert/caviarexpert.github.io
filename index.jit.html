@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reflect-metadata/0.1.10/Reflect.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.10/system.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.2.0/Rx.min.js"></script>
-    <script src="systemjs.config.aot.js"></script>
+    <script src="systemjs.config.js"></script>
     <script>
         (function(l) {
             if (l.search) {
@@ -34,7 +34,7 @@
         System.set('rx', System.newModule({
             "default": window.rxjsapp
         }));
-        System.import("app/main.aot")
+        System.import("app/main")
             .catch(function(err){ console.error(err); })
             .then( 
                 function(m) {

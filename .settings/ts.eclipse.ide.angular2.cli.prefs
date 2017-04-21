@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+executeNgWithFile=true
+ngCustomFilePath=${project_loc\:node_modules/.bin}
+ngUseGlobalInstallation=false

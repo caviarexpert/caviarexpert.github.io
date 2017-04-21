@@ -6,26 +6,30 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
+import { ThemeComponent } from './theme/theme.component';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
+
 @NgModule({
   declarations: [
-    AppComponent, StoreComponent
+    AppComponent, StoreComponent, ThemeComponent
   ],
   imports: [
+    
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: "store", component: StoreComponent },
+      { path: "store", component: ThemeComponent },
       { path: "**", redirectTo: "/store" }
     ]),
     BsDropdownModule.forRoot(),
     ButtonsModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [ThemeComponent]
 })
 export class AppModule { }

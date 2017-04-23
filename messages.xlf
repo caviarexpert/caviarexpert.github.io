@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="fdd51a3d46e390e53047ba4a1a5f161df16a1972" datatype="html">
+        <source>Add</source>
+        <target/>
+        <note priority="1" from="description">Add item to shopcart</note>
+        <note priority="1" from="meaning">shopcart</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

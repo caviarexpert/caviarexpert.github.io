@@ -4,7 +4,7 @@ import { Theme } from '../model/theme';
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-theme',
+  selector: 'theme-choose',
   templateUrl: './theme.component.html',
   styleUrls: ['./theme.component.css']
 })
@@ -29,9 +29,10 @@ export class ThemeComponent implements OnInit {
      return this.themesList;
   }
   
-  setTheme(theme:Theme){
-      let theme_css = document.getElementById("theme_css")
-      console.debug("theme_css ", theme_css, theme.url);
+  setTheme(theme:Theme, $event: MouseEvent){
+      $event.preventDefault();
+      //$event.stopPropagation();
+      let theme_css = document.getElementById("theme_css");
       theme_css.setAttribute("href", theme.url);
   }
 

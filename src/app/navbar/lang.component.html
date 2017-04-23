@@ -1,0 +1,6 @@
+<div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{ current.id | uppercase }} &ndash; {{ current.localizedName }} </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li *ngFor="let lang of langs" role="menuitem"><a class="dropdown-item" (click)="current=lang" href="#">{{ lang.id }} &ndash; {{ lang.localizedName }}</a></li>
+  </ul>
+</div>

@@ -1,0 +1,6 @@
+<div class="btn-group" dropdown>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">Theme <span class="caret"></span></button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li *ngFor="let theme of themes" role="menuitem"><a class="dropdown-item" (click)="setTheme(theme, $event)" href="#">{{ theme.id }}</a></li>
+  </ul>
+</div>

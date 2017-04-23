@@ -1,40 +1,43 @@
-<div *ngFor="let product of products" class="card card-outline-primary">
-    {{ product }}
-</div>
-<div>
-<div class="btn-group" dropdown>
-  <button type="button" class="btn btn-danger">Action</button>
-  <button type="button" dropdownToggle class="btn btn-danger dropdown-toggle dropdown-toggle-split">
-    <span class="caret"></span>
-    <span class="sr-only">Split button!</span>
-  </button>
-  <ul *dropdownMenu class="dropdown-menu" role="menu">
-    <li role="menuitem"><a class="dropdown-item" href="#" (click)="changeStyle($event)">Action</a></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
-    </li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Something else
-      here</a></li>
-    <li class="divider dropdown-divider"></li>
-    <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-    </li>
-  </ul>
-</div>
-</div>
-
-
-<pre class="card card-block card-header">{{radioModel || 'null'}}</pre>
-<div class="btn-group">
-  <label class="btn btn-primary" [(ngModel)]="radioModel"
-         btnRadio="Left">Left</label>
-  <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="Middle">Middle</label>
-  <label class="btn btn-primary" [(ngModel)]="radioModel"
-         btnRadio="Right">Right</label>
-</div>
-<div class="btn-group">
-  <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Left"
-         uncheckable>Left</label>
-  <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Middle"
-         uncheckable>Middle</label>
-  <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="Right"
-         uncheckable>Right</label>
+<div class="container" style="padding-top: 5rem;">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+        <div class="card card-outline-primary text-xs-center">
+          <h3 class="card-header hidden-xs-down" translate>STORE.PRODUCTS.salmon_cav_200g</h3>
+          <h6 class="card-header hidden-sm-up" translate>STORE.PRODUCTS.salmon_cav_200g</h6>
+          <div class="card-block">
+            <div class="row">
+              <div class="col-12 col-sm-7">
+                <img style="width:10rem; display:block;" src="/assets/images/chase.jpg" alt="salmon caviar tin, 200g">
+              </div>
+              <div class="col text-center">
+                    <h4 class="card-title mb-0"><strong>&euro;21.40</strong></h4>
+                    <h6 class="card-title text-muted small">107 EUR/kg</h6>
+                    <br />
+                      <button type="button" class="btn btn-primary btn-lg" (click)="translate.use('es')">
+                        <i class="fa fa-cart-plus"></i> <span translate>STORE.addToCart</span>
+                      </button>
+                </div>
+            </div>
+          </div>
+          <div class="card-block">
+            <a href="#" class="card-link invisible">Checkout</a>
+            <a href="#" class="card-link invisible">Login</a>
+          </div>
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+              <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+            </blockquote>
+          </div>          
+      </div>      
+    </div>
+    <div class="col">
+        <address>
+          <strong>Authentic Russian Caviar</strong>
+          <br />Corso Venezia, 3
+          <br />Milano, Italia
+          <br /><abbr title="Phone">Tel.</abbr>: +39 0287159490
+        </address>
+    </div>
+  </div>
 </div>

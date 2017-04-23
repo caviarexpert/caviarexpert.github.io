@@ -5,31 +5,34 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
-import { StoreComponent } from './store/store.component';
-import { ThemeComponent } from './theme/theme.component';
 
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
+//import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+//import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
+import { NavModule } from "./navbar/nav.module";
+import { StoreModule } from "./store/store.module";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
   declarations: [
-    AppComponent, StoreComponent, ThemeComponent
+    AppComponent
   ],
   imports: [
-    
+    NavModule, StoreModule,
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      { path: "store", component: ThemeComponent },
-      { path: "**", redirectTo: "/store" }
-    ]),
-    BsDropdownModule.forRoot(),
-    ButtonsModule.forRoot()
+    TranslateModule.forRoot()
+    //RouterModule.forRoot([
+    //  { path: "store", component: ThemeComponent },
+    //  { path: "**", redirectTo: "/store" }
+    //]),
+    //BsDropdownModule.forRoot(),
+    //ButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [ThemeComponent]
+  exports: []
 })
 export class AppModule { }

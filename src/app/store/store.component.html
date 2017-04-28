@@ -1,16 +1,16 @@
 <div class="container" style="padding-top: 5rem;">
   <div class="row">
     <div class="col-12 col-lg-8">
-        <div class="card card-outline-primary text-xs-center">
-          <h3 class="card-header hidden-xs-down" translate>STORE.PRODUCTS.salmon_cav_200g</h3>
-          <h6 class="card-header hidden-sm-up" translate>STORE.PRODUCTS.salmon_cav_200g</h6>
+        <div class="card card-outline-primary text-xs-center" *ngFor="let product of products">
+          <h3 class="card-header hidden-xs-down" translate>STORE.PRODUCTS.{{ product.sku }}</h3>
+          <h6 class="card-header hidden-sm-up" translate>STORE.PRODUCTS.{{ product.sku }}</h6>
           <div class="card-block">
             <div class="row">
               <div class="col-12 col-sm-7">
-                <img style="width:10rem; display:block;" src="/assets/images/chase.jpg" alt="salmon caviar tin, 200g">
+                <img style="width:10rem; display:block;" class="mx-auto" src="/assets/images/chase.jpg" alt="salmon caviar tin, 200g">
               </div>
               <div class="col text-center">
-                    <h4 class="card-title mb-0"><strong>&euro;21.40</strong></h4>
+                    <h4 class="card-title mb-0"><strong>&euro;{{ product.price }}</strong></h4>
                     <h6 class="card-title text-muted small">107 EUR/kg</h6>
                     <br />
                       <button type="button" class="btn btn-primary btn-lg" (click)="translate.use('es')">

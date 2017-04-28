@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import {TranslateService } from '@ngx-translate/core';
+import {TranslateService } from "@ngx-translate/core";
+import { ProductService } from "./product.service";
+import { Product } from "./model/product";
 
 @Component({
     selector: "store-area",
@@ -11,7 +13,9 @@ export class StoreComponent implements OnInit {
     public radioModel: string = 'Middle';
     private productList: string[] = ["Hello", "List"];
 
-    constructor(private translateService: TranslateService){}
+    constructor(private translateService: TranslateService,
+            private productService: ProductService){}
+    
     ngOnInit(){
         this.translateService.setTranslation("en", {
             STORE: {
@@ -39,8 +43,8 @@ export class StoreComponent implements OnInit {
         });
     }
 
-    get products(): string[] {
-        return this.productList
+    get products(): Product[] {
+        return this.productService.products;
     }
 
     get translate(): TranslateService {

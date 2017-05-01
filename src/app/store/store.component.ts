@@ -98,6 +98,6 @@ export class StoreComponent implements OnInit {
     }
 
     cartPrice():number{
-        return this.cart.cartPrice;
+        return this.cart.totalCartPrice;
     }
 }

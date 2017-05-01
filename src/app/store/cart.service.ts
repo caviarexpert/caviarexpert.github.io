@@ -4,8 +4,8 @@ import { Product } from "./model/product";
 @Injectable()
 export class Cart {
     public lines: CartLine[] = [];
-    public itemCount: number = 0;
-    public cartPrice: number = 0;
+    //public itemCount: number = 0;
+    //public cartPrice: number = 0;
 
     addLine(product: Product, quantity: number = 1) {
         let line = this.lines.find(line => line.product.sku == product.sku);
@@ -14,37 +14,23 @@ export class Cart {
         } else {
             this.lines.push(new CartLine(product, quantity));
         }
-        this.recalculate();
-    }
-
-    updateQuantity(product: Product, quantity: number) {
-        let line = this.lines.find(line => line.product.sku == product.sku);
-        if (line != undefined) {
-            line.quantity = Number(quantity);
-        }
-        this.recalculate();
     }
 
     removeLine(sku: string) {
         let index = this.lines.findIndex(line => line.product.sku == sku);
         this.lines.splice(index);
-        this.recalculate();
+    }
+
+    get totalCartPrice(): number{
+        return this.lines
+            .map ( line => line.quantity * line.product.price )
+            .reduce ( (last, current) => last + current, 0);
     }
 
     clear() {
         this.lines = [];
-        this.itemCount = 0;
-        this.cartPrice = 0;
-    }
-
-    private recalculate() {
-        this.itemCount = 0;
-        this.cartPrice = 0;
-        this.lines.forEach(l => {
-            this.itemCount += l.quantity;
-            this.cartPrice += (l.quantity * l.product.price);
-        })
-
+        //this.itemCount = 0;
+        //this.cartPrice = 0;
     }
 }
 

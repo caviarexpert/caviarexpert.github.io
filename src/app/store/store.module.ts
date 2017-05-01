@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 //import { FormsModule } from "@angular/forms";
 import { StoreComponent } from "./store.component";
 import { CartDetailComponent } from "./cartdetails.component";
+import { FormsModule }   from "@angular/forms";
 
 import { SharedModule } from "../shared.module";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
@@ -15,7 +16,7 @@ import { Cart } from "./cart.service";
 @NgModule({
     imports: [
         BrowserModule, 
-        //FormsModule,
+        FormsModule,
         RouterModule,
         TranslateModule.forChild()
     ],

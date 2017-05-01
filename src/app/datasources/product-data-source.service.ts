@@ -7,8 +7,8 @@ import "rxjs/add/observable/from";
 export class ProductDataSourceService {
     
     private products: Product[] = [
-      new Product("salmon_cav_200g", 22.85),
-      new Product("salmon_cav_200g", 23.00)
+      new Product("salmon_cav_200g", 22.85, ["/assets/images/chase.jpg"], 0.2, "kg", "net_weight"),
+      new Product("salmon_keta_cav_200g", 23.00, ["/assets/images/chase.jpg"], 0.2, "kg", "net_weight")
     ];
 
     constructor() { }

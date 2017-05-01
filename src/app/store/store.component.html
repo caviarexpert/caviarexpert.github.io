@@ -1,26 +1,29 @@
-<div class="container" style="padding-top: 5rem;">
+<div class="container">
   <div class="row">
     <div class="col-12 col-lg-8">
-        <div class="card card-outline-primary text-xs-center" *ngFor="let product of products">
+        <div class="card card-outline-primary text-xs-center mb-3" *ngFor="let product of products">
           <h3 class="card-header hidden-xs-down" translate>STORE.PRODUCTS.{{ product.sku }}</h3>
           <h6 class="card-header hidden-sm-up" translate>STORE.PRODUCTS.{{ product.sku }}</h6>
           <div class="card-block">
             <div class="row">
-              <div class="col-12 col-sm-7">
-                <img style="width:10rem; display:block;" class="mx-auto" src="/assets/images/chase.jpg" alt="salmon caviar tin, 200g">
+              <div *ngIf="product.pictures.length>0" class="col-12 col-sm-7">
+                <img style="width:100%; display:block;" class="mx-auto" [src]="product.pictures[0]" alt="salmon caviar tin, 200g">
               </div>
               <div class="col text-center">
-                    <h4 class="card-title mb-0"><strong>&euro;{{ product.price }}</strong></h4>
-                    <h6 class="card-title text-muted small">107 EUR/kg</h6>
+                    <h4 class="card-title mb-1"><strong>{{ product.price | currency:"EUR":true:"1.0-2" }}</strong></h4>
+                    <h5 class="card-title small mb-1">{{ 'STORE.valueNames.'+product.valueName| translate}}: {{ product.valueUnits }} {{ product.referenceMesure }}</h5>
+                    <h6 class="card-title text-muted small">{{ product.price/product.valueUnits }} EUR/{{ product.referenceMesure }}</h6>
                     <br />
-                      <button type="button" class="btn btn-primary btn-lg" (click)="translate.use('es')">
+                      <button type="button" class="btn btn-primary btn-lg" (click)="addProductToCart(product)">
                         <i class="fa fa-cart-plus"></i> <span translate>STORE.addToCart</span>
                       </button>
                 </div>
             </div>
           </div>
           <div class="card-block">
-            <a href="#" class="card-link invisible">Checkout</a>
+            <a routerLink="/cart" class="card-link" [ngClass]="{'invisible' : cartPrice() <= 0 }">
+              Checkout ({{ cartPrice() | currency:"EUR":true:"1.0-2" }})
+            </a>
             <a href="#" class="card-link invisible">Login</a>
           </div>
           <div class="card-block">

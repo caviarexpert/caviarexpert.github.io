@@ -7,16 +7,26 @@ import { CartSummaryComponent } from "./cart-summary.component";
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RouterModule } from "@angular/router";
+import { StoreModule } from "../store/store.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        StoreModule,
         BsDropdownModule.forRoot(),
         ButtonsModule.forRoot(),
-        TranslateModule.forChild()
+        //TranslateModule.forChild()
     ],
     declarations: [NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ],
-    exports: [ NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ]
+    exports: [ NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ],
+    providers: [
+       TranslateService
+    ]
 })
 export class NavModule {}

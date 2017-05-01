@@ -1,0 +1,45 @@
+<h1>Your cart</h1>
+<div class="mx-2">
+    <table class="table table-bordered table-striped p-a-1">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th class="text-xs-right">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="cart.lines.length == 0">
+                <td colspan="4" class="text-xs-center">
+                    Your cart is empty
+                </td>
+            </tr>
+            <tr *ngFor="let line of cart.lines">
+                <td translate>STORE.PRODUCTS.{{ line.product.sku }}</td>
+                <td>
+                    <input type="number" class="form-control-sm" 
+                           style="width:2.5rem" 
+                           [value]="line.quantity"
+                           (change)="cart.updateQuantity(line.product, 
+                                $event.target.value)"/>
+                    <button class="btn btn-sm btn-danger"
+                            (click)="cart.removeLine(line.product.id)">
+                        &times;
+                    </button>
+                     {{line.product.price | currency:"EUR":true:"1.0-2"}}
+                </td> 
+                <td class="text-xs-right">
+                    {{(line.lineTotal) | currency:"EUR":true:"1.0-2" }}
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-xs-right">Total:</td>
+                <td class="text-xs-right">
+                    {{cart.cartPrice | currency:"EUR":true:"1.2-2"}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

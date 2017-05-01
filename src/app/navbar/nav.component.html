@@ -1,8 +1,12 @@
 <nav class="fixed-top navbar-inverse bg-primary">
-  <a class="navbar-brand float-left hidden-xs-down" href="/">
-    <img src="/assets/images/001-caviar.svg" style="width:1.5rem; height: 1.5rem;" alt="CaviarExpert.eu logo" />
-    <span>CaviarExpert.eu</span>
+  <a class="navbar-brand float-left mr-3" routerLink="/">
+    <div class="hidden-xs-down">
+      <img src="/assets/images/001-caviar.svg" style="width:1.5rem; height: 1.5rem;" alt="CaviarExpert.eu logo" />
+      <span>CaviarExpert.eu</span>
+    </div>
+    <i class="fa fa-home hidden-sm-up"></i>
   </a>
+  <lang-selector></lang-selector>
 <!--
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
@@ -19,9 +23,6 @@
   </div>
 -->
   <div class="float-right"><ul class="nav ml-auto">
-    <li class="nav-item">
-      <lang-selector></lang-selector>
-    </li>
     <!--
     <li class="nav-item">
       <theme-choose></theme-choose>

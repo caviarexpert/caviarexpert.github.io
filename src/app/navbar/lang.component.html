@@ -1,4 +1,8 @@
-<div class="btn-group" dropdown>
+<div class="btn-group hidden-xs-down" role="group" aria-label="Basic example">
+  <button *ngFor="let lang of langs" type="button" class="btn btn-primary" [ngClass]="{'active': current == lang}" (click)="current=lang">{{ lang.id | uppercase}}</button>
+</div>
+<span class="navbar-brand hidden-xs-down">: {{ current.localizedName }}</span>
+<div class="btn-group hidden-sm-up" dropdown>
   <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{ current.id | uppercase }} &ndash; {{ current.localizedName }} </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
     <li *ngFor="let lang of langs" role="menuitem"><a class="dropdown-item" (click)="current=lang" href="#">{{ lang.id }} &ndash; {{ lang.localizedName }}</a></li>

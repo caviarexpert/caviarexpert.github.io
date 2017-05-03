@@ -39,7 +39,7 @@ export class CartLine {
     constructor(public product: Product,
         public quantity: number) { }
 
-    get lineTotal() {
+    get lineTotal(): number {
         return this.quantity * this.product.price;
     }
 }

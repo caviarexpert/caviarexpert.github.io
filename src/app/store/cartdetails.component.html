@@ -1,11 +1,12 @@
-<h1>Your cart</h1>
+<h1>...</h1>
 <div class="mx-2">
     <form #cartForm="ngForm"><table class="table table-bordered table-striped p-a-1">
         <thead>
             <tr>
                 <th>Product</th>
-                <th>Quantity</th>
-                <th class="text-xs-right">Subtotal</th>
+                <th class="fit">Price</th>
+                <th class="fit">Quantity</th>
+                <th class="text-xs-right fit">Subtotal</th>
             </tr>
         </thead>
         <tbody>
@@ -16,23 +17,25 @@
             </tr>
             <tr *ngFor="let line of cart.lines">
                 <td translate>STORE.PRODUCTS.{{ line.product.sku }}</td>
+                <td>{{line.product.price | currency:"EUR":true:"1.0-2"}}</td>
                 <td>
                     <input type="number" class="form-control-sm px-1" 
                            style="width:3.5rem" 
-                           [(ngModel)]="line.quantity" [name]="line.product.sku" />                           
-                    &times;
-                    {{line.product.price | currency:"EUR":true:"1.0-2"}}
+                           [(ngModel)]="line.quantity" [name]="line.product.sku" />
                 </td> 
                 <td class="text-xs-right">
-                    {{(line.lineTotal) | currency:"EUR":true:"1.0-2" }}
+                    {{ line.lineTotal | currency:"EUR":true:"1.0-2" }}
                 </td>
+            </tr>
+            <tr>
+              <td colspan="4"><a routerLink="/delivery">DELIVERY</a> <a routerLink="/map">MAP</a></td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2" class="text-xs-right">Total:</td>
-                <td class="text-xs-right">
-                    {{cart.totalCartPrice | currency:"EUR":true:"1.2-2"}}
+                <td colspan="3" class="text-xs-right">Total:</td>
+                <td colspan="1" class="text-xs-right table-info">
+                    {{cart.totalCartPrice | currency:"EUR":true:"1.0-2"}}
                 </td>
             </tr>
         </tfoot>

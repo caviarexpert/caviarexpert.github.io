@@ -13,6 +13,7 @@ import { CartDetailComponent } from "./store/cartdetails.component";
 
 import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
+import { DeliveryModule } from "./delivery/delivery.module";
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -21,18 +22,17 @@ import { TranslateModule } from '@ngx-translate/core';
     AppComponent
   ],
   imports: [
-    NavModule, StoreModule, NavModule,
+    NavModule, StoreModule, DeliveryModule, NavModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     TranslateModule.forRoot(),
-    RouterModule.forRoot([      
-      { path: "cart", component: CartDetailComponent },
-      { path: "**", component: StoreComponent },
-      
+    RouterModule.forRoot([
+       { path: '',   redirectTo: '/store', pathMatch: 'full' },
+       { path: "**", redirectTo: "/store" }
+    ])
     //  { path: "store", component: ThemeComponent },
     //  { path: "**", redirectTo: "/store" }
-    ]),
     //BsDropdownModule.forRoot(),
     //ButtonsModule.forRoot()
   ],

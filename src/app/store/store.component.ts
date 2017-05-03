@@ -100,4 +100,9 @@ export class StoreComponent implements OnInit {
     cartPrice():number{
         return this.cart.totalCartPrice;
     }
+    itemsInCart(product : Product): number {
+        return this.cart.lines.filter( line => line.product.sku == product.sku)
+            .map ( line => line.quantity)
+            .reduce( (last, current) => last + current, 0);
+    }
 }

@@ -14,9 +14,10 @@
                     <h5 class="card-title small mb-1">{{ 'STORE.valueNames.'+product.valueName| translate}}: {{ product.valueUnits }} {{ product.referenceMesure }}</h5>
                     <h6 class="card-title text-muted small">{{ product.price/product.valueUnits }} EUR/{{ product.referenceMesure }}</h6>
                     <br />
-                      <button type="button" class="btn btn-primary btn-lg" (click)="addProductToCart(product)">
-                        <i class="fa fa-cart-plus"></i> <span translate>STORE.addToCart</span>
-                      </button>
+                    <button type="button" class="btn btn-primary btn-lg" (click)="addProductToCart(product)">
+                      <i class="fa fa-cart-plus"></i> <span translate>STORE.addToCart</span>
+                      <span *ngIf="itemsInCart(product) as itemCount">[ {{ itemCount }} ]</span>
+                    </button>
                 </div>
             </div>
           </div>

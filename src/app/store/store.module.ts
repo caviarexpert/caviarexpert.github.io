@@ -1,13 +1,13 @@
 import { NgModule, LOCALE_ID } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-//import { FormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { StoreComponent } from "./store.component";
 import { CartDetailComponent } from "./cartdetails.component";
-import { FormsModule }   from "@angular/forms";
+
 
 import { SharedModule } from "../shared.module";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
-import { RouterModule } from "@angular/router";
+import { StoreRoutingModule } from "./store-routing.module";
 
 import { ProductService } from "./product.service";
 import { ProductDataSourceService } from "../datasources/product-data-source.service";
@@ -17,7 +17,7 @@ import { Cart } from "./cart.service";
     imports: [
         BrowserModule, 
         FormsModule,
-        RouterModule,
+        StoreRoutingModule,
         TranslateModule.forChild()
     ],
     declarations: [StoreComponent, CartDetailComponent],

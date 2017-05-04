@@ -8,7 +8,7 @@ import { GeocodingService } from "./geocoding.service";
 @Component({
   selector: "mapTap",
   moduleId: module.id,
-  styleUrls: ["./maptap.css"],
+  //styleUrls: [],
   styles: [`
     .lc.leaflet-control { cursor: crosshair}
   `],
@@ -22,7 +22,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
   geocodingService : GeocodingService;
   ngAfterViewInit() {
     //System.import("leaflet").then( m => {
-          let map = this.leafletMap;
+          
           let geoService = this.geocodingService;
 
           var MyControl = L.Control.extend({
@@ -45,7 +45,8 @@ export class MaptapComponent implements OnInit, AfterViewInit{
 
           
 
-          map = L.map("map").setView([52, 12], 4);
+          this.leafletMap = L.map("map").setView([52, 12], 4);
+          const map = this.leafletMap;
 
           map.addControl(new MyControl());
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png

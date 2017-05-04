@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule, DOCUMENT } from '@angular/platform-browser';
+import { NgModule, Inject} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
@@ -40,4 +40,18 @@ import { TranslateModule } from '@ngx-translate/core';
   bootstrap: [AppComponent],
   exports: []
 })
-export class AppModule { }
+export class AppModule {
+    constructor(@Inject(DOCUMENT) private document: any){
+        let bootswatch = document.createElement("link");
+        bootswatch.rel = "stylesheet";
+        bootswatch.type = "text/css";
+        bootswatch.href = "https://bootswatch.com/4-alpha/cosmo/bootstrap.min.css";
+        document.getElementsByTagName("head")[0].appendChild(bootswatch);
+
+        let fa = document.createElement("link");
+        fa.rel = "stylesheet";
+        fa.type = "text/css";
+        fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+        document.getElementsByTagName("head")[0].appendChild(fa);
+    }
+ }

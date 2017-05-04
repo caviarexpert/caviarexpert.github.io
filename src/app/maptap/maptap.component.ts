@@ -6,12 +6,10 @@ import { GeocodingService } from "./geocoding.service";
 
 
 @Component({
-  selector: "mapTap",
+  selector: "map-tap",
   moduleId: module.id,
-  //styleUrls: [],
-  styles: [`
-    .lc.leaflet-control { cursor: crosshair}
-  `],
+  styleUrls: ["./maptap.css"],
+  //styles: [`.lc.leaflet-control { cursor: crosshair }`],
   template: `<section id="map" style="height: 600px;" class="leaflet-crosshair"></section>`
 })
 export class MaptapComponent implements OnInit, AfterViewInit{
@@ -65,6 +63,14 @@ export class MaptapComponent implements OnInit, AfterViewInit{
               console.log("latlng=", event.latlng.lat, ",", event.latlng.lng);
               map.flyTo( event.latlng, newZoom );
             }           
+          });
+
+          map.on('zoomend', function() {
+              if(map.getZoom() > 15){
+                L.DomUtil.addClass(L.DomUtil.get("map"), "pointer");
+              }else{
+                L.DomUtil.removeClass(L.DomUtil.get("map"), "pointer");
+              }
           });
     //});
   }

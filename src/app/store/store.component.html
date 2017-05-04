@@ -6,7 +6,7 @@
           <h6 class="card-header hidden-sm-up" translate>STORE.PRODUCTS.{{ product.sku }}</h6>
           <div class="card-block">
             <div class="row">
-              <div *ngIf="product.pictures.length>0" class="col-12 col-sm-7">
+              <div *ngIf="product.pictures.length>0" class="col-12 col-sm-6">
                 <img style="width:100%; display:block;" class="mx-auto" [src]="product.pictures[0]" alt="salmon caviar tin, 200g">
               </div>
               <div class="col text-center">
@@ -14,7 +14,7 @@
                     <h5 class="card-title small mb-1">{{ 'STORE.valueNames.'+product.valueName| translate}}: {{ product.valueUnits }} {{ product.referenceMesure }}</h5>
                     <h6 class="card-title text-muted small">{{ product.price/product.valueUnits }} EUR/{{ product.referenceMesure }}</h6>
                     <br />
-                    <button type="button" class="btn btn-primary btn-lg" (click)="addProductToCart(product)">
+                    <button type="button" class="btn btn-success btn-lg" (click)="addProductToCart(product)">
                       <i class="fa fa-cart-plus"></i> <span translate>STORE.addToCart</span>
                       <span *ngIf="itemsInCart(product) as itemCount">[ {{ itemCount }} ]</span>
                     </button>
@@ -24,6 +24,7 @@
           <div class="card-block">
             <a routerLink="/cart" class="card-link" [ngClass]="{'invisible' : cartPrice() <= 0 }">
               Checkout ({{ cartPrice() | currency:"EUR":true:"1.0-2" }})
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
             </a>
             <a href="#" class="card-link invisible">Login</a>
           </div>

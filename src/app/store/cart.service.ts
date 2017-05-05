@@ -18,7 +18,9 @@ export class Cart {
 
     removeLine(sku: string) {
         let index = this.lines.findIndex(line => line.product.sku == sku);
-        this.lines.splice(index);
+        if(index>=0){
+            this.lines.splice(index, 1);
+        }
     }
 
     get totalCartPrice(): number{

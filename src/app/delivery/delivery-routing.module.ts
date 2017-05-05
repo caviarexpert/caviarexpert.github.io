@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { DeliveryComponent } from "./delivery.component";
 
 const routes: Routes = [
-    { path: "delivery", component: DeliveryComponent },
+    { path: "delivery", component: DeliveryComponent, children: [
+           { path: "map", loadChildren: "../maptap/maptap.module#MaptapModule" }
+       ] },
     { path: "map", loadChildren: "../maptap/maptap.module#MaptapModule" }
   ];
 

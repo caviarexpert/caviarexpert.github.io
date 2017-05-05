@@ -26,7 +26,6 @@ export class CartDetailComponent {
     private validateQuantity(obj:any): void{
         Object.keys(obj).forEach( key => {
                 if( obj[key]!=null && obj[key]<=0 ){
-                    console.warn("removing", key, obj[key])
                     this.cart.removeLine(key);
                 } 
             });

@@ -14,6 +14,7 @@ import { CartDetailComponent } from "./store/cartdetails.component";
 import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
+import { SharedModule } from "./shared.module";
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -27,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     HttpModule,
     TranslateModule.forRoot(),
+    SharedModule.forRoot(),
     RouterModule.forRoot([
        { path: '',   redirectTo: '/store', pathMatch: 'full' },
        { path: "**", redirectTo: "/store" }

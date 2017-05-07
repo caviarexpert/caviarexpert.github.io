@@ -8,9 +8,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { routing } from "./maptap.routing";
 
+import { SharedModule } from "../shared.module";
+
 
 @NgModule({
-    imports: [ HttpModule, routing ],
+    imports: [ HttpModule, routing, SharedModule ],
     declarations: [MaptapComponent],
     exports: [MaptapComponent],
     providers: [ GeocodingService, TranslateService ]

@@ -1,4 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
+import { AddressService } from "../shared.module";
 
 
 @Component({
@@ -8,4 +9,11 @@ import {Component, ViewChild} from "@angular/core";
     styleUrls: ["./delivery.component.css"]
 })
 export class DeliveryComponent {
+    @ViewChild("addressForm") form;
+    constructor(public addrService : AddressService) {}
+
+    ngAfterViewInit() {
+        //this.form.control.valueChanges
+        //    .subscribe(values => this.validateQuantity(values));
+    }
 }

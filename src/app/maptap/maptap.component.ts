@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 //import L = require("leaflet");
 import * as L from "leaflet";
 import { GeocodingService } from "./geocoding.service";
+import { AddressService } from "../shared.module";
 
 
 @Component({
@@ -13,7 +14,7 @@ import { GeocodingService } from "./geocoding.service";
   template: `<section id="map" class="leaflet-crosshair"></section>`
 })
 export class MaptapComponent implements OnInit, AfterViewInit{
-  constructor(geocodingService : GeocodingService){
+  constructor(geocodingService : GeocodingService, public addressService : AddressService ){
     this.geocodingService = geocodingService;
   }
   leafletMap : any;
@@ -22,6 +23,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
     //System.import("leaflet").then( m => {
           
           let geoService = this.geocodingService;
+          let addrService = this.addressService;
 
           var MyControl = L.Control.extend({
               options: {
@@ -44,8 +46,8 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
-          let southWest = new L.LatLng(40.712, -74.227),
-              northEast = new L.LatLng(40.774, -74.125),
+          let southWest = new L.LatLng(34, -13),
+              northEast = new L.LatLng(63, 29),
               bounds = new L.LatLngBounds(southWest, northEast);
           this.leafletMap = L.map("map").fitBounds(bounds);
           const map = this.leafletMap;
@@ -59,7 +61,12 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           map.on("click", function(event){      
             let zoom = map.getZoom();            
             if(zoom > 15){
-              geoService.getGeocoding(event.latlng.lat, event.latlng.lng);
+              geoService.getGeocoding(event.latlng.lat, event.latlng.lng)
+                .subscribe( results => {
+                  let addr = results[0].formatted_address;
+                  addrService.address = addr;
+                  console.log("results: ", addr);
+                });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
               newZoom = newZoom > 18 ? 18 : newZoom;

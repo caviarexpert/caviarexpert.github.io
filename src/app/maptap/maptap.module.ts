@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { MaptapComponent } from "./maptap.component";
 import { GeocodingService } from "./geocoding.service";
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { routing } from "./maptap.routing";
 
@@ -12,7 +13,7 @@ import { routing } from "./maptap.routing";
     imports: [ HttpModule, routing ],
     declarations: [MaptapComponent],
     exports: [MaptapComponent],
-    providers: [ GeocodingService ]
+    providers: [ GeocodingService, TranslateService ]
 })
 export class MaptapModule { 
     constructor(@Inject(DOCUMENT) private document: any){

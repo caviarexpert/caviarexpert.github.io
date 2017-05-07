@@ -4,8 +4,9 @@ import {TranslateService } from '@ngx-translate/core';
 @Component({
   selector: "app-root",
   //template: "<router-outlet></router-outlet>"
-  template: `<navigation-bar></navigation-bar>
-    <section class="mt-5">
+  template: `
+    <section class="pt-5 fill">
+      <navigation-bar></navigation-bar>
       <router-outlet></router-outlet>
     </section>`
 })

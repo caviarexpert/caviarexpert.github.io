@@ -10,7 +10,7 @@ import { GeocodingService } from "./geocoding.service";
   moduleId: module.id,
   styleUrls: ["./maptap.css"],
   //styles: [`.lc.leaflet-control { cursor: crosshair }`],
-  template: `<section id="map" style="height: 600px;" class="leaflet-crosshair"></section>`
+  template: `<section id="map" class="leaflet-crosshair"></section>`
 })
 export class MaptapComponent implements OnInit, AfterViewInit{
   constructor(geocodingService : GeocodingService){
@@ -43,7 +43,11 @@ export class MaptapComponent implements OnInit, AfterViewInit{
 
           
 
-          this.leafletMap = L.map("map").setView([52, 12], 4);
+          //this.leafletMap = L.map("map").setView([52, 12], 4);
+          let southWest = new L.LatLng(40.712, -74.227),
+              northEast = new L.LatLng(40.774, -74.125),
+              bounds = new L.LatLngBounds(southWest, northEast);
+          this.leafletMap = L.map("map").fitBounds(bounds);
           const map = this.leafletMap;
 
           map.addControl(new MyControl());

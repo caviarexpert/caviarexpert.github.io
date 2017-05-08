@@ -4,7 +4,7 @@ node_js:
 cache: yarn
 branches:
   only:
-  - dev
+  - ng-cli
 notifications:
   slack:
     secure_desc: itranga:[SLACK-TOKEN]

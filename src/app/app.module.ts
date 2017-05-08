@@ -14,7 +14,7 @@ import { CartDetailComponent } from "./store/cartdetails.component";
 import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
-import { SharedModule } from "./shared.module";
+import { SharedModule } from "./shared/shared.module";
 import { TranslateModule } from '@ngx-translate/core';
 
 

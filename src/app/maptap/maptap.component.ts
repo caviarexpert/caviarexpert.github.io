@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 //import L = require("leaflet");
 import * as L from "leaflet";
 import { GeocodingService } from "./geocoding.service";
-import { AddressService } from "../shared.module";
+import { AddressService } from "../shared/address.service";
 
 
 @Component({
@@ -43,19 +43,16 @@ export class MaptapComponent implements OnInit, AfterViewInit{
               }
           });
 
-          
-
           //this.leafletMap = L.map("map").setView([52, 12], 4);
-          let southWest = new L.LatLng(33, -13),
-              northEast = new L.LatLng(62, 32),
-              bounds = new L.LatLngBounds(southWest, northEast);
-          this.leafletMap = L.map("map").fitBounds(bounds);
+          const markersLayer = new L.LayerGroup([]);
+          this.leafletMap = L.map("map");
           const map = this.leafletMap;
 
           map.addControl(new MyControl());
+          markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 18,
+            maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);
           map.on("click", function(event){      
@@ -65,13 +62,16 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                 .subscribe( results => {
                   let addr = results[0].formatted_address;
                   addrService.address = addr;
-                  console.log("results: ", addr);
+                  console.log("results: ", results);
+                  addrService.coordinate = event.latlng;
+                  markersLayer.clearLayers();
+                  let marker = L.marker(addrService.coordinate);
+                  markersLayer.addLayer(marker);
+                  marker.bindPopup(addrService.address).openPopup();
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
-              newZoom = newZoom > 18 ? 18 : newZoom;
-              console.debug( "Zoom: ", zoom, " -> ", newZoom );
-              console.log("latlng=", event.latlng.lat, ",", event.latlng.lng);
+              newZoom = newZoom > 17 ? 17 : newZoom;
               map.flyTo( event.latlng, newZoom );
             }           
           });
@@ -83,6 +83,17 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                 L.DomUtil.removeClass(L.DomUtil.get("map"), "pointer");
               }
           });
+          var southWest = new L.LatLng(33, -17),
+          northEast = new L.LatLng(62, 32),
+          bounds = new L.LatLngBounds(southWest, northEast);
+          //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
+          //map.setView([52, 12], 4)
+          map.fitBounds(bounds);
+          if(addrService.coordinate){
+              let marker = L.marker(addrService.coordinate);
+              markersLayer.addLayer(marker);
+              marker.bindPopup(addrService.address).openPopup();
+          }
     //});
   }
   ngOnInit() {

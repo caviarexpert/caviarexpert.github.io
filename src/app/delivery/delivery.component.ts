@@ -1,5 +1,5 @@
 import {Component, ViewChild} from "@angular/core";
-import { AddressService } from "../shared.module";
+import { AddressService } from "../shared/address.service";
 
 
 @Component({

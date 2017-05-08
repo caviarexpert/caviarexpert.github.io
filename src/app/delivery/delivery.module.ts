@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { DeliveryRoutingModule } from "./delivery-routing.module";
 import { DeliveryComponent } from "./delivery.component";
 
-import { SharedModule } from "../shared.module";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({

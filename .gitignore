@@ -34,3 +34,5 @@ Thumbs.db
 
 /terraform/.tmp/
 /terraform/.terraform/
+
+yarn-error.log

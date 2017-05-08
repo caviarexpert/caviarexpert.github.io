@@ -5,7 +5,7 @@ import { StoreComponent } from "./store.component";
 import { CartDetailComponent } from "./cartdetails.component";
 
 
-import { SharedModule } from "../shared.module";
+import { SharedModule } from "../shared/shared.module";
 import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { StoreRoutingModule } from "./store-routing.module";
 

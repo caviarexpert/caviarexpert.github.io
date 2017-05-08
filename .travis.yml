@@ -1,0 +1,45 @@
+language: node_js
+node_js:
+- node
+cache: yarn
+branches:
+  only:
+  - dev
+notifications:
+  slack:
+    secure_desc: itranga:[SLACK-TOKEN]
+    secure: nln5Ls+wDh2URxdSOoe3aRq/Q8X0tPum6Vo16hGhqEojQUhiEJ0jvYBhCR7lv5fxCCFEQ6QWwp0fYrUCAOC9n2Nrqg3QQDHTuzAktissPCVu1NSZ7ULbJoyQnfnuiWTCvOtrKqYZK3gYQ5wgUPpfbyK4WelmjLFcvzO/3O22dAHmYImUfhS/GZUaJsJhAvEpAeg8ao/ygy/G5zn6keDb4j5l3STYi2YbY4mcGAliIKUlIJGWR6A+GhvpjStXu1BePg9ilzMxHxR0/I3hVn+MkQupmnITqCf6YunfwfF2bz4We21OfLfFURUImb49VR1FCDcF2wL1MV067R5O7aItWTPib9KMJDk28cQ8lJeGBFi/ZzkGLorXDfj9/ECZCGZuLse2/T21aail0VkepQN1j2luIsf48PFPx6O/WNh2dhKKdElImrfqPC47MHQ2mTlsGNqDj49mPDzS3cPhIZCaZC+uus55+LgVLnpht4W2JsMNNCc34SIgJ6P463WVg++4E6QzUBttJQCfEC8R0LLKhaqhsNkvmdBEQ8y+lt+rY/jtPBWPWv+TEwxqJQJ4jpkNiE8YZ40QW4N6FBxy60fq02n+m/ImHN9/5Lc0YtS5TkRVHeHnxG+kt1l0iyrkstMvb9CU8mwsf3LWZMZAoSnZAjubpqDJ8degP5XgdeGeDoM=
+env:
+  global:
+  - PUSH_GIT_REPO: github.com/cavairexpert/caviarexpert.github.io.git
+  - PUSH_GIT_BRANCH: master
+  - secure_desc: GH_TOKEN=[TOKEN]
+  - secure: yWL8DMPrNyKS5jKwfjKWPSrZ3USOkK5xzNNyuVEGoYkqcgEo+RdwrfwmgksvG9dlktq3lkLqPckEPZOc4KwlkU/p/F8j+MKiszm4yXhebnJI5nEjDm9p0Dqx015M2fKalNxQfI8Mf0XyVKb6N7O+Gt6g7FCuviQAatDtNhRjw7RW8pLzgd5SbHshuBrM1qzWzBbQarwcFRvDHb2X4/4RHpEqX0ApSlyFvHWqvQVvcJya6uMU2hRePTcaplAgpYfKrM9Wk19m9VKhswxoApP91cEgMNAuHIQyTuZue714DYoG9T3FrGAexZ08SQUZNJ65WWOYBTcmXmJKN2lbzUHVAhE4jSpykC5HclZuTmUN7W5ukKQRmorK/JiMQrd8nA9BDbtpfdU6IqaK71WOqnJQ9zPDUOLJFRHKVNN7E6+SfT2fgxAunpfx/kc/3yTm25kQyLQduHVgjvbpmGw9GqrjFQYIpqqr3DbwYtY2u05FUWgqa/0e8AWB2DOq/oH53tTrqMo0m//ZMNyQEh83sf3yXEnQuWdI0oQbck9weSm/aAoP5crSXlp7WjvNGbnyJ/TmjAEfAxj3LIfndbaUvIzGCP4s2swwXoS+UnfedXGU/5V2POYyQpdycjFIYg5RPIL9xF9djNxxJBddHCGdN3vFAGaoI3Iu9G4DBxhw8UZAtNk=
+
+before_install:
+  - cat /dev/null > .yarnrc
+
+script: yarn run build
+
+#after_success:
+# - bash deploy/deploy.sh
+before_deploy:
+  - cat /dev/null > .gitignore
+  - touch .nojekyll
+#  - mkdir ../output
+#  - cp -r . ../output/
+#  - echo 'output dir created'
+#  - cd ../output
+#  - echo `ls .`
+#  - echo `ls deploy`
+#  - cp deploy/README.md README.md
+#  - cp deploy/deploy.gitignore .gitignore  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: ./dist
+  on:
+    branch: ng-cli
+  target_branch: master
+  github_token:
+    secure: zC7+eY9CovhP4xF2+86tsrkhKsnLNx2I6K/U78TSjQtT4RLt0mZm/47ZhTlenOyOGuLMdYqg3VRQIt2oo4Mv8PqS8pw5fMJgxwjIKP3Jr3zxDxUiMk2g6RmUlKn95A9xnarD2FR7eZsLhPZr66zv6r6kQdkYHo/Rlpz1OescSPL3J4VOQfFpoqMK2j/DO9eEJ0CQNS66kNGFFwNxYnUPEyRK8ruSMHvv6RgxqoQMdL21Z6N+VyW7Blltl51YQvyjMBKcklZNqGioZ54cY99nrf+Nt2g7k+WqpVYvKYzs4sf51WwBWng3urMw0cMJPgC2OmDCIXOXqE1R/Ghk/5GvKMsR79JYCytlODgRr0xRV/rp0AVzFFIRGvmR7XBlMpc2lMPdpS/1um9oYAOLyspDLeqFyo2TAbaNxQHvdAjk9MthTsWU3zU2NBFtULuq6p4qigy4m5Jsd63gNf6VBdB1Q13k9abEIXSpQx3tAP9UGTSqEjwfwAXKETzWRp3KStlTkE8k+Rebl8bcBDxsVlaS+VizJSei/s8fY9JqAnBS4uuEl9Iqj7UFnA9cQjQ8jApsLkaIEXYJZu7WTilfiqUb0Q1f1X9EuLi1nWCGwj9c4nIrvqrOTbZ4UIRn/xV+lIEsYAHGiKHxpwO+Cje0Du+wKuptyQp5lbk21KOTV1rTuZs=

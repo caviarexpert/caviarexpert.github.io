@@ -4,3 +4,5 @@
 typings.json
 *.log
 /aot/
+/dist/
+/terraform/

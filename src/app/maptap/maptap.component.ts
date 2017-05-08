@@ -46,8 +46,8 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
-          let southWest = new L.LatLng(34, -13),
-              northEast = new L.LatLng(63, 29),
+          let southWest = new L.LatLng(33, -13),
+              northEast = new L.LatLng(62, 32),
               bounds = new L.LatLngBounds(southWest, northEast);
           this.leafletMap = L.map("map").fitBounds(bounds);
           const map = this.leafletMap;
@@ -56,7 +56,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 18,
-            //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);
           map.on("click", function(event){      
             let zoom = map.getZoom();            

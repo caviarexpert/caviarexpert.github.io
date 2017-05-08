@@ -25,9 +25,23 @@ export class CartDetailComponent {
 
     private validateQuantity(obj:any): void{
         Object.keys(obj).forEach( key => {
-                if( obj[key]!=null && obj[key]<=0 ){
-                    this.cart.removeLine(key);
-                } 
+                
+                if(obj[key]!=null && !isNaN(obj[key])){
+                    if( obj[key]<=0 ){
+                        this.cart.removeLine(key);
+                        return;
+                    }else if ( !Number.isInteger(obj[key] )){
+                        this.cart.lines.filter( line => line.product.sku == key)
+                            .forEach( line => line.quantity = Math.round( obj[key] ));
+                        return;
+                    }else return;
+                }
+                if( obj[key]=="") return;
+                let newVal = parseFloat(obj[key]);
+                if(!isNaN(newVal)){
+                    this.cart.lines.filter( line => line.product.sku == key)
+                            .forEach( line => line.quantity = newVal );
+                }
             });
         
     }

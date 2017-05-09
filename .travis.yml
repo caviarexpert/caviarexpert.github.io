@@ -28,7 +28,7 @@ before_deploy:
   - cat /dev/null > .gitignore
 #  - touch .nojekyll
 #  - mkdir ../output
-#  - cp -r . ../output/
+  - cp ./deploy/404.html ./dist
 #  - echo 'output dir created'
 #  - cd ../output
 #  - echo `ls .`

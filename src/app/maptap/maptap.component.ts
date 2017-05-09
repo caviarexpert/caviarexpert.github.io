@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
 //import { System } from "systemjs";
 //import L = require("leaflet");
 import * as L from "leaflet";
@@ -12,7 +12,8 @@ import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
   moduleId: module.id,
   styleUrls: ["./maptap.css"],
   //styles: [`.lc.leaflet-control { cursor: crosshair }`],
-  template: `<section id="map" class="leaflet-crosshair"></section>`
+  template: `<section id="map" class="leaflet-crosshair"></section>`,
+  //encapsulation: ViewEncapsulation.None,
 })
 export class MaptapComponent implements OnInit, AfterViewInit{
   constructor(geocodingService : GeocodingService, public addressService : AddressService ){

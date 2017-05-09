@@ -5,7 +5,7 @@ import { GeocodeResult, AddressObject } from "./geocode";
 @Injectable()
 export class AddressService {
   private value : AddressObject = new AddressObject( new GeocodeResult ([], "", null, "", []) );
-  private latlng: LatLng; 
+  private latlng: LatLng;
 
   get address(): AddressObject {
     return this.value;

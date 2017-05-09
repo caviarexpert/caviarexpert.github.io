@@ -41,8 +41,8 @@ export class AddressObject {
     
     get buildingNumber() : string {
         let streetNumber = this.streetNumber, premise = this.premise;
-        let delimiter = streetNumber && premise ? " " : "";
-        return streetNumber + delimiter + premise;
+        let delimiter = streetNumber && premise ? "/" : "";
+        return premise + delimiter + streetNumber;
     }
     
     get route() : string {
@@ -55,12 +55,17 @@ export class AddressObject {
             .find( addr => addr.types.some( atype => atype == "locality"));
         return locality_of_address_component ? locality_of_address_component.long_name : "";
     }
-    administrative_area_level_2
     
     get postalCode() : string {
         let postal_code_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "postal_code"));
         return postal_code_of_address_component ? postal_code_of_address_component.long_name : "";
+    }
+
+    get countryCode() : string {
+        let country_of_address_component = this.geocodeResult.address_components
+            .find( addr => addr.types.some( atype => atype == "country"));
+        return country_of_address_component ? country_of_address_component.short_name : "";
     }
     
     get areaLevel2() : string {

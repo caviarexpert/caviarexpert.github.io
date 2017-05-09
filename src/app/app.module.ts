@@ -15,7 +15,7 @@ import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
 import { SharedModule } from "./shared/shared.module";
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     AppComponent
   ],
   imports: [
-    NavModule, StoreModule, DeliveryModule, NavModule,
+    NavModule, StoreModule, DeliveryModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -38,9 +38,9 @@ import { TranslateModule } from '@ngx-translate/core';
     //BsDropdownModule.forRoot(),
     //ButtonsModule.forRoot()
   ],
-  providers: [],
+  //providers: [ TranslateService ],
   bootstrap: [AppComponent],
-  exports: []
+  //exports: [ TranslateModule ]
 })
 export class AppModule {
     constructor(@Inject(DOCUMENT) private document: any){

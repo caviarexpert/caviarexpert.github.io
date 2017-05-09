@@ -1,39 +1,34 @@
 <div style="height:100%">
 <div style="float: left; width:30rem;">
     <div class="container">
-    	<p>We deliver the goods to <strong>EU</strong> and <dfn><abbr title="European Free Trade Association: Switzerland, Norway, Iceland and Liechtenstein">EFTA</abbr></dfn> countries</p> 
+    	<p><span translate>HELLO</span> We deliver the goods to <strong>EU</strong> and <dfn><abbr title="European Free Trade Association: Switzerland, Norway, Iceland and Liechtenstein">EFTA</abbr></dfn> countries</p> 
         <form #addressForm="ngForm">
             <div class="row">
 				<div class="col has-warning">
-					<label for="country">EU or EFTA country</label>
-					<select class="form-control form-control-warning" id="country" autofocus>
-						<option selected>choose ...</option>
-						<option name="DE">Deutschland</option>
-						<option name="UK">United Kingdom</option>
-						<option name="FR">France</option>
-						<option name="IT">Italy</option>
-						<option>4</option>
-						<option>5</option>
+					<select class="form-control form-control-warning" id="country" name="country" autofocus
+							[ngModel]="geocodeAddress.countryCode">						
+						<option *ngFor="let c of countries" [ngValue]="c" translate>{{ 'COUNTRIES.'+c }}</option>
+						<option value="">choose EU or EFTA country</option>
 					</select>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<label for="postalCode">Postal code</label>
+					<label for="postalCode" translate>ADDRESS.postal_code</label>
 					<input type="text" class="form-control" id="postalCode" name="postalCode"
 						aria-describedby="postalCodeHelp" placeholder="Postal code"
 						[ngModel]="geocodeAddress.postalCode">
 					<small id="postalCodeHelp" class="form-text text-muted">If you know that.</small>
 				</div>
 				<div class="col has-warning">
-					<label for="locality">Locality</label>
+					<label for="locality" translate>ADDRESS.locality</label>
 					<input type="text" class="form-control form-control-warning" id="locality" name="locality"
 						 aria-describedby="localityHelp" placeholder="town, village and etc."
 						 [ngModel]="geocodeAddress.locality">
 					<small id="localityHelp" class="form-text text-muted">Specify the location</small>
 				</div>
 				<div class="col">
-					<label for="areaLevel2">Area</label>
+					<label for="areaLevel2" translate>ADDRESS.administrative_area_level_2</label>
 					<input type="text" class="form-control" id="areaLevel2" name="areaLevel2"
 						aria-describedby="areaLevel2Help" placeholder="region"
 						[ngModel]="geocodeAddress.areaLevel2Short">
@@ -42,7 +37,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<label for="areaLevel1">Region</label>
+					<label for="areaLevel1" translate="ADDRESS.administrative_area_level_1"></label>
 					<input type="text" class="form-control" id="areaLevel1" name="areaLevel1"
 						aria-describedby="areaLevel2Help" placeholder="region"
 						[ngModel]="geocodeAddress.areaLevel1">

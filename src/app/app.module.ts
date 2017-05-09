@@ -47,13 +47,16 @@ export class AppModule {
         let bootswatch = document.createElement("link");
         bootswatch.rel = "stylesheet";
         bootswatch.type = "text/css";
-        bootswatch.href = "https://bootswatch.com/4-alpha/cosmo/bootstrap.min.css";
+        bootswatch.href = "https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css";
+        //bootswatch.href = "https://bootswatch.com/4-alpha/cosmo/bootstrap.min.css";
         document.getElementsByTagName("head")[0].appendChild(bootswatch);
 
         let fa = document.createElement("link");
         fa.rel = "stylesheet";
         fa.type = "text/css";
-        fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+        fa.href = "https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css";
+        //fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+        //fa.href = "https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css";
         document.getElementsByTagName("head")[0].appendChild(fa);
     }
  }

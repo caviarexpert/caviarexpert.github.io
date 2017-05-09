@@ -2,8 +2,9 @@ import { Component, OnInit, AfterViewInit } from "@angular/core";
 //import { System } from "systemjs";
 //import L = require("leaflet");
 import * as L from "leaflet";
-import { GeocodingService } from "./geocoding.service";
+import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
+import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 
 
 @Component({
@@ -51,7 +52,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           map.addControl(new MyControl());
           markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
-          L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);
@@ -60,14 +61,16 @@ export class MaptapComponent implements OnInit, AfterViewInit{
             if(zoom > 15){
               geoService.getGeocoding(event.latlng.lat, event.latlng.lng)
                 .subscribe( results => {
-                  let addr = results[0].formatted_address;
-                  addrService.address = addr;
+                  let geocodeResponse : GeocodeResponse = new GeocodeResponse(results);
+                  let geocodeResult : GeocodeResult = geocodeResponse.results[0];
+                  let addr = geocodeResult.formatted_address;
+                  addrService.assignAddress(geocodeResult);
                   console.log("results: ", results);
                   addrService.coordinate = event.latlng;
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
                   markersLayer.addLayer(marker);
-                  marker.bindPopup(addrService.address).openPopup();
+                  marker.bindPopup(addrService.address.formattedAddress).openPopup();
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
@@ -92,7 +95,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           if(addrService.coordinate){
               let marker = L.marker(addrService.coordinate);
               markersLayer.addLayer(marker);
-              marker.bindPopup(addrService.address).openPopup();
+              marker.bindPopup(addrService.address.formattedAddress).openPopup();
           }
     //});
   }

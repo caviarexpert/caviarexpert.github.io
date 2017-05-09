@@ -1,19 +1,17 @@
 import { Injectable } from "@angular/core";
 import { LatLng } from "leaflet";
+import { GeocodeResult, AddressObject } from "./geocode";
 
 @Injectable()
 export class AddressService {
-  constructor(){
-    console.log("AddressService created")
-  }
-  private value : string;
+  private value : AddressObject = new AddressObject( new GeocodeResult ([], "", null, "", []) );
   private latlng: LatLng; 
 
-  get address(): string {
+  get address(): AddressObject {
     return this.value;
   }
-  set address(newAddress : string){
-    this.value = newAddress;
+  assignAddress( geocodingResult : GeocodeResult ){
+    this.value = new AddressObject(geocodingResult);
   }
   
   get coordinate(): LatLng {
@@ -21,5 +19,9 @@ export class AddressService {
   }
   set coordinate(latLng : LatLng){
       this.latlng = latLng;
+  }
+  
+  addressAsJson() : string {
+      return JSON.stringify(this.value);
   }
 }

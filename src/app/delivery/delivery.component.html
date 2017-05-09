@@ -16,28 +16,36 @@
 						<option>5</option>
 					</select>
 				</div>
-				<div class="col">
-					<label for="postal_code">Postal code</label>
-					<input type="text" class="form-control" id="postal_code" aria-describedby="postalCodeHelp" placeholder="Postal code">
-					<small id="postalCodeHelp" class="form-text text-muted">If you know your postal code.</small>
-				</div>
 			</div>
 			<div class="row">
+				<div class="col">
+					<label for="postalCode">Postal code</label>
+					<input type="text" class="form-control" id="postalCode" name="postalCode"
+						aria-describedby="postalCodeHelp" placeholder="Postal code"
+						[(ngModel)]="geocodeAddress.postalCode">
+					<small id="postalCodeHelp" class="form-text text-muted">If you know that.</small>
+				</div>
 				<div class="col has-warning">
 					<label for="locality">Locality</label>
-					<input type="text" class="form-control form-control-warning" id="postal_code" aria-describedby="localityHelp" placeholder="town, village and etc.">
+					<input type="text" class="form-control form-control-warning" id="locality" name="locality"
+						 aria-describedby="localityHelp"
+						placeholder="town, village and etc." [(ngModel)]="geocodeAddress.locality">
 					<small id="localityHelp" class="form-text text-muted">Specify the location</small>
 				</div>
 				<div class="col">
-					<label for="administrative_area_level_1">Area</label>
-					<input type="text" class="form-control" id="administrative_area_level_1" aria-describedby="areaLevel1Help" placeholder="region">
-					<small id="areaLevel1Help" class="form-text text-muted">If you know your postal code.</small>
+					<label for="areaLevel2">Area</label>
+					<input type="text" class="form-control" id="areaLevel2" name="areaLevel2"
+						aria-describedby="areaLevel2Help" placeholder="region"
+						[(ngModel)]="geocodeAddress.areaLevel2Short">
+					<small id="areaLevel2Help" class="form-text text-muted" *ngIf="geocodeAddress.areaLevel2">{{ geocodeAddress.areaLevel2 }}</small>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<label for="administrative_area_level_2">Region</label>
-					<input type="text" class="form-control" id="administrative_area_level_2" aria-describedby="areaLevel2Help" placeholder="region">
+					<label for="areaLevel1">Region</label>
+					<input type="text" class="form-control" id="areaLevel1" name="areaLevel1"
+						aria-describedby="areaLevel2Help" placeholder="region"
+						[(ngModel)]="geocodeAddress.areaLevel1">
 					<small id="areaLevel2Help" class="form-text text-muted">We have some problems resolving your locality, please specify region.</small>
 				</div>
 			</div>
@@ -48,11 +56,13 @@
 			</div>
 			<div class="row">
 				<div class="col-6 pr-1">
-					<input type="text" class="form-control" id="route" aria-describedby="streetAddressHelp" placeholder="street address">
+					<input type="text" class="form-control" id="route" name="route" aria-describedby="streetAddressHelp" placeholder="street address" [(ngModel)]="geocodeAddress.route">
 					<small id="streetAddressHelp" class="form-text text-muted">for example: <code>Oxford street</code></small>
 				</div>
 				<div class="col-3 px-1">
-					<input type="text" class="form-control" id="street_number" aria-describedby="buildingNumberHelp" placeholder="num.">
+					<input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
+						aria-describedby="buildingNumberHelp" placeholder="num." 
+						[(ngModel)]="geocodeAddress.buildingNumber">
 					<small id="buildingNumberHelp" class="form-text text-muted">building number</small>
 				</div>
 				<div class="col-3 pl-1">
@@ -61,7 +71,7 @@
 				</div>
 			</div>
 			<div *ngIf="addrService.address" class="alert alert-info justify-content-center">
-				{{ addrService.address }}
+				{{ addrService.addressAsJson() }}
 				<address>
 					<strong>Authentic Russian Caviar</strong>
 					<br />Corso Venezia 3

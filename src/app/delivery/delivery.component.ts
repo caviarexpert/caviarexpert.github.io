@@ -1,5 +1,6 @@
 import {Component, ViewChild} from "@angular/core";
 import { AddressService } from "../shared/address.service";
+import { AddressObject } from "../shared/geocode";
 
 
 @Component({
@@ -15,5 +16,9 @@ export class DeliveryComponent {
     ngAfterViewInit() {
         //this.form.control.valueChanges
         //    .subscribe(values => this.validateQuantity(values));
+    }
+    
+    get geocodeAddress() : AddressObject {
+        return this.addrService.address;
     }
 }

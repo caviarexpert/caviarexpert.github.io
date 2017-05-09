@@ -22,21 +22,21 @@
 					<label for="postalCode">Postal code</label>
 					<input type="text" class="form-control" id="postalCode" name="postalCode"
 						aria-describedby="postalCodeHelp" placeholder="Postal code"
-						[(ngModel)]="geocodeAddress.postalCode">
+						[ngModel]="geocodeAddress.postalCode">
 					<small id="postalCodeHelp" class="form-text text-muted">If you know that.</small>
 				</div>
 				<div class="col has-warning">
 					<label for="locality">Locality</label>
 					<input type="text" class="form-control form-control-warning" id="locality" name="locality"
-						 aria-describedby="localityHelp"
-						placeholder="town, village and etc." [(ngModel)]="geocodeAddress.locality">
+						 aria-describedby="localityHelp" placeholder="town, village and etc."
+						 [ngModel]="geocodeAddress.locality">
 					<small id="localityHelp" class="form-text text-muted">Specify the location</small>
 				</div>
 				<div class="col">
 					<label for="areaLevel2">Area</label>
 					<input type="text" class="form-control" id="areaLevel2" name="areaLevel2"
 						aria-describedby="areaLevel2Help" placeholder="region"
-						[(ngModel)]="geocodeAddress.areaLevel2Short">
+						[ngModel]="geocodeAddress.areaLevel2Short">
 					<small id="areaLevel2Help" class="form-text text-muted" *ngIf="geocodeAddress.areaLevel2">{{ geocodeAddress.areaLevel2 }}</small>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 					<label for="areaLevel1">Region</label>
 					<input type="text" class="form-control" id="areaLevel1" name="areaLevel1"
 						aria-describedby="areaLevel2Help" placeholder="region"
-						[(ngModel)]="geocodeAddress.areaLevel1">
+						[ngModel]="geocodeAddress.areaLevel1">
 					<small id="areaLevel2Help" class="form-text text-muted">We have some problems resolving your locality, please specify region.</small>
 				</div>
 			</div>
@@ -56,13 +56,15 @@
 			</div>
 			<div class="row">
 				<div class="col-6 pr-1">
-					<input type="text" class="form-control" id="route" name="route" aria-describedby="streetAddressHelp" placeholder="street address" [(ngModel)]="geocodeAddress.route">
+					<input type="text" class="form-control" id="route" name="route"
+						aria-describedby="streetAddressHelp" placeholder="street address"
+						[ngModel]="geocodeAddress.route">
 					<small id="streetAddressHelp" class="form-text text-muted">for example: <code>Oxford street</code></small>
 				</div>
 				<div class="col-3 px-1">
 					<input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
 						aria-describedby="buildingNumberHelp" placeholder="num." 
-						[(ngModel)]="geocodeAddress.buildingNumber">
+						[ngModel]="geocodeAddress.buildingNumber">
 					<small id="buildingNumberHelp" class="form-text text-muted">building number</small>
 				</div>
 				<div class="col-3 pl-1">

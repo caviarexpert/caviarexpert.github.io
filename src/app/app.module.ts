@@ -15,7 +15,7 @@ import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
 import { SharedModule } from "./shared/shared.module";
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     BrowserModule,
     FormsModule,
     HttpModule,
-    TranslateModule.forRoot(),
+    TranslationModule.forRoot(),
     SharedModule.forRoot(),
     RouterModule.forRoot([
        { path: '',   redirectTo: '/store', pathMatch: 'full' },

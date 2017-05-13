@@ -17,14 +17,14 @@
             </tr>
             <tr *ngFor="let line of cart.lines">
                 <td translate>STORE.PRODUCTS.{{ line.product.sku }}</td>
-                <td>{{line.product.price | currency:"EUR":true:"1.0-2"}}</td>
+                <td>{{line.product.price | localeCurrency:defaultLocale:currency:true:"1.0-2" }}</td>
                 <td>
                     <input type="number" class="form-control-sm px-1" 
                            style="width:3.5rem" 
                            [(ngModel)]="line.quantity" [name]="line.product.sku" />
                 </td> 
                 <td class="text-xs-right">
-                    {{ line.lineTotal | currency:"EUR":true:"1.0-2" }}
+                    {{ line.lineTotal | localeCurrency:defaultLocale:currency:true:"1.0-2" }}
                 </td>
             </tr>
             <tr>
@@ -49,7 +49,7 @@
             <tr>
                 <td colspan="3" class="text-xs-right">Total:</td>
                 <td colspan="1" class="text-xs-right table-info">
-                    {{cart.totalCartPrice | currency:"EUR":true:"1.0-2"}}
+                    {{cart.totalCartPrice | localeCurrency:defaultLocale:currency:true:"1.0-2"}}
                 </td>
             </tr>
         </tfoot>

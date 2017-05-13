@@ -23,19 +23,19 @@ import { LocalizationModule, LocaleService, TranslationService } from 'angular-l
     AppComponent
   ],
   imports: [
-    //NavModule,
-    //StoreModule,
+    NavModule,
+    StoreModule,
     //DeliveryModule,
     BrowserModule,
     FormsModule,
     SharedModule.forRoot(),
+
     //HttpModule,
-    LocalizationModule.forChild()
-    //SharedModule.forRoot(),
-    //RouterModule.forRoot([
-    //   { path: '',   redirectTo: '/store', pathMatch: 'full' },
-    //   { path: "**", redirectTo: "/store" }
-    //])
+    //LocalizationModule.forChild()
+    RouterModule.forRoot([
+       { path: '',   redirectTo: '/store', pathMatch: 'full' },
+       { path: "**", redirectTo: "/store" }
+    ])
     //  { path: "store", component: ThemeComponent },
     //  { path: "**", redirectTo: "/store" }
     //BsDropdownModule.forRoot(),
@@ -46,7 +46,7 @@ import { LocalizationModule, LocaleService, TranslationService } from 'angular-l
   //exports: [ SharedModule ]
 })
 export class AppModule {
-    constructor(@Inject(DOCUMENT) private document: any){
+    constructor(@Inject(DOCUMENT) private document: any, private translation: TranslationService){
         let bootswatch = document.createElement("link");
         bootswatch.rel = "stylesheet";
         bootswatch.type = "text/css";
@@ -60,6 +60,12 @@ export class AppModule {
         fa.href = "https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css";
         //fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
         //fa.href = "https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css";
-        document.getElementsByTagName("head")[0].appendChild(fa);        
+        document.getElementsByTagName("head")[0].appendChild(fa);
+
+        this.translation.addConfiguration()
+            //.addProvider('./assets/l10n/locale-countries-'); 
+            .addProvider("./assets/l10n/app-");
+
+        this.translation.init();     
     }
  }

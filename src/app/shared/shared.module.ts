@@ -9,8 +9,11 @@ import {
   LocalizationModule, 
   LocaleService, 
   TranslationService, 
-  TranslatePipe, 
-  LocaleDatePipe,
+  //TranslatePipe, 
+  //LocaleDatePipe,
+  //LocaleConfig,
+  //TranslationConfig,
+  //InjectorRef
 } from 'angular-l10n';
 
  export const countries : string[] = ["UK", "DE", "FR", "IT", "ES", "PT", "NL", "BE", "LU", "NL", "DK",
@@ -22,21 +25,30 @@ import {
     LocalizationModule.forRoot()
   ],
   declarations: [SharedComponent],
-  exports: [ SharedComponent, TranslatePipe, LocaleDatePipe ]
+  exports: [ SharedComponent, LocalizationModule ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {
       return {
         ngModule: SharedModule,
-        providers: [ AddressService, GeocodingService, LocaleService, TranslationService ]
+        providers: [ 
+                AddressService,
+                GeocodingService, 
+                //InjectorRef,
+                //LocaleConfig,
+                //LocaleService,
+                //TranslationConfig,
+                //TranslationService
+        ]
       };
     }
 
     constructor(public locale: LocaleService, public translation: TranslationService){
         this.locale.addConfiguration()
           .disableStorage()
-          .addLanguages(['it', 'en_UK'])
-          .defineDefaultLocale('it', 'IT');
+          .addLanguages(['it', 'en'])
+          .defineDefaultLocale('it', "IT")
+          .defineCurrency("EUR");
           //.defineLanguage('en');            
         this.locale.init();
 

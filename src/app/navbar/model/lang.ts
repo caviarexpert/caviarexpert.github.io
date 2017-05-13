@@ -1,6 +1,8 @@
-export class Lang {
+export class Locale {
     constructor(
-        public id: string,
+        public languageCode: string,
+        public countryCode: string,
+        public shortcut: string,
         public localizedName: string
     ){}
 

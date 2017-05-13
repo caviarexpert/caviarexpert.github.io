@@ -4,6 +4,12 @@ import { Router } from "@angular/router";
 
 import { Cart } from "./cart.service";
 
+import {
+    Language,
+    DefaultLocale,
+    Currency
+} from 'angular-l10n';
+
 /*
  * Consider using https://github.com/Caballerog/ng2-inline-editor 
  */
@@ -15,6 +21,10 @@ import { Cart } from "./cart.service";
     styleUrls: ["./cartdetails.component.css"]
 })
 export class CartDetailComponent {
+    @Language() lang: string;
+    @DefaultLocale() defaultLocale: string;
+    @Currency() currency: string;
+
     @ViewChild("cartForm") form;
     constructor(public cart: Cart) { }
 

@@ -7,10 +7,11 @@ import { CartSummaryComponent } from "./cart-summary.component";
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from "@angular/router";
 import { StoreModule } from "../store/store.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -18,15 +19,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule,
-        StoreModule,
+        //StoreModule,
+        SharedModule,
         BsDropdownModule.forRoot(),
-        ButtonsModule.forRoot(),
-        //TranslateModule.forChild()
+        ButtonsModule.forRoot()
     ],
     declarations: [NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ],
-    exports: [ NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ],
-    providers: [
-       TranslateService
-    ]
+    exports: [ NavComponent, ThemeComponent, LangComponent, CartSummaryComponent ]
 })
 export class NavModule {}

@@ -12,8 +12,10 @@ import {
 
 @Component({
   selector: "app-root",
-  //template: "<section class="pt-5 fill"><navigation-bar></navigation-bar><router-outlet></router-outlet></section>"
-  template: ` 
+  template: `<section class="pt-5 fill"><navigation-bar></navigation-bar><router-outlet></router-outlet></section>`
+  /*
+  template: `
+      <navigation-bar></navigation-bar>
       <p translate>Hello</p>  
       <p translate>STORE.Caviar</p>
       <p localeDate="fullDate">{{ today }}</p>
@@ -24,7 +26,9 @@ import {
       {{ 'STORE.Caviar' | translate:lang }}
       {{ today | localeDate:defaultLocale:'fullDate' }}
       <p>languageCodes: {{ languageCodes }}</p>
+      <strong translate>App translate</strong>
     `
+  */  
 })
 export class AppComponent implements OnInit {
     @Language() lang: string;

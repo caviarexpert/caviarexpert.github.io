@@ -1,10 +1,15 @@
 //import { Component, Inject, OnInit } from "@angular/core";
 //import { Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { ProductService } from "./product.service";
 import { Product } from "./model/product";
 import { Cart } from "./cart.service";
+
+import {
+    Language,
+    DefaultLocale,
+    Currency
+} from 'angular-l10n';
 
 @Component({
     selector: "store-area",
@@ -13,11 +18,14 @@ import { Cart } from "./cart.service";
 })
 export class StoreComponent implements OnInit {
 
-    constructor(private translateService: TranslateService,
-            private cart: Cart,
-            private productService: ProductService){}
+    @Language() lang: string;
+    @DefaultLocale() defaultLocale: string;
+    @Currency() currency: string;
+
+    constructor(private cart: Cart, private productService: ProductService){}
     
-    ngOnInit(){
+    ngOnInit():void {
+        /*
         this.translateService.setTranslation("en", {
             STORE: {
                 addToCart: "buy",
@@ -83,14 +91,11 @@ export class StoreComponent implements OnInit {
                 }
             }
         });
+        */
     }
 
     get products(): Product[] {
         return this.productService.products;
-    }
-
-    get translate(): TranslateService {
-        return this.translateService;
     }
 
     addProductToCart(product: Product) {

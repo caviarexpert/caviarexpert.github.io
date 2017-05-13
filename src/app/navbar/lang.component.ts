@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { Lang } from "./model/lang";
-import {TranslateService } from '@ngx-translate/core';
+import { Locale } from "./model/lang";
+import { LocaleService } from "angular-l10n";
 
 const lang_map = {
-    ru: "русский",
-    en: "English",
-    es: "español",
-    de: "Deutsch",
-    fr: "français",
-    it: "italiano"
+    ru: { shortcut: "ru", name: "русский", country: "RU" },
+    en: { shortcut: "en", name: "English", country: "UK" },
+    es: { shortcut: "es", name:"español", country: "ES" },
+    de: { shortcut: "de", name: "Deutsch", country: "DE" },
+    fr: { shortcut: "fr", name: "français", country: "FR" },
+    it: { shortcut: "it", name: "italiano", country: "IT" }
 };
 
 @Component({
@@ -18,28 +18,28 @@ const lang_map = {
 })
 export class LangComponent implements OnInit {
     
-    private working_langs: Lang[] = [];
-    private currentLang: Lang;
+    private working_langs: Locale[] = [];
+    private currentLang: Locale;
 
-    constructor(private translateService: TranslateService){}
+    constructor(private localeService: LocaleService){}
 
     ngOnInit(){
-        this.working_langs = this.translateService.getLangs()
-            .filter( code => lang_map.hasOwnProperty(code))
-            .map ( code => new Lang(code, lang_map[code]));
+        this.working_langs = this.localeService.getConfiguration().languageCodes
+            .filter( langCode => lang_map.hasOwnProperty(langCode.code))
+            .map ( langCode => new Locale(langCode.code, lang_map[langCode.code].country, lang_map[langCode.code].shortcut, lang_map[langCode.code].name));
         this.currentLang = this.working_langs
-            .find ( lang => lang.id === this.translateService.currentLang);
+            .find ( lang => lang.languageCode === this.localeService.getCurrentLanguage());
     }
 
-    get langs():Lang[]{
+    get langs():Locale[]{
         return this.working_langs;
     }
 
-    get current():Lang{
+    get current():Locale{
         return this.currentLang;
     }
-    set current(lang:Lang){
-        this.currentLang = lang;
-        this.translateService.use(lang.id);
+    set current(lang: Locale){
+        this.currentLang = lang;    
+        this.localeService.setDefaultLocale(lang.languageCode, lang.countryCode);
     }
 }

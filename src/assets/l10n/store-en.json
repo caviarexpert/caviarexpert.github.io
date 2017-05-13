@@ -1,0 +1,48 @@
+{
+  "STORE": {
+    "addToCart": "buy",
+    "PRODUCTS": {
+      "salmon_cav_200g": "Salmon caviar, 200g",
+      "salmon_keta_cav_200g": "Salmon caviar (Keta), 200g"
+    },
+    "valueNames": {
+      "net_weight": "net weight"
+    }
+  },
+  "COUNTRY": {
+    "DE": "Germany",
+    "FR": "France",
+    "IT": "Italy",
+    "ES": "Spain",
+    "PT": "Portugal",
+    "AD": "Andorra",
+    "BE": "Belgium",
+    "LU": "Luxembourg",
+    "NL": "Netherlands",
+    "IE": "Ireland",
+    "UK": "United Kingdom",
+    "DK": "Denmark",
+    "NO": "Norway",
+    "SE": "Sweden",
+    "FI": "Finland",
+    "EE": "Estonia",
+    "LV": "Latvia",
+    "LT": "Lithuania",
+    "PL": "Poland",
+    "CZ": "Czech",
+    "SK": "Slovakia",
+    "HU": "Hungary",
+    "RO": "Romania",
+    "BL": "Bulgaria",
+    "MK": "Macedonia",
+    "GR": "Greece",
+    "CY": "Cyprus",
+    "MT": "Malta",
+    "SL": "Slovenia",
+    "CR": "Croatia",
+    "AT": "Austria",
+    "LI": "Lichtenshtein",
+    "IS": "Iceland"
+  },
+  "Milan": "Milan"
+}

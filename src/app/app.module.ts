@@ -15,7 +15,7 @@ import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
 import { SharedModule } from "./shared/shared.module";
-import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
+import { LocalizationModule, LocaleService, TranslationService } from 'angular-l10n';
 
 
 @NgModule({
@@ -23,16 +23,19 @@ import { TranslationModule, LocaleService, TranslationService } from 'angular-l1
     AppComponent
   ],
   imports: [
-    NavModule, StoreModule, DeliveryModule,
+    //NavModule,
+    //StoreModule,
+    //DeliveryModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
-    TranslationModule.forRoot(),
     SharedModule.forRoot(),
-    RouterModule.forRoot([
-       { path: '',   redirectTo: '/store', pathMatch: 'full' },
-       { path: "**", redirectTo: "/store" }
-    ])
+    //HttpModule,
+    LocalizationModule.forChild()
+    //SharedModule.forRoot(),
+    //RouterModule.forRoot([
+    //   { path: '',   redirectTo: '/store', pathMatch: 'full' },
+    //   { path: "**", redirectTo: "/store" }
+    //])
     //  { path: "store", component: ThemeComponent },
     //  { path: "**", redirectTo: "/store" }
     //BsDropdownModule.forRoot(),
@@ -40,7 +43,7 @@ import { TranslationModule, LocaleService, TranslationService } from 'angular-l1
   ],
   //providers: [ TranslateService ],
   bootstrap: [AppComponent],
-  //exports: [ TranslateModule ]
+  //exports: [ SharedModule ]
 })
 export class AppModule {
     constructor(@Inject(DOCUMENT) private document: any){
@@ -57,6 +60,6 @@ export class AppModule {
         fa.href = "https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css";
         //fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
         //fa.href = "https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css";
-        document.getElementsByTagName("head")[0].appendChild(fa);
+        document.getElementsByTagName("head")[0].appendChild(fa);        
     }
  }

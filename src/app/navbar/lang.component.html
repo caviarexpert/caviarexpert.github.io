@@ -3,8 +3,8 @@
 </div>
 <span class="navbar-brand hidden-xs-down">: {{ current.localizedName }}</span>
 <div class="btn-group hidden-sm-up" dropdown>
-  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{ current.id | uppercase }} &ndash; {{ current.localizedName }} </button>
+  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{ current.shortcut | uppercase }} &ndash; {{ current.localizedName }} </button>
   <ul *dropdownMenu class="dropdown-menu" role="menu">
-    <li *ngFor="let lang of langs" role="menuitem"><a class="dropdown-item" (click)="current=lang">{{ lang.id }} &ndash; {{ lang.localizedName }}</a></li>
+    <li *ngFor="let lang of langs" role="menuitem"><a class="dropdown-item" (click)="current=lang">{{ lang.shortcut }} &ndash; {{ lang.localizedName }}</a></li>
   </ul>
 </div>

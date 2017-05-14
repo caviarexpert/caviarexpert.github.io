@@ -13,7 +13,7 @@ import { ProductService } from "./product.service";
 import { ProductDataSourceService } from "../datasources/product-data-source.service";
 import { Cart } from "./cart.service";
 
-import { LocalizationModule, TranslationService } from 'angular-l10n';
+import { LocalizationModule, TranslationService } from "angular-l10n";
 
 @NgModule({
     imports: [

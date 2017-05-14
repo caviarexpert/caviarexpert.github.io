@@ -1,0 +1,12 @@
+{
+    "ADDRESS": {
+        "country": "country",
+        "postal_code": "postal code",
+        "locality": "locality",
+        "administrative_area_level_1": "region",
+        "administrative_area_level_2": "district",
+        "HELP": {
+            "addressToLocation": "for example <code>Oxford street 5 London </code>"
+        }        
+    }
+}

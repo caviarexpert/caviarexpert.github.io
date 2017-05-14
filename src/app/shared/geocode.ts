@@ -53,7 +53,24 @@ export class AddressObject {
     get locality() : string {
         let locality_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "locality"));
-        return locality_of_address_component ? locality_of_address_component.long_name : "";
+        return locality_of_address_component ? locality_of_address_component.long_name : this.postalTown;
+    }
+
+    /**
+     * auxiliry to locality()
+     */
+    get postalTown(): string {
+        let postal_town_of_address_component = this.geocodeResult.address_components
+            .find( addr => addr.types.some( atype => atype == "postal_town"));
+        return postal_town_of_address_component ? postal_town_of_address_component.long_name : this.areaLevel3;
+    }
+    /**
+     * auxliary to postalTown()
+     */
+    get areaLevel3(): string {
+        let administrative_area_level_3_of_address_component = this.geocodeResult.address_components
+            .find( addr => addr.types.some( atype => atype == "administrative_area_level_3"));
+        return administrative_area_level_3_of_address_component ? administrative_area_level_3_of_address_component.long_name : "";
     }
     
     get postalCode() : string {

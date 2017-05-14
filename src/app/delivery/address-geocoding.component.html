@@ -1,0 +1,7 @@
+<form #searchAddress="ngForm" (ngSubmit)="onSubmit(searchAddress)">
+    <label for="addressToLocation" translate>ADDRESS.addressToLocation</label>
+    <input class="form-control form-control-warning" id="addressToLocation" name="addressToLocation"
+        aria-describedby="addressToLocationHelp"
+        [(ngModel)]="addressToLocation" placeholder="Type delivery address" autofocus />
+    <small id="addressToLocationHelp" class="form-text text-muted" [innerHTML]="'ADDRESS.HELP.addressToLocation'" translate></small>	
+</form>

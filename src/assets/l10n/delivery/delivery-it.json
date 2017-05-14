@@ -1,0 +1,9 @@
+{
+    "ADDRESS": {
+        "country": "paese",
+        "postal_code": "codice postale",
+        "locality": "località",
+         "administrative_area_level_1": "regione",
+         "administrative_area_level_2": "provincia"
+    }    
+}

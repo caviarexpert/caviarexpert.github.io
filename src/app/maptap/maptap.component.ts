@@ -60,7 +60,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           map.on("click", function(event){      
             let zoom = map.getZoom();            
             if(zoom > 15){
-              geoService.getGeocoding(event.latlng.lat, event.latlng.lng)
+              geoService.getAddress(event.latlng.lat, event.latlng.lng)
                 .subscribe( results => {
                   let geocodeResponse : GeocodeResponse = new GeocodeResponse(results);
                   let geocodeResult : GeocodeResult = geocodeResponse.results[0];

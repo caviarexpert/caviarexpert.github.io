@@ -25,7 +25,7 @@ import { SharedModule } from "./shared/shared.module";
   imports: [
     NavModule,
     StoreModule,
-    //DeliveryModule,
+    DeliveryModule,
     BrowserModule,
     FormsModule,
     SharedModule.forRoot(),

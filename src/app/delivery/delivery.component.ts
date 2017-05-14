@@ -1,8 +1,8 @@
 import {Component, ViewChild, OnInit } from "@angular/core";
 import { AddressService } from "../shared/address.service";
 import { AddressObject } from "../shared/geocode";
-import { countries } from "../shared/shared.module";
-import { TranslateService } from "@ngx-translate/core";
+import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
+import { Language, DefaultLocale, Currency, TranslationService } from "angular-l10n";
 
 
 @Component({
@@ -12,8 +12,16 @@ import { TranslateService } from "@ngx-translate/core";
     styleUrls: ["./delivery.component.css"]
 })
 export class DeliveryComponent implements OnInit {
-    @ViewChild("addressForm") form;
-    constructor(public addrService : AddressService, private translateService: TranslateService) {}
+    @Language() lang: string;
+    @DefaultLocale() defaultLocale: string;
+    @Currency() currency: string;
+
+    @ViewChild("addressForm") addressForm;
+    @ViewChild("searchAddress") searchAddressForm;
+
+    constructor(public addrService : AddressService, 
+        private deliveryService: DeliveryService,
+        public translationService: TranslationService) {}
 
     ngAfterViewInit() {
         //this.form.control.valueChanges
@@ -23,12 +31,15 @@ export class DeliveryComponent implements OnInit {
     get geocodeAddress() : AddressObject {
         return this.addrService.address;
     }
-
-    get countries() : string[] {
-        return countries;
+    /**
+     * @return a list countries ordered ASC in current locale
+     */
+    get countries() : CountryEntity[] {
+        return this.deliveryService.countries;
     }
 
-    ngOnInit(){
+    ngOnInit(){}
+    /*
         this.translateService.setTranslation("en", {
             ADDRESS: {
                 postal_code: "postal code",
@@ -69,6 +80,5 @@ export class DeliveryComponent implements OnInit {
                 administrative_area_level_2: "provincia"
             }
         });
-        
-    }
+    */    
 }

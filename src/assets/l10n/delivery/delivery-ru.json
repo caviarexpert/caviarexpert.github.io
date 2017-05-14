@@ -1,0 +1,9 @@
+{
+    "ADDRESS": {
+        "country": "страна",
+        "postal_code": "индекс",
+        "locality": "город, посёлок",
+         "administrative_area_level_1": "область",
+         "administrative_area_level_2": "район"
+    }    
+}

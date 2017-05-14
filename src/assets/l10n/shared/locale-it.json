@@ -1,8 +1,4 @@
 {
-  "Hello": "Chio!",
-  "STORE": {
-    "Caviar": "Caviale"
-  },
   "COUNTRY": {
     "DE": "Germany",
     "FR": "France",
@@ -14,7 +10,7 @@
     "LU": "Luxembourg",
     "NL": "Netherlands",
     "IE": "Ireland",
-    "UK": "United Kingdom",
+    "GB": "United Kingdom",
     "DK": "Denmark",
     "NO": "Norway",
     "SE": "Sweden",

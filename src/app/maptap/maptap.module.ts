@@ -3,18 +3,17 @@ import { BrowserModule, DOCUMENT } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { MaptapComponent } from "./maptap.component";
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { routing } from "./maptap.routing";
 
 import { SharedModule } from "../shared/shared.module";
+import { LocalizationModule } from "angular-l10n";
 
 
 @NgModule({
-    imports: [ HttpModule, routing, SharedModule ],
+    imports: [ HttpModule, routing, SharedModule, LocalizationModule.forChild() ],
     declarations: [MaptapComponent],
-    exports: [MaptapComponent],
-    providers: [ TranslateService ]
+    exports: [MaptapComponent ]
 })
 export class MaptapModule { 
     constructor(@Inject(DOCUMENT) private document: any){

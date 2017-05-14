@@ -25,7 +25,7 @@ import {
     LocalizationModule.forRoot()
   ],
   declarations: [SharedComponent],
-  exports: [ SharedComponent, LocalizationModule ]
+  exports: [ LocalizationModule ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {
@@ -53,7 +53,7 @@ export class SharedModule {
         this.locale.init();
 
         this.translation.addConfiguration()
-            .addProvider('./assets/l10n/locale-');
+            .addProvider('./assets/l10n/shared/locale-');
         this.translation.init();
     }
 

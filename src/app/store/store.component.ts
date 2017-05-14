@@ -1,6 +1,6 @@
 //import { Component, Inject, OnInit } from "@angular/core";
 //import { Router } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "./product.service";
 import { Product } from "./model/product";
 import { Cart } from "./cart.service";
@@ -24,6 +24,7 @@ export class StoreComponent implements OnInit {
 
     constructor(private cart: Cart, private productService: ProductService){}
     
+    ngOnDestroy(): void {}
     ngOnInit():void {
         /*
         this.translateService.setTranslation("en", {

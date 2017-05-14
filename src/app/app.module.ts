@@ -15,7 +15,7 @@ import { NavModule } from "./navbar/nav.module";
 import { StoreModule } from "./store/store.module";
 import { DeliveryModule } from "./delivery/delivery.module";
 import { SharedModule } from "./shared/shared.module";
-import { LocalizationModule, LocaleService, TranslationService } from 'angular-l10n';
+//import { LocalizationModule, LocaleService, TranslationService } from 'angular-l10n';
 
 
 @NgModule({
@@ -46,7 +46,7 @@ import { LocalizationModule, LocaleService, TranslationService } from 'angular-l
   //exports: [ SharedModule ]
 })
 export class AppModule {
-    constructor(@Inject(DOCUMENT) private document: any, private translation: TranslationService){
+    constructor(@Inject(DOCUMENT) private document: any){
         let bootswatch = document.createElement("link");
         bootswatch.rel = "stylesheet";
         bootswatch.type = "text/css";
@@ -61,11 +61,12 @@ export class AppModule {
         //fa.href = "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
         //fa.href = "https://unpkg.com/bootstrap@4.0.0-alpha.6/dist/css/bootstrap.min.css";
         document.getElementsByTagName("head")[0].appendChild(fa);
-
+/*
         this.translation.addConfiguration()
             //.addProvider('./assets/l10n/locale-countries-'); 
             .addProvider("./assets/l10n/app-");
 
-        this.translation.init();     
+        this.translation.init();
+*/     
     }
  }

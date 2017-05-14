@@ -6,13 +6,14 @@ import { CartDetailComponent } from "./cartdetails.component";
 
 
 import { SharedModule } from "../shared/shared.module";
+//import { AppModule } from "../app.module";
 import { StoreRoutingModule } from "./store-routing.module";
 
 import { ProductService } from "./product.service";
 import { ProductDataSourceService } from "../datasources/product-data-source.service";
 import { Cart } from "./cart.service";
 
-import { TranslationService } from 'angular-l10n';
+import { LocalizationModule, TranslationService } from 'angular-l10n';
 
 @NgModule({
     imports: [
@@ -32,9 +33,8 @@ import { TranslationService } from 'angular-l10n';
 })
 export class StoreModule {
     constructor(private translation: TranslationService){
-        this.translation.addConfiguration()
-            //.addProvider('./assets/l10n/locale-countries-'); 
-            .addProvider("./assets/l10n/store-");
+        this.translation.addConfiguration() 
+            .addProvider("./assets/l10n/store/store-");
 
         this.translation.init();    
     }

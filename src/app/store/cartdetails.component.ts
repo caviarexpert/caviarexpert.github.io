@@ -1,4 +1,4 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, ViewChild, OnInit, OnDestroy} from "@angular/core";
 import {NgForm} from "@angular/forms";
 import { Router } from "@angular/router";
 
@@ -20,7 +20,7 @@ import {
     templateUrl: "./cartdetails.component.html",
     styleUrls: ["./cartdetails.component.css"]
 })
-export class CartDetailComponent {
+export class CartDetailComponent implements OnInit, OnDestroy {
     @Language() lang: string;
     @DefaultLocale() defaultLocale: string;
     @Currency() currency: string;
@@ -32,6 +32,8 @@ export class CartDetailComponent {
         this.form.control.valueChanges
             .subscribe(values => this.validateQuantity(values));
     }
+    ngOnInit() : void {}
+    ngOnDestroy(): void {}
 
     private validateQuantity(obj:any): void{
         Object.keys(obj).forEach( key => {

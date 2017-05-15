@@ -11,7 +11,6 @@ import { GeocodeResponse, GeocodeResult} from "../shared/geocode";
 })
 export class AddressGeocoding{
     constructor(private geocodingService: GeocodingService, private addressService: AddressService){}
-    address: string;
     onSubmit(searchAddress: NgForm){
         let _address = searchAddress.value.addressToLocation;
         console.log("Address submited", _address);
@@ -23,5 +22,13 @@ export class AddressGeocoding{
                 this.addressService.assignAddress(geocodeResult);
                 console.log("results: ", result);
             });
+    }
+
+    get addressToLocation(): string {
+        return this.addressService.addressToLocation;
+    }
+
+    set addressToLocation(address: string) {
+        this.addressService.addressToLocation = address;
     }
 } 

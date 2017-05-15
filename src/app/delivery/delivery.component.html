@@ -6,60 +6,57 @@
 		<form #addressForm="ngForm" class="pt-3">			
 			<div class="row">
 				<div class="col-6 pr-1">
+					<label for="route"><small class="form-text text-muted" translate>ADDRESS.route</small></label>
 					<input type="text" class="form-control" id="route" name="route"
 						placeholder="street name" aria-describedby="streetNameHelp"
 						[ngModel]="geocodeAddress.route" />
-					<small id="streetNameHelp" class="form-text text-muted">street name</small>
 				</div>
 				<div class="col-3 px-1">
+					<label for="buildingNumber"><small class="form-text text-muted" translate>ADDRESS.building</small></label>
 					<input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
 						aria-describedby="buildingNumberHelp" placeholder="num." 
-						[ngModel]="geocodeAddress.buildingNumber">
-					<small id="buildingNumberHelp" class="form-text text-muted">building number</small>
+						[ngModel]="geocodeAddress.buildingNumber" />
 				</div>
 				<div class="col-3 pl-1 has-warning">
-					<input type="text" class="form-control" id="room_number" aria-describedby="roomNumberHelp" placeholder="num.">
-					<small id="roomNumberHelp" class="form-text text-muted">room or flat</small>
+					<label for="room_number"><small class="form-text text-muted" translate>ADDRESS.room</small></label>
+					<input type="text" class="form-control" id="room_number" name="room_number" placeholder="num.">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-3 pr-1">
-					<label for="postalCode" translate>ADDRESS.postal_code</label>
+					<label for="postalCode"><small class="form-text text-muted" translate>ADDRESS.postal_code</small></label>
 					<input type="text" class="form-control" id="postalCode" name="postalCode"
 						aria-describedby="postalCodeHelp" [placeholder]="translationService.translate('ADDRESS.postal_code')"
 						[ngModel]="geocodeAddress.postalCode" />
 				</div>
 				<div class="col-5 px-1">
-					<label for="locality" translate>ADDRESS.locality</label>
+					<label for="locality"><small class="form-text text-muted" translate>ADDRESS.locality</small></label>
 					<input type="text" class="form-control form-control-warning" id="locality" name="locality"
 						 [placeholder]="translationService.translate('ADDRESS.locality')"
-						 [ngModel]="geocodeAddress.locality">
+						 [ngModel]="geocodeAddress.locality" />
 				</div>
 				<div class="col-4 pl-1">
-					<label for="areaLevel2" translate>ADDRESS.administrative_area_level_2</label>
+					<label for="areaLevel2"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_2</small></label>
 					<input type="text" class="form-control" id="areaLevel2" name="areaLevel2"
 						aria-describedby="areaLevel2Help" [placeholder]="translationService.translate('ADDRESS.administrative_area_level_2')"
-						[ngModel]="geocodeAddress.areaLevel2Short">
+						[ngModel]="geocodeAddress.areaLevel2Short" />
 					<small id="areaLevel2Help" class="form-text text-muted" *ngIf="geocodeAddress.areaLevel2">{{ geocodeAddress.areaLevel2 }}</small>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col pr-1">
-					<label for="areaLevel1" translate>ADDRESS.administrative_area_level_1</label>
+					<label for="areaLevel1"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_1</small></label>
 					<input type="text" class="form-control" id="areaLevel1" name="areaLevel1"
-						aria-describedby="areaLevel1Help" [placeholder]="translationService.translate('ADDRESS.administrative_area_level_1')"
-						[ngModel]="geocodeAddress.areaLevel1">
-					<small id="areaLevel1Help" class="form-text text-muted" translate>ADDRESS.help.administrative_area_level_1</small>
+						[placeholder]="translationService.translate('ADDRESS.administrative_area_level_1')"
+						[ngModel]="geocodeAddress.areaLevel1" />
 				</div>
 				<div class="col pl-1">
-					<label for="country" translate>ADDRESS.country</label>
+					<label for="country"><small class="form-text text-muted" translate>ADDRESS.country</small></label>
 					<select class="form-control form-control-warning" id="country" name="country"
-							aria-describedby="countryHelp"
 							[ngModel]="geocodeAddress.countryCode">						
 						<option *ngFor="let c of countries" [ngValue]="c.code">{{ c.name }}</option>
 						<option value="">EU/EFTA country</option>
 					</select>
-					<small id="countryHelp" class="form-text text-muted" translate>ADDRESS.help.country</small>
 				</div>
 			</div>
 			<div *ngIf="addrService.address" class="alert alert-info justify-content-center">

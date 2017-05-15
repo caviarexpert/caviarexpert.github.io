@@ -6,6 +6,7 @@ import { GeocodeResult, AddressObject } from "./geocode";
 export class AddressService {
   private value : AddressObject = new AddressObject( new GeocodeResult ([], "", null, "", []) );
   private latlng: LatLng;
+  public addressToLocation: string;
 
   get address(): AddressObject {
     return this.value;

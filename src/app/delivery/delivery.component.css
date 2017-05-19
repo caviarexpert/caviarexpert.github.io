@@ -13,3 +13,11 @@
     /* IE 10+ */
     color: Tan;
 }
+.delivery-pane {
+    width: 100%;
+}
+@media(min-width:768px){
+    .delivery-pane {
+        width: 30rem;
+    }
+}

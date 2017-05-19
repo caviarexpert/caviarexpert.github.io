@@ -3,6 +3,7 @@ import { AddressService } from "../shared/address.service";
 import { AddressObject } from "../shared/geocode";
 import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
 import { Language, DefaultLocale, Currency, TranslationService } from "angular-l10n";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
@@ -19,11 +20,15 @@ export class DeliveryComponent implements OnInit {
     @ViewChild("addressForm") addressForm;
     @ViewChild("searchAddress") searchAddressForm;
 
+    private formShown: boolean = false;
+    private addressSet: boolean = false;
+    private _subscription: Subscription;
+
     constructor(public addrService : AddressService, 
         private deliveryService: DeliveryService,
         public translationService: TranslationService) {}
 
-    ngAfterViewInit() {
+    ngAfterViewInit() {        
         //this.form.control.valueChanges
         //    .subscribe(values => this.validateQuantity(values));
     }
@@ -38,7 +43,25 @@ export class DeliveryComponent implements OnInit {
         return this.deliveryService.countries;
     }
 
-    ngOnInit(){}
+    get showForm(): boolean {
+        if(this.addressSet===true && this.formShown===true) return true;
+        return this.formShown;
+    }
+
+    cancelForm() {
+        this.formShown = false;
+    }
+
+    ngOnInit(){
+        this._subscription = this.addrService.addressAssigned$.subscribe( value => { 
+            console.log("Address assigned")
+            this.addressSet = value;
+            this.formShown = value;
+        });
+    }
+    ngOnDestroy() {
+        this._subscription.unsubscribe();
+    }
     /*
         this.translateService.setTranslation("en", {
             ADDRESS: {

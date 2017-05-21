@@ -5,6 +5,7 @@ import * as L from "leaflet";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
 import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
+import { TranslationService } from "angular-l10n";
 
 
 @Component({
@@ -16,41 +17,29 @@ import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
   //encapsulation: ViewEncapsulation.None,
 })
 export class MaptapComponent implements OnInit, AfterViewInit{
-  constructor(geocodingService : GeocodingService, public addressService : AddressService ){
-    this.geocodingService = geocodingService;
-  }
+  constructor(public geocodingService : GeocodingService, 
+      public addressService : AddressService,
+      private translationService: TranslationService){}
   leafletMap : any;
-  geocodingService : GeocodingService;
+  //geocodingService : GeocodingService;
+  private _lang: string;
+
   ngAfterViewInit() {
     //System.import("leaflet").then( m => {
           
           let geoService = this.geocodingService;
           let addrService = this.addressService;
+          let tranlateService = this.translationService;
 
-          var MyControl = L.Control.extend({
-              options: {
-                  position: 'topright'
-              },
-
-              onAdd: function (map) {
-                  // create the control container with a particular class name
-                  var container = L.DomUtil.create('div', 'lc');
-                  
-                  container.innerHTML = "HELLO!!!";
-                  container.style.cursor = "crosshair";
-                  L.DomUtil.disableTextSelection();
-                  // ... initialize other DOM elements, add listeners, etc.
-
-                  return container;
-              }
-          });
+          
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
           const markersLayer = new L.LayerGroup([]);
           this.leafletMap = L.map("map");
           const map = this.leafletMap;
+          let addressPopup = this.getAddressPopup;
 
-          map.addControl(new MyControl());
+          map.addControl(this.getControl());
           markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -71,7 +60,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
                   markersLayer.addLayer(marker);
-                  marker.bindPopup(addrService.address.formattedAddress).openPopup();
+                  marker.bindPopup(addressPopup()).openPopup();
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
@@ -96,13 +85,43 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           if(addrService.coordinate){
               let marker = L.marker(addrService.coordinate);
               markersLayer.addLayer(marker);
-              marker.bindPopup(addrService.address.formattedAddress).openPopup();
+              marker.bindPopup(addressPopup()).openPopup();
           }
     //});
   }
+  private getControl(){
+      let MyControl = L.Control.extend({
+              options: {
+                  position: 'topright'
+              },
+              onAdd : (map) => {
+                  // create the control container with a particular class name
+                  var container = L.DomUtil.create('div', 'lc');
+                  container.innerHTML = this.translationService.translate("HELLO");
+                  container.style.cursor = "crosshair";
+                  L.DomUtil.disableTextSelection();
+                  // ... initialize other DOM elements, add listeners, etc.
+
+                  return container;
+              }
+          });
+
+          return new MyControl();
+  }
+  private getAddressPopup = () : string => {
+    let _lang = this.geocodingService.getSharedLocale().getCurrentLanguage();
+    let localCountryName = this.geocodingService.getSharedTranslation().translate("COUNTRY." + this.addressService.address.countryCode);
+    console.log("Address popup for", localCountryName, _lang)
+    return "<p>" + this.addressService.address.formattedAddress + "</p><address>" +
+             this.addressService.address.route + " " + this.addressService.address.streetNumber + "<br />" +
+             this.addressService.address.postalCode + " " +
+             this.addressService.address.locality + " " +
+             this.addressService.address.areaLevel2Short + "<br />" +
+             localCountryName +
+             "</address><button>" + this.translationService.translate("HELLO") +"</button>";
+  }
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    
+    //Add 'implements OnInit' to the class.    
   }
 }

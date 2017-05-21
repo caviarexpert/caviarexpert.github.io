@@ -15,7 +15,8 @@ import { LocalizationModule, TranslationService } from "angular-l10n";
   imports: [
     CommonModule, FormsModule,
     DeliveryRoutingModule,
-    SharedModule
+    SharedModule,
+    LocalizationModule
   ],
   declarations: [ DeliveryComponent, AddressGeocoding ],
   exports: [ DeliveryComponent ]

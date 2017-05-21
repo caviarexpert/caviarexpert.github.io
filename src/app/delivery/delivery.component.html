@@ -2,15 +2,17 @@
 <div style="float: left;" class="delivery-pane">
     <div class="container">
 			<div [hidden]="showForm">
-    		<p [innerHTML]="'We deliver to EU only'" translate></p> 
-      	<address-geocoding></address-geocoding>
-				<div class="mt-2 text-center">
-					<strong>OR</strong>
-				</div>
-				<div class="row">
-					<a routerLink="/map" class="btn btn-primary btn mx-auto mt-3">
-							<i class="fa fa-map-o"></i> <span translate>Point on map</span>
-					</a>
+				<p [innerHTML]="'We deliver to EU only'" translate></p> 
+				<address-geocoding></address-geocoding>
+				<div class="hidden-md-down">
+					<div class="mt-2 text-center">
+						<strong>OR</strong>
+					</div>
+					<div class="row">
+						<a routerLink="/map" class="btn btn-primary btn mx-auto mt-3">
+								<i class="fa fa-map-o"></i> <span translate>Point on map</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		<form #addressForm="ngForm" [hidden]="!showForm">			

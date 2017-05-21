@@ -23,8 +23,8 @@ import {
     HttpModule,
     LocalizationModule.forRoot()
   ],
-  declarations: [SharedComponent],
-  exports: [ LocalizationModule ]
+  declarations: [SharedComponent]
+  //exports: [ LocalizationModule ]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {

@@ -20,7 +20,8 @@ import { LocalizationModule, TranslationService } from "angular-l10n";
         BrowserModule, 
         FormsModule,
         StoreRoutingModule,
-        SharedModule
+        SharedModule,
+        LocalizationModule
     ],
     declarations: [StoreComponent, CartDetailComponent],
     exports: [StoreComponent, CartDetailComponent],

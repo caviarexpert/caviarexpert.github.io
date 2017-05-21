@@ -54,7 +54,6 @@ export class DeliveryComponent implements OnInit {
 
     ngOnInit(){
         this._subscription = this.addrService.addressAssigned$.subscribe( value => { 
-            console.log("Address assigned")
             this.addressSet = value;
             this.formShown = value;
         });

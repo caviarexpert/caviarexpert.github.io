@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http, Request, RequestMethod, Headers, Response, RequestOptions, URLSearchParams } from "@angular/http";
-import { LocaleService } from "angular-l10n";
+import { LocaleService, TranslationService } from "angular-l10n";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class GeocodingService{
     public API_URL : string = "https://maps.googleapis.com/maps/api/geocode/json";
 
-    constructor(private http: Http, private locale: LocaleService){}
+    constructor(private http: Http, private locale: LocaleService, private translationService: TranslationService ){}
 
     getAddress(lat : string, lng : string): Observable<any[]> {
         let searchParams: URLSearchParams = new URLSearchParams();
@@ -42,4 +42,11 @@ export class GeocodingService{
         return this.http.get(this.API_URL, new RequestOptions({search: searchParams}))
             .map( res => res.json().results || []);
     }
+
+    getSharedLocale() : LocaleService {
+        return this.locale;
+    }
+    getSharedTranslation(): TranslationService {
+        return this.translationService;
+    } 
 }

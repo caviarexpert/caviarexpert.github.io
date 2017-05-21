@@ -12,6 +12,7 @@ import { StoreModule } from "../store/store.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SharedModule } from "../shared/shared.module";
+import { LocalizationModule } from "angular-l10n";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SharedModule } from "../shared/shared.module";
         RouterModule,
         //StoreModule,
         SharedModule,
+        LocalizationModule,
         BsDropdownModule.forRoot(),
         ButtonsModule.forRoot()
     ],

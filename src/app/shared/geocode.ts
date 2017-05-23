@@ -6,7 +6,7 @@ export class GeocodeResponse {
 
 export class GeocodeResult {
     constructor (public address_components : AddressComponent[], public formatted_address : string,
-            geometry : GeocodeGeometry, place_id : string, types : string[]){}
+            public geometry : GeocodeGeometry, place_id : string, types : string[]){}
 }
 
 export class AddressComponent {
@@ -14,11 +14,12 @@ export class AddressComponent {
 }
 
 export class GeocodeGeometry {
-    constructor (bounds : GeocodeBounds, viewport : GeocodeBounds, location : LatLng, location_type : string){}
+    constructor (bounds : GeocodeBounds, public viewport : GeocodeBounds, public location : LatLng, 
+        public location_type : string){}
 }
 
 export class GeocodeBounds {
-    constructor ( northeast : LatLng, southwest : LatLng){}
+    constructor ( public northeast : LatLng, public southwest : LatLng){}
 }
 
 export class AddressObject {
@@ -101,6 +102,10 @@ export class AddressObject {
         let administrative_area_level_1_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "administrative_area_level_1"));
         return administrative_area_level_1_of_address_component ? administrative_area_level_1_of_address_component.long_name : "";
+    }
+
+    get viewport(): GeocodeBounds {
+        return this.geocodeResult.geometry.viewport;
     }
     
 }

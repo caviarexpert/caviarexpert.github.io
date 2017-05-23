@@ -6,7 +6,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class AddressService {
-  private value : AddressObject = new AddressObject( new GeocodeResult ([], "", null, "", []) );
+  private value : AddressObject;// = new AddressObject( new GeocodeResult ([], "", null, "", []) );
   private latlng: LatLng;
   public addressToLocation: string;
   private addressAssigned: Subject<boolean> = new Subject<boolean>();

@@ -4,6 +4,7 @@ import { AddressObject } from "../shared/geocode";
 import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
 import { Language, DefaultLocale, Currency, TranslationService } from "angular-l10n";
 import {Subscription} from "rxjs/Subscription";
+import { GeocodeResult } from "../shared/geocode";
 
 
 @Component({
@@ -34,7 +35,7 @@ export class DeliveryComponent implements OnInit {
     }
     
     get geocodeAddress() : AddressObject {
-        return this.addrService.address;
+        return this.addrService.address?this.addrService.address:new AddressObject( new GeocodeResult ([], "", null, "", []) );
     }
     /**
      * @return a list countries ordered ASC in current locale

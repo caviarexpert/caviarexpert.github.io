@@ -76,16 +76,29 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                 L.DomUtil.removeClass(L.DomUtil.get("map"), "pointer");
               }
           });
-          var southWest = new L.LatLng(33, -17),
-          northEast = new L.LatLng(62, 32),
-          bounds = new L.LatLngBounds(southWest, northEast);
-          //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
-          //map.setView([52, 12], 4)
-          map.fitBounds(bounds);
-          if(addrService.coordinate){
-              let marker = L.marker(addrService.coordinate);
+          let viewport;
+          if(addrService.address){
+            viewport = new L.LatLngBounds(addrService.address.viewport.southwest, 
+                addrService.address.viewport.northeast);
+              let marker;
+              if(addrService.coordinate){
+                marker = L.marker(addrService.coordinate);
+              }else{
+                marker = L.marker(addrService.address.geocodeResult.geometry.location);
+              }
               markersLayer.addLayer(marker);
               marker.bindPopup(addressPopup()).openPopup();
+          }else{
+            let southWest = new L.LatLng(33, -17)
+            let northEast = new L.LatLng(62, 32)
+            viewport = new L.LatLngBounds(southWest, northEast);
+          }
+          
+          //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
+          //map.setView([52, 12], 4)
+          map.fitBounds(viewport);
+          if(addrService.coordinate){
+              
           }
     //});
   }

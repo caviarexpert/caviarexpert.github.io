@@ -4,6 +4,8 @@ import { LocaleService, TranslationService } from "angular-l10n";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from "../environment";
+
 
 
 @Injectable()
@@ -15,7 +17,7 @@ export class GeocodingService{
     getAddress(lat : string, lng : string): Observable<any[]> {
         let searchParams: URLSearchParams = new URLSearchParams();
         searchParams.set("latlng", lat + "," + lng);
-        searchParams.set("key", "AIzaSyCT8piTVujZwgJctZBoS8HHSYkXg20xyos");
+        searchParams.set("key", environment.googleMapApiKey);
         searchParams.set("language", this.locale.getCurrentLanguage());
         let requestOptions = new RequestOptions();
         requestOptions.search = searchParams;

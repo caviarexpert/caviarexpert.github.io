@@ -21,17 +21,15 @@ export class DeliveryComponent implements OnInit {
     @ViewChild("addressForm") addressForm;
     @ViewChild("searchAddress") searchAddressForm;
 
-    private formShown: boolean = false;
-    private addressSet: boolean = false;
+    private isAddressAssigned: boolean = false;
     private _subscription: Subscription;
 
     constructor(public addrService : AddressService, 
         private deliveryService: DeliveryService,
         public translationService: TranslationService) {}
 
-    ngAfterViewInit() {        
-        //this.form.control.valueChanges
-        //    .subscribe(values => this.validateQuantity(values));
+    ngAfterViewInit() {
+        this.isAddressAssigned = !!this.addrService.address;
     }
     
     get geocodeAddress() : AddressObject {
@@ -44,19 +42,17 @@ export class DeliveryComponent implements OnInit {
         return this.deliveryService.countries;
     }
 
-    get showForm(): boolean {
-        if(this.addressSet===true && this.formShown===true) return true;
-        return this.formShown;
+    get isShowAddressForm(): boolean {
+        return this.isAddressAssigned;
     }
 
-    cancelForm() {
-        this.formShown = false;
+    cancelForm() : void {
+        this.addrService.cancelAddress();
     }
 
     ngOnInit(){
         this._subscription = this.addrService.addressAssigned$.subscribe( value => { 
-            this.addressSet = value;
-            this.formShown = value;
+            this.isAddressAssigned = value;
         });
     }
     ngOnDestroy() {

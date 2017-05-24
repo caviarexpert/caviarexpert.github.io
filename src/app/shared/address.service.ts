@@ -15,6 +15,10 @@ export class AddressService {
   get address(): AddressObject {
     return this.value;
   }
+  cancelAddress(): void {
+    this.value = null;
+    this.addressAssigned.next(false);
+  }
   assignAddress( geocodingResult : GeocodeResult ){
     this.addressAssigned.next(true);
     this.value = new AddressObject(geocodingResult);

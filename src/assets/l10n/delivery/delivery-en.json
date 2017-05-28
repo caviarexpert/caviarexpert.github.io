@@ -1,5 +1,5 @@
 {
-    "ADDRESS": {
+    "ADDRESS": {        
         "addressToLocation": "street address",
         "route": "street",
         "building": "building",
@@ -13,5 +13,10 @@
         "HELP": {
             "addressToLocation": "for example <code>Oxford street 5 London </code> and we'll figure out other details ourselves"
         }        
-    }
+    },
+    "ChooseMap": {
+        "OR": "or"        
+    },
+    "point on map": "point on map",
+    "TypeDeliveryAddress": "Type delivery address"
 }

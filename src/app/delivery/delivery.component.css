@@ -26,3 +26,13 @@
         width: 30rem;
     }
 }
+.mapTapButtondDiv  {
+    height: 200px;
+    background-image: url(https://a.tile.openstreetmap.org/4/7/5.png), url(https://b.tile.openstreetmap.org/4/8/5.png), url(https://c.tile.openstreetmap.org/4/9/5.png);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: top -56px left -126px, top -56px left 130px, top -56px left 386px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

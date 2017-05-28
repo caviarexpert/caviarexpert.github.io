@@ -116,7 +116,7 @@ export class MaptapComponent implements OnInit, AfterViewInit{
     console.log("Address popup for", localCountryName, _lang);
     return `<p>${this.addressService.address.formattedAddress}</p>
             <address>
-            ${this.addressService.address.route} ${this.addressService.address.streetNumber}<br />
+            ${this.addressService.address.route} ${this.addressService.address.buildingNumber}<br />
             ${this.addressService.address.postalCode} ${this.addressService.address.locality} ${this.addressService.address.areaLevel2Short}<br />
             ${localCountryName}
             </address>

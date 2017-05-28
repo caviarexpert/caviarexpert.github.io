@@ -3,6 +3,8 @@ import {NgForm} from "@angular/forms";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
 import { GeocodeResponse, GeocodeResult} from "../shared/geocode";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/first';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +16,7 @@ export class AddressGeocoding{
     onSubmit(searchAddress: NgForm){
         let _address = searchAddress.value.addressToLocation;
         console.log("Address submited", _address);
-        this.geocodingService.getLocation(_address)
+        this.geocodingService.getLocation(_address).first()
             .subscribe ( result => {
                 let geocodeResponse : GeocodeResponse = new GeocodeResponse(result);
                 let geocodeResult : GeocodeResult = geocodeResponse.results[0];

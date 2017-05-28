@@ -14,5 +14,10 @@
         "HELP": {
             "addressToLocation": "например <code>Репина 3 Урюпинск</code> и остальное мы заполним сами"
         } 
-    }    
+    },
+    "ChooseMap": {
+        "OR": "или"        
+    },
+    "point on map": "на карте",
+    "Type delivery address": "напечатайте адрес"
 }

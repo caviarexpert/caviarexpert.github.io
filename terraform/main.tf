@@ -23,15 +23,14 @@ resource "aws_iam_role" "iam_role_for_lambda" {
 EOF
 }
 
-# Here is a first lambda function that will run the code `hello_lambda.handler`
+/* Here is a first lambda function that will run the code `hello_lambda.handler` */
 module "lambda" {
   source  = "./lambda"
   name    = "hello_lambda"
   runtime = "python2.7"
   role    = "${aws_iam_role.iam_role_for_lambda.arn}"
 }
-# This is a second lambda function that will run the code
-# `hello_lambda.post_handler`
+/* This is a second lambda function that will run the code `hello_lambda.post_handler` */
 module "lambda_post" {
   source  = "./lambda"
   name    = "hello_lambda"
@@ -40,7 +39,7 @@ module "lambda_post" {
   role    = "${aws_iam_role.iam_role_for_lambda.arn}"
 }
 
-# Now, we need an API to expose those functions publicly
+/* Now, we need an API to expose those functions publicly */
 resource "aws_api_gateway_rest_api" "hello_api" {
   name = "Terraform Hello API"
 }
@@ -88,4 +87,7 @@ resource "aws_api_gateway_deployment" "hello_api_deployment" {
 
 output "SimpleDB" {
 	value = "${module.simpledb.domain_id}"
+}
+output "api_url" {
+  value = "${aws_api_gateway_deployment.hello_api_deployment.invoke_url}"
 }

@@ -10,7 +10,9 @@ export class AddressService {
   private latlng: LatLng;
   public addressToLocation: string;
   private addressAssigned: Subject<boolean> = new Subject<boolean>();
+  private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
   public addressAssigned$ = this.addressAssigned.asObservable();
+  public mapclickAssigned$ = this.mapclickAssigned.asObservable();
 
   get address(): AddressObject {
     return this.value;
@@ -18,6 +20,9 @@ export class AddressService {
   cancelAddress(): void {
     this.value = null;
     this.addressAssigned.next(false);
+  }
+  assignMapclick ( geocodeResult : GeocodeResult ) : void{
+    this.value = new AddressObject ( geocodeResult );
   }
   assignAddress( geocodingResult : GeocodeResult ){
     this.addressAssigned.next(true);

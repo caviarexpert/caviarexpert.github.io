@@ -16,6 +16,11 @@
 .delivery-pane {
     width: 100%;
 }
+.single-line-truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media(min-width:768px){
     .delivery-pane {
         width: 30rem;

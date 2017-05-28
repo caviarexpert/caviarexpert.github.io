@@ -23,20 +23,20 @@ export class GeocodeBounds {
 }
 
 export class AddressObject {
-    constructor ( public geocodeResult : GeocodeResult){}
+    constructor ( public geocodeResult? : GeocodeResult){}
     get formattedAddress() : string {
         return this.geocodeResult ? this.geocodeResult.formatted_address : "";
     }
     
     get streetNumber() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let street_number_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "street_number"));
         return street_number_of_address_component ? street_number_of_address_component.long_name : "";
     }
     
     get premise() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let premise_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "premise"));
         return premise_of_address_component ? premise_of_address_component.long_name : "";
@@ -49,13 +49,13 @@ export class AddressObject {
     }
     
     get route() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let route_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "route"));
         return route_of_address_component ? route_of_address_component.long_name : "";
     }
     get locality() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let locality_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "locality"));
         return locality_of_address_component ? locality_of_address_component.long_name : this.postalTown;
@@ -65,7 +65,7 @@ export class AddressObject {
      * auxiliry to locality()
      */
     get postalTown(): string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let postal_town_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "postal_town"));
         return postal_town_of_address_component ? postal_town_of_address_component.long_name : this.areaLevel3;
@@ -74,41 +74,42 @@ export class AddressObject {
      * auxliary to postalTown()
      */
     get areaLevel3(): string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let administrative_area_level_3_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "administrative_area_level_3"));
         return administrative_area_level_3_of_address_component ? administrative_area_level_3_of_address_component.long_name : "";
     }
     
     get postalCode() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let postal_code_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "postal_code"));
         return postal_code_of_address_component ? postal_code_of_address_component.long_name : "";
     }
 
     get countryCode() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let country_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "country"));
         return country_of_address_component ? country_of_address_component.short_name : "";
     }
     
     get areaLevel2() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let administrative_area_level_2_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "administrative_area_level_2"));
         return administrative_area_level_2_of_address_component ? administrative_area_level_2_of_address_component.long_name : "";
     }
     
     get areaLevel2Short() : string {
+        if(!this.geocodeResult) return null;
         let administrative_area_level_2_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "administrative_area_level_2"));
         return administrative_area_level_2_of_address_component ? administrative_area_level_2_of_address_component.short_name : "";
     }
     
     get areaLevel1() : string {
-        if(!this.geocodeResult) return "";
+        if(!this.geocodeResult) return null;
         let administrative_area_level_1_of_address_component = this.geocodeResult.address_components
             .find( addr => addr.types.some( atype => atype == "administrative_area_level_1"));
         return administrative_area_level_1_of_address_component ? administrative_area_level_1_of_address_component.long_name : "";

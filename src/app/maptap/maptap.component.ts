@@ -20,9 +20,11 @@ export class MaptapComponent implements OnInit, AfterViewInit{
   constructor(public geocodingService : GeocodingService, 
       public addressService : AddressService,
       private translationService: TranslationService){}
-  leafletMap : any;
+  leafletMap : any ;
   //geocodingService : GeocodingService;
   private _lang: string;
+
+  private markersLayer = new L.LayerGroup([]);
 
   ngAfterViewInit() {
     //System.import("leaflet").then( m => {
@@ -30,17 +32,17 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           let geoService = this.geocodingService;
           let addrService = this.addressService;
           let tranlateService = this.translationService;
-
           
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
-          const markersLayer = new L.LayerGroup([]);
+          
           this.leafletMap = L.map("map");
           const map = this.leafletMap;
+          const markersLayer = this.markersLayer;
           let addressPopup = this.getAddressPopup;
 
           map.addControl(this.getControl());
-          markersLayer.addTo(map);
+          this.markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             maxZoom: 17,
@@ -53,10 +55,10 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                 .subscribe( results => {
                   let geocodeResponse : GeocodeResponse = new GeocodeResponse(results);
                   let geocodeResult : GeocodeResult = geocodeResponse.results[0];
-                  let addr = geocodeResult.formatted_address;
-                  addrService.assignAddress(geocodeResult);
+                  let addr = geocodeResult.formatted_address;                  
                   console.log("results: ", results);
                   addrService.coordinate = event.latlng;
+                  addrService.assignMapclick(geocodeResult);
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
                   markersLayer.addLayer(marker);
@@ -76,27 +78,14 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                 L.DomUtil.removeClass(L.DomUtil.get("map"), "pointer");
               }
           });
-          let viewport;
-          if(addrService.address){
-            viewport = new L.LatLngBounds(addrService.address.viewport.southwest, 
-                addrService.address.viewport.northeast);
-              let marker;
-              if(addrService.coordinate){
-                marker = L.marker(addrService.coordinate);
-              }else{
-                marker = L.marker(addrService.address.geocodeResult.geometry.location);
-              }
-              markersLayer.addLayer(marker);
-              marker.bindPopup(addressPopup()).openPopup();
-          }else{
-            let southWest = new L.LatLng(33, -17)
-            let northEast = new L.LatLng(62, 32)
-            viewport = new L.LatLngBounds(southWest, northEast);
-          }
+          map.on("load", () => {
+              this.addAddressMarker();
+          });
+         
           
           //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
           //map.setView([52, 12], 4)
-          map.fitBounds(viewport);
+          map.fitBounds(this.getViewport());
           if(addrService.coordinate){
               
           }
@@ -124,17 +113,52 @@ export class MaptapComponent implements OnInit, AfterViewInit{
   private getAddressPopup = () : string => {
     let _lang = this.geocodingService.getSharedLocale().getCurrentLanguage();
     let localCountryName = this.geocodingService.getSharedTranslation().translate("COUNTRY." + this.addressService.address.countryCode);
-    console.log("Address popup for", localCountryName, _lang)
-    return "<p>" + this.addressService.address.formattedAddress + "</p><address>" +
-             this.addressService.address.route + " " + this.addressService.address.streetNumber + "<br />" +
-             this.addressService.address.postalCode + " " +
-             this.addressService.address.locality + " " +
-             this.addressService.address.areaLevel2Short + "<br />" +
-             localCountryName +
-             "</address><button>" + this.translationService.translate("HELLO") +"</button>";
+    console.log("Address popup for", localCountryName, _lang);
+    return `<p>${this.addressService.address.formattedAddress}</p>
+            <address>
+            ${this.addressService.address.route} ${this.addressService.address.streetNumber}<br />
+            ${this.addressService.address.postalCode} ${this.addressService.address.locality} ${this.addressService.address.areaLevel2Short}<br />
+            ${localCountryName}
+            </address>
+            <button (click)="alert(111)">${this.translationService.translate("HELLO")}</button>`;
   }
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.    
+  }
+
+  private addAddressMarker() {
+      let marker;
+      if(this.addressService.coordinate){
+        marker = L.marker(this.addressService.coordinate);
+      }else{
+        if(this.addressService.address!=null &&
+          this.addressService.address.geocodeResult!=null &&
+          this.addressService.address.geocodeResult.geometry.location_type=="ROOFTOP"){
+            marker = L.marker(this.addressService.address.geocodeResult.geometry.location);
+        }
+      }
+      if(marker!=null){
+        this.markersLayer.addLayer(marker);
+        marker.bindPopup(this.getAddressPopup()).openPopup();
+      }
+  }
+
+  private getViewport(){
+     if(this.addressService.address){
+       let sw = new L.LatLng(this.addressService.address.viewport.southwest.lat - 5,
+            this.addressService.address.viewport.southwest.lng - 5);
+       let ne = new L.LatLng(this.addressService.address.viewport.northeast.lat + 5,
+            this.addressService.address.viewport.northeast.lng + 5);
+        return new L.LatLngBounds(sw, ne);              
+     }else{
+        return MaptapComponent.getEuViewport();
+     }
+  }
+
+  private static getEuViewport() : L.LatLngBounds{
+    let southWest = new L.LatLng(33, -17)
+    let northEast = new L.LatLng(62, 32)
+    return new L.LatLngBounds(southWest, northEast);
   }
 }

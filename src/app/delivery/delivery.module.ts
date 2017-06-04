@@ -20,7 +20,7 @@ import { LocalizationModule, TranslationService } from "angular-l10n";
     LocalizationModule
   ],
   declarations: [ DeliveryComponent, AddressGeocoding, AddressFormattedComponent ],
-  exports: [ DeliveryComponent ]
+  exports: [ DeliveryComponent, AddressFormattedComponent ]
 })
 export class DeliveryModule {
   constructor(private translation: TranslationService){

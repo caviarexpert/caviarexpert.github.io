@@ -1,5 +1,5 @@
 {
-    "We deliver to EU only": "Отправляем <strong>только</strong> в страны EC",
+    "we deliver to EU only": " &ndash; отправляем <strong>только</strong> в страны EC",
     "ADDRESS": {
         "addressToLocation": "адрес",
         "route": "улица",
@@ -19,5 +19,5 @@
         "OR": "или"        
     },
     "point on map": "на карте",
-    "Type delivery address": "напечатайте адрес"
+    "Type delivery address": "укажите адрес"
 }

@@ -7,12 +7,13 @@ import { MaptapComponent } from "./maptap.component";
 import { routing } from "./maptap.routing";
 
 import { SharedModule } from "../shared/shared.module";
+import { DeliveryModule } from "../delivery/delivery.module";
 import { GeocodingService } from "../shared/geocoding.service";
 import { TranslationService, TranslationModule, LocalizationModule, LocaleService } from "angular-l10n";
 
 
 @NgModule({
-    imports: [ HttpModule, routing, SharedModule, LocalizationModule.forChild() ],
+    imports: [ HttpModule, routing, SharedModule, LocalizationModule.forChild(), DeliveryModule ],
     declarations: [MaptapComponent],
     exports: [MaptapComponent]
 })

@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, AfterViewInit, AfterContentInit, ViewEncapsulation, ViewChild, ContentChild, ElementRef } from "@angular/core";
 //import { System } from "systemjs";
 //import L = require("leaflet");
 import * as L from "leaflet";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
+import { AddressFormattedComponent } from "../delivery/address-formatted.component";
 import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 import { TranslationService } from "angular-l10n";
 
@@ -13,25 +14,36 @@ import { TranslationService } from "angular-l10n";
   moduleId: module.id,
   styleUrls: ["./maptap.css"],
   //styles: [`.lc.leaflet-control { cursor: crosshair }`],
-  template: `<section id="map" class="leaflet-crosshair"></section>`,
+  template: `<section id="map" class="leaflet-crosshair"></section><address-formatted style="display:none">My address</address-formatted>`,
   //encapsulation: ViewEncapsulation.None,
 })
-export class MaptapComponent implements OnInit, AfterViewInit{
+export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
   constructor(public geocodingService : GeocodingService, 
       public addressService : AddressService,
       private translationService: TranslationService){}
+
+  @ViewChild(AddressFormattedComponent) addressFormatted:AddressFormattedComponent;
+  
   leafletMap : any ;
+  addressPopupHtml: L.Popup;
   //geocodingService : GeocodingService;
   private _lang: string;
 
   private markersLayer = new L.LayerGroup([]);
 
+  ngAfterContentInit() {
+    
+  }
+
   ngAfterViewInit() {
     //System.import("leaflet").then( m => {
-          
+          this.addressPopupHtml = L.popup()
+                    .setContent(this.addressFormatted.getHtml());
+
           let geoService = this.geocodingService;
           let addrService = this.addressService;
           let tranlateService = this.translationService;
+          let addressPopup = this.addressPopupHtml;
           
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
@@ -39,12 +51,14 @@ export class MaptapComponent implements OnInit, AfterViewInit{
           this.leafletMap = L.map("map");
           const map = this.leafletMap;
           const markersLayer = this.markersLayer;
-          let addressPopup = this.getAddressPopup;
+          //let addressPopup = this.getAddressPopup;
+          
 
           map.addControl(this.getControl());
           this.markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          //https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
+          L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
             maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);
@@ -62,7 +76,8 @@ export class MaptapComponent implements OnInit, AfterViewInit{
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
                   markersLayer.addLayer(marker);
-                  marker.bindPopup(addressPopup()).openPopup();
+                  marker.bindPopup(addressPopup).openPopup();
+                  //marker.bindPopup(addressPopup()).openPopup();
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
@@ -140,7 +155,10 @@ export class MaptapComponent implements OnInit, AfterViewInit{
       }
       if(marker!=null){
         this.markersLayer.addLayer(marker);
-        marker.bindPopup(this.getAddressPopup()).openPopup();
+        //marker.bindPopup(this.getAddressPopup()).openPopup();
+        let popup = L.popup()
+          .setContent(this.addressFormatted.getHtml());
+        marker.bindPopup(popup).openPopup();
       }
   }
 

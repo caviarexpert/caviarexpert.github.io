@@ -4,7 +4,8 @@ import { Component, OnInit, AfterViewInit, AfterContentInit, ViewEncapsulation, 
 import * as L from "leaflet";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
-import { AddressFormattedComponent } from "../delivery/address-formatted.component";
+import { AddressFormattedComponent } from "./address-formatted.component";
+import { MapControlComponent } from "./map-control.component";
 import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 import { TranslationService } from "angular-l10n";
 
@@ -14,7 +15,9 @@ import { TranslationService } from "angular-l10n";
   moduleId: module.id,
   styleUrls: ["./maptap.css"],
   //styles: [`.lc.leaflet-control { cursor: crosshair }`],
-  template: `<section id="map" class="leaflet-crosshair"></section><address-formatted style="display:none">My address</address-formatted>`,
+  template: `<section id="map" class="leaflet-crosshair"></section>
+  <address-formatted style="display:none">My address</address-formatted>
+  <map-control style="display:none"></map-control>`,
   //encapsulation: ViewEncapsulation.None,
 })
 export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
@@ -22,7 +25,8 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
       public addressService : AddressService,
       private translationService: TranslationService){}
 
-  @ViewChild(AddressFormattedComponent) addressFormatted:AddressFormattedComponent;
+  @ViewChild(AddressFormattedComponent) addressFormatted : AddressFormattedComponent;
+  @ViewChild(MapControlComponent) mapControl : MapControlComponent;
   
   leafletMap : any ;
   addressPopupHtml: L.Popup;
@@ -58,7 +62,9 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
           this.markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           //https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
-          L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+          //let osmTemplate = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
+          let osmTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+          L.tileLayer(osmTemplate, {
             maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           }).addTo(map);
@@ -107,6 +113,27 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
     //});
   }
   private getControl(){
+      let MyControl = L.Control.extend({
+              options: {
+                  position: 'topright'
+              },
+              onAdd : (map) => {
+                  // create the control container with a particular class name
+                  var container = L.DomUtil.create('div', 'lc');
+                  //container.innerHTML = this.mapControl.getHtml();
+                  container.appendChild(this.mapControl.getHtml());
+                  container.style.cursor = "crosshair";
+                  L.DomUtil.disableTextSelection();
+                  // ... initialize other DOM elements, add listeners, etc.
+
+                  return this.mapControl.getHtml();
+              }
+          });
+
+          return new MyControl();    
+  }
+
+  private __getControl(){
       let MyControl = L.Control.extend({
               options: {
                   position: 'topright'

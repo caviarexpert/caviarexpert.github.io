@@ -3,18 +3,19 @@ import { BrowserModule, DOCUMENT } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { MaptapComponent } from "./maptap.component";
+import { AddressFormattedComponent } from "./address-formatted.component";
+import { MapControlComponent } from "./map-control.component";
 
 import { routing } from "./maptap.routing";
 
 import { SharedModule } from "../shared/shared.module";
-import { DeliveryModule } from "../delivery/delivery.module";
 import { GeocodingService } from "../shared/geocoding.service";
 import { TranslationService, TranslationModule, LocalizationModule, LocaleService } from "angular-l10n";
 
 
 @NgModule({
-    imports: [ HttpModule, routing, SharedModule, LocalizationModule.forChild(), DeliveryModule ],
-    declarations: [MaptapComponent],
+    imports: [ HttpModule, routing, SharedModule, LocalizationModule.forChild() ],
+    declarations: [MaptapComponent, AddressFormattedComponent, MapControlComponent],
     exports: [MaptapComponent]
 })
 export class MaptapModule { 

@@ -1,5 +1,5 @@
 {
-    "we deliver to EU only": "&mdash;we deliver to <strong>EU only</strong>",
+    "we deliver to EU only": "&ndash; we deliver to <strong>EU only</strong>",
     "ADDRESS": {        
         "addressToLocation": "street address",
         "route": "street",

@@ -1,9 +1,18 @@
 {
     "ADDRESS": {
+        "addressToLocation": "indirizzio",
+        "route": "via",
+        "building": "casa",
+        "room": "stanza",
         "country": "paese",
         "postal_code": "codice postale",
         "locality": "località",
          "administrative_area_level_1": "regione",
          "administrative_area_level_2": "provincia"
-    }    
+    },
+    "ChooseMap": {
+        "OR": "o"        
+    },
+    "point on map": "punta sul mappa",
+    "TypeDeliveryAddress": "Type delivery address" 
 }

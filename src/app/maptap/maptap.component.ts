@@ -52,11 +52,12 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
           
-          this.leafletMap = L.map("map");
+          this.leafletMap = L.map("map", { zoomControl: false });
           const map = this.leafletMap;
           const markersLayer = this.markersLayer;
           //let addressPopup = this.getAddressPopup;
           
+          new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
           map.addControl(this.getControl());
           this.markersLayer.addTo(map);
@@ -115,7 +116,7 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
   private getControl(){
       let MyControl = L.Control.extend({
               options: {
-                  position: 'topright'
+                  position: 'topleft'
               },
               onAdd : (map) => {
                   // create the control container with a particular class name
@@ -126,33 +127,15 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
                   L.DomUtil.disableTextSelection();
                   // ... initialize other DOM elements, add listeners, etc.
 
-                  return this.mapControl.getHtml();
+                  //return this.mapControl.getHtml();
+                  return container;
               }
           });
 
           return new MyControl();    
   }
 
-  private __getControl(){
-      let MyControl = L.Control.extend({
-              options: {
-                  position: 'topright'
-              },
-              onAdd : (map) => {
-                  // create the control container with a particular class name
-                  var container = L.DomUtil.create('div', 'lc');
-                  container.innerHTML = this.translationService.translate("HELLO");
-                  container.style.cursor = "crosshair";
-                  L.DomUtil.disableTextSelection();
-                  // ... initialize other DOM elements, add listeners, etc.
-
-                  return container;
-              }
-          });
-
-          return new MyControl();
-  }
-  private getAddressPopup = () : string => {
+  private _getAddressPopup = () : string => {
     let _lang = this.geocodingService.getSharedLocale().getCurrentLanguage();
     let localCountryName = this.geocodingService.getSharedTranslation().translate("COUNTRY." + this.addressService.address.countryCode);
     console.log("Address popup for", localCountryName, _lang);
@@ -183,9 +166,7 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
       if(marker!=null){
         this.markersLayer.addLayer(marker);
         //marker.bindPopup(this.getAddressPopup()).openPopup();
-        let popup = L.popup()
-          .setContent(this.addressFormatted.getHtml());
-        marker.bindPopup(popup).openPopup();
+        marker.bindPopup(this.addressPopupHtml).openPopup();
       }
   }
 

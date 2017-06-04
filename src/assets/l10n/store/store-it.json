@@ -1,6 +1,8 @@
 {
+  "we deliver to EU only": "&ndash; spediamo alla EU",
   "STORE": {
     "addToCart": "comprare",
+    "deliveryButton": "spedizione",
     "PRODUCTS": {
       "salmon_cav_200g": "Uova di pesce (salmone), 200g",
       "salmon_keta_cav_200g": "Uova di pesce (salmone, Keta), 200g"

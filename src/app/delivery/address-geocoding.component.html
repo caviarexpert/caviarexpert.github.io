@@ -1,5 +1,8 @@
 <form #searchAddress="ngForm" (ngSubmit)="onSubmit(searchAddress)">
-    <label for="addressToLocation"><span translate>ADDRESS.addressToLocation</span><span [innerHTML]="'we deliver to EU only'" translate></span></label>
+    <label for="addressToLocation">
+        <span translate>ADDRESS.addressToLocation</span>
+        <small class="text-muted" [innerHTML]="'we deliver to EU only'" translate></small>
+    </label>
     <div class="input-group">
         <input class="form-control form-control-warning" id="addressToLocation" name="addressToLocation"
             type="search"

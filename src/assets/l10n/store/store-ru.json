@@ -1,0 +1,13 @@
+{
+  "STORE": {
+    "addToCart": "купить",
+    "deliveryButton": "доставка",
+    "PRODUCTS": {
+      "salmon_cav_200g": "Икра лососёвая (Горбуша), 200 грамм.",
+      "salmon_keta_cav_200g": "Икра лососёвая (Кета), 200 грамм"
+    },
+    "valueNames": {
+      "net_weight": "вес нетто"
+    }
+  }
+}

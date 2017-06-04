@@ -9,7 +9,8 @@ import 'rxjs/add/operator/first';
 @Component({
     moduleId: module.id,
     selector: 'address-formatted',
-    templateUrl: "./address-formatted.component.html"
+    templateUrl: "./address-formatted.component.html",
+        styleUrls: ["./address-formatted.css"]
 })
 export class AddressFormattedComponent implements AfterViewInit{
 

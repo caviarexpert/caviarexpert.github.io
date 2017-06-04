@@ -1,4 +1,9 @@
-<address #addressHtml>
- {{ addressFromGoogleApi }}
-    <a routerLink="/cart" class="btn btn-primary">Cart</a>
-</address>
+<div #addressHtml>
+    <address>
+    {{ addressFromGoogleApi }}
+    </address>
+    <div class="text-center">
+        <a routerLink="/cart" class="btn btn-outline-success btn-sm" role="button">OK</a>
+        <a routerLink="/cart" class="btn btn-outline-danger btn-sm" role="button">Cancel</a>
+    </div>
+</div>

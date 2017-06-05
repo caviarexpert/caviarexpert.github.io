@@ -1,3 +1,4 @@
-address {
-    white-space: nowrap
+address > .fullAddress {
+    white-space: nowrap;
+    color: red;
 }

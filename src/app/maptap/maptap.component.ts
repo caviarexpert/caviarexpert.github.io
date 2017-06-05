@@ -35,19 +35,25 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
 
   private markersLayer = new L.LayerGroup([]);
 
+  ngOnInit() {
+    //this.addressFormatted.changes.subscribe(changes => console.log(changes));
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.    
+  }
+
   ngAfterContentInit() {
     
   }
-
   ngAfterViewInit() {
     //System.import("leaflet").then( m => {
-          this.addressPopupHtml = L.popup()
-                    .setContent(this.addressFormatted.getHtml());
+          this.addressPopupHtml = L.popup({closeButton: false});
+                    
 
           let geoService = this.geocodingService;
           let addrService = this.addressService;
           let tranlateService = this.translationService;
           let addressPopup = this.addressPopupHtml;
+          let addressFormatted = this.addressFormatted;
           
 
           //this.leafletMap = L.map("map").setView([52, 12], 4);
@@ -82,9 +88,10 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
                   addrService.assignMapclick(geocodeResult);
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
-                  markersLayer.addLayer(marker);
-                  marker.bindPopup(addressPopup).openPopup();
-                  //marker.bindPopup(addressPopup()).openPopup();
+                  markersLayer.addLayer(marker);                  
+                  setTimeout(() => {
+                    marker.bindPopup(addressPopup.setContent(addressFormatted.getHtml())).openPopup();
+                  }, 0);
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
@@ -146,10 +153,6 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
             ${localCountryName}
             </address>
             <button (click)="alert(111)">${this.translationService.translate("HELLO")}</button>`;
-  }
-  ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.    
   }
 
   private addAddressMarker() {

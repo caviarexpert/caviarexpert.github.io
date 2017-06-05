@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from "@angular/core";
+import { Component, ViewChild, AfterViewInit, AfterViewChecked, ElementRef } from "@angular/core";
 import {NgForm} from "@angular/forms";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";

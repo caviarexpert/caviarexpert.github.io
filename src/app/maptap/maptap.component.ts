@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, AfterContentInit, ViewEncapsulation, ViewChild, ContentChild, ElementRef } from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit, ViewEncapsulation, ViewChild, ContentChild, ElementRef } from "@angular/core";
 //import { System } from "systemjs";
 //import L = require("leaflet");
 import * as L from "leaflet";
@@ -8,6 +8,8 @@ import { AddressFormattedComponent } from "./address-formatted.component";
 import { MapControlComponent } from "./map-control.component";
 import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 import { TranslationService } from "angular-l10n";
+import { Subscription } from "rxjs/Subscription";
+import { environment } from "../environment";
 
 
 @Component({
@@ -20,7 +22,7 @@ import { TranslationService } from "angular-l10n";
   <map-control style="display:none"></map-control>`,
   //encapsulation: ViewEncapsulation.None,
 })
-export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
+export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentInit{
   constructor(public geocodingService : GeocodingService, 
       public addressService : AddressService,
       private translationService: TranslationService){}
@@ -32,13 +34,20 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
   addressPopupHtml: L.Popup;
   //geocodingService : GeocodingService;
   private _lang: string;
+  private clearMarkerSubscription : Subscription;
 
   private markersLayer = new L.LayerGroup([]);
 
   ngOnInit() {
+    this.clearMarkerSubscription  = this.addressService.clearMarkerSubject$.subscribe ( r => {
+      this.markersLayer.clearLayers();
+    });    
     //this.addressFormatted.changes.subscribe(changes => console.log(changes));
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.    
+  }
+  ngOnDestroy(){
+    this.clearMarkerSubscription.unsubscribe();
   }
 
   ngAfterContentInit() {
@@ -54,23 +63,17 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
           let tranlateService = this.translationService;
           let addressPopup = this.addressPopupHtml;
           let addressFormatted = this.addressFormatted;
-          
-
-          //this.leafletMap = L.map("map").setView([52, 12], 4);
-          
+         
           this.leafletMap = L.map("map", { zoomControl: false });
           const map = this.leafletMap;
-          const markersLayer = this.markersLayer;
-          //let addressPopup = this.getAddressPopup;
-          
+          const markersLayer = this.markersLayer;          
           new L.Control.Zoom({ position: 'topright' }).addTo(map);
-
           map.addControl(this.getControl());
           this.markersLayer.addTo(map);
           //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
           //https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
           //let osmTemplate = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-          let osmTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+          let osmTemplate = environment.mapTilesUrlTemplate;
           L.tileLayer(osmTemplate, {
             maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -88,7 +91,8 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
                   addrService.assignMapclick(geocodeResult);
                   markersLayer.clearLayers();
                   let marker = L.marker(addrService.coordinate);
-                  markersLayer.addLayer(marker);                  
+                  markersLayer.addLayer(marker);
+                  addressFormatted.restored = false;                 
                   setTimeout(() => {
                     marker.bindPopup(addressPopup.setContent(addressFormatted.getHtml())).openPopup();
                   }, 0);
@@ -110,8 +114,6 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
           map.on("load", () => {
               this.addAddressMarker();
           });
-         
-          
           //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
           //map.setView([52, 12], 4)
           map.fitBounds(this.getViewport());
@@ -131,7 +133,7 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
                   //container.innerHTML = this.mapControl.getHtml();
                   container.appendChild(this.mapControl.getHtml());
                   container.style.cursor = "crosshair";
-                  L.DomUtil.disableTextSelection();
+                  ///L.DomUtil.disableTextSelection();
                   // ... initialize other DOM elements, add listeners, etc.
 
                   //return this.mapControl.getHtml();
@@ -168,8 +170,10 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
       }
       if(marker!=null){
         this.markersLayer.addLayer(marker);
-        //marker.bindPopup(this.getAddressPopup()).openPopup();
-        marker.bindPopup(this.addressPopupHtml).openPopup();
+        this.addressFormatted.restored = true;
+        setTimeout(() => {
+                    marker.bindPopup(this.addressPopupHtml.setContent(this.addressFormatted.getHtml())).openPopup();
+        }, 0);
       }
   }
 
@@ -185,9 +189,10 @@ export class MaptapComponent implements OnInit, AfterViewInit, AfterContentInit{
      }
   }
 
+
   private static getEuViewport() : L.LatLngBounds{
     let southWest = new L.LatLng(33, -17)
     let northEast = new L.LatLng(62, 32)
     return new L.LatLngBounds(southWest, northEast);
-  }
+  }  
 }

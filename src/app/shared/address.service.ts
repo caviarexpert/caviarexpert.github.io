@@ -10,9 +10,12 @@ export class AddressService {
   private latlng: LatLng;
   public addressToLocation: string;
   private addressAssigned: Subject<boolean> = new Subject<boolean>();
-  private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
+  //private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
   public addressAssigned$ = this.addressAssigned.asObservable();
-  public mapclickAssigned$ = this.mapclickAssigned.asObservable();
+  //public mapclickAssigned$ = this.mapclickAssigned.asObservable();
+
+  public clearMarkerSubject: Subject<boolean> = new Subject<boolean>();
+  public clearMarkerSubject$ = this.clearMarkerSubject.asObservable();
 
   get address(): AddressObject {
     return this.value;

@@ -118,6 +118,5 @@ export class AddressObject {
     get viewport(): GeocodeBounds {
         if(!this.geocodeResult) return null;
         return this.geocodeResult.geometry.viewport;
-    }
-    
+    }    
 }

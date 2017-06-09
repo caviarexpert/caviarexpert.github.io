@@ -2,9 +2,9 @@
     <address>
         <p>{{ addressFromGoogleApi }}</p>
     </address>    
-    <div class="text-center">
-        <a routerLink="/cart" class="btn btn-outline-success btn-sm" role="button">OK</a>
+    <div [hidden]="restored" class="text-center">
+        <a routerLink="/delivery-address" class="btn btn-outline-success btn-sm" role="button">OK</a>
         <a routerLink="/cart" class="btn btn-outline-danger btn-sm" role="button">Cancel</a>
-        <a routerLink="/map" class="btn btn-outline-warning btn-sm" role="button">Cancel</a>
+        <button (click)="clearMarker()" class="btn btn-outline-warning btn-sm">Clear</button>
     </div>
 </div>

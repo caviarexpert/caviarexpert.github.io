@@ -19,5 +19,9 @@
         "OR": "or"        
     },
     "point on map": "point on map",
-    "TypeDeliveryAddress": "Type delivery address"
+    "TypeDeliveryAddress": "Type delivery address",
+    "upuAddress": {
+        "addressee": "addressee",
+        "deliveryPoint": "appartement/room/office"
+    }
 }

@@ -2,7 +2,6 @@ import { Component, ViewChild, AfterViewInit, AfterViewChecked, ElementRef } fro
 import {NgForm} from "@angular/forms";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
-import { GeocodeResponse, GeocodeResult} from "../shared/geocode";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/first';
 
@@ -15,12 +14,11 @@ import 'rxjs/add/operator/first';
 export class AddressFormattedComponent implements AfterViewInit{
 
     @ViewChild('addressHtml') addressHtml: ElementRef
+    private isAddressRestored : boolean = false;
 
     constructor(private addressService : AddressService){}
 
-    ngAfterViewInit(){
-        console.log("addressHtml", this.addressHtml.nativeElement);
-    }
+    ngAfterViewInit(){}
 
     public getHtml(): any {
         return this.addressHtml.nativeElement;
@@ -30,5 +28,16 @@ export class AddressFormattedComponent implements AfterViewInit{
         if(!!this.addressService.address){
             return this.addressService.address.formattedAddress;
         }else return "";        
+    }
+
+    public clearMarker() : void {
+        this.addressService.clearMarkerSubject.next(true);
+    }
+
+    set restored( isRestored : boolean ) {
+        this.isAddressRestored = isRestored;
+    }
+    get restored() : boolean {
+        return this.isAddressRestored;
     }
 }

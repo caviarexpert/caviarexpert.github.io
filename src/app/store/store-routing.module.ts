@@ -5,7 +5,8 @@ import { StoreComponent } from "./store.component";
 
 const routes: Routes = [
     { path: "cart", component: CartDetailComponent },
-    { path: "store", component: StoreComponent }
+    { path: "store", component: StoreComponent },
+    { path: "payment", loadChildren: "../payment/payment.module#PaymentModule" }
   ];
 
 @NgModule({

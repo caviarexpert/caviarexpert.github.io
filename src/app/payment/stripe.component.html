@@ -1,0 +1,34 @@
+<h1>Form</h1>
+
+  <span class="payment-message">{{message}}</span>
+
+  <div class="row">
+    <label>
+      <span>Card Number</span>
+      <input [(ngModel)]="cardNumber" name="card-number" type="text" size="20" data-stripe="number">
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>Expiration (MM/YY)</span>
+      <input [(ngModel)]="expiryMonth" name="expiry-month" type="text" size="2" data-stripe="exp_month">
+    </label>
+    <span> / </span>
+    <input [(ngModel)]="expiryYear" name="expiry-year" type="text" size="2" data-stripe="exp_year">
+  </div>
+
+  <div class="form-row">
+    <label>
+      <span>CVC</span>
+      <input [(ngModel)]="cvc" name="cvc" type="text" size="4" data-stripe="cvc">
+    </label>
+  </div>
+
+<div class="row">
+    <div class="col">
+    Card {{ cardNumber }} {{expiryMonth}}/{{expiryYear}} {{ cvc }}
+    </div>
+</div>
+
+<button (click)="getToken()">Send payment</button>

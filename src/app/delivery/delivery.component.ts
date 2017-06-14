@@ -1,6 +1,7 @@
 import {Component, ViewChild, OnInit } from "@angular/core";
 import { AddressService } from "../shared/address.service";
 import { AddressObject } from "../shared/geocode";
+import { UpuAddress } from "../shared/upu-address";
 import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
 import { Language, DefaultLocale, Currency, TranslationService } from "angular-l10n";
 import {Subscription} from "rxjs/Subscription";
@@ -18,22 +19,21 @@ export class DeliveryComponent implements OnInit {
     @DefaultLocale() defaultLocale: string;
     @Currency() currency: string;
 
-    @ViewChild("addressForm") addressForm;
+    @ViewChild("addressNormalForm") addressNormalForm;
     @ViewChild("searchAddress") searchAddressForm;
-
-    private isAddressAssigned: boolean = false;
-    private _subscription: Subscription;
+    
+    private _addressSubscription: Subscription;
+    private currentAddress : AddressObject = null;
 
     constructor(public addrService : AddressService, 
         private deliveryService: DeliveryService,
-        public translationService: TranslationService) {}
+        public translationService: TranslationService) {
 
-    ngAfterViewInit() {
-        this.isAddressAssigned = !!this.addrService.address;
+        
     }
     
     get geocodeAddress() : AddressObject {
-        return this.addrService.address?this.addrService.address:new AddressObject( new GeocodeResult ([], "", null, "", []) );
+        return this.currentAddress || new AddressObject();
     }
     /**
      * @return a list countries ordered ASC in current locale
@@ -43,7 +43,7 @@ export class DeliveryComponent implements OnInit {
     }
 
     get isShowAddressForm(): boolean {
-        return this.isAddressAssigned;
+        return !!this.currentAddress;
     }
 
     cancelForm() : void {
@@ -51,53 +51,25 @@ export class DeliveryComponent implements OnInit {
     }
 
     ngOnInit(){
-        this._subscription = this.addrService.addressAssigned$.subscribe( value => { 
-            this.isAddressAssigned = value;
-        });
+        this._addressSubscription = this.addrService.addressAssigned$
+            .subscribe( address => {
+              this.currentAddress = address;
+              //this.setPostalAddress(address);
+            });
     }
     ngOnDestroy() {
-        this._subscription.unsubscribe();
+        this._addressSubscription.unsubscribe();
     }
-    /*
-        this.translateService.setTranslation("en", {
-            ADDRESS: {
-                postal_code: "postal code",
-                locality: "locality",
-                administrative_area_level_1: "region",
-                administrative_area_level_2: "district"
-            }
-        });
-        this.translateService.setTranslation("es", {
-            ADDRESS: {
-                postal_code: "código postal",
-                locality: "localidad",
-                administrative_area_level_1: "Región",
-                administrative_area_level_2: "área"
-            }
-        });
-        this.translateService.setTranslation("de", {
-            ADDRESS: {
-                postal_code: "Postleitzahl",
-                locality: "Lokalität",
-                administrative_area_level_1: "Region",
-                 administrative_area_level_2: "Bezirk"
-            }
-        });
-        this.translateService.setTranslation("ru", {
-            ADDRESS: {
-                postal_code: "почтовый индекс",
-                locality: "местонахождение",
-                administrative_area_level_1: "регион",
-                administrative_area_level_2: "район"
-            }
-        });
-        this.translateService.setTranslation("it", {
-            ADDRESS: {
-                postal_code: "codice postale",
-                locality: "località",
-                administrative_area_level_1: "regione",
-                administrative_area_level_2: "provincia"
-            }
-        });
-    */    
+
+    private setPostalAddress( address : AddressObject ) : void {
+      let upuAddress : UpuAddress = new UpuAddress();
+      upuAddress.streetNumber = address.streetNumber;
+      upuAddress.route = address.route;
+      upuAddress.locality = address.locality;
+      upuAddress.countryCode = address.countryCode;
+      upuAddress.postalCode = address.postalCode;
+      upuAddress.premise = address.premise;
+      upuAddress.country = this.translationService.translate("COUNTRY."+address.countryCode, {}, "en");
+      this.addrService.postalAddress = upuAddress;
+    }  
 }

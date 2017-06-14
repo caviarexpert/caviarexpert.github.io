@@ -15,23 +15,28 @@ export class AddressFormattedComponent implements AfterViewInit{
 
     @ViewChild('addressHtml') addressHtml: ElementRef
     private isAddressRestored : boolean = false;
+    private _addressFromGoogleApi : string;
 
     constructor(private addressService : AddressService){}
 
-    ngAfterViewInit(){}
+    ngAfterViewInit(){
+
+    }
 
     public getHtml(): any {
         return this.addressHtml.nativeElement;
     }
 
-    get addressFromGoogleApi(): string {
-        if(!!this.addressService.address){
-            return this.addressService.address.formattedAddress;
-        }else return "";        
+    set addressFromGoogleApi( formattedAddress : string ) {
+        this._addressFromGoogleApi = formattedAddress;
     }
 
-    public clearMarker() : void {
-        this.addressService.clearMarkerSubject.next(true);
+    get addressFromGoogleApi(): string {
+        return this._addressFromGoogleApi || "";        
+    }
+
+    public clearAddress() : void {
+        this.addressService.cancelAddress();
     }
 
     set restored( isRestored : boolean ) {

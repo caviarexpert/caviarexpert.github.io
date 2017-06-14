@@ -1,11 +1,13 @@
-<div class="container">    
-    <div *ngFor="let line of address" class="row">
-      <ng-container *ngIf="!line.result">
-        <div *ngFor="let field of line.fields" class="col">
-          <label [for]="field"><small class="form-text text-muted" translate>{{field}}</small></label>
-          <input [name]="field" [id]="field" [placeholder]="getFieldTranslation(field)" />
-        </div>
-      </ng-container>     
-      <span *ngIf="line.result">{{line.result}}</span>
+<div #finalAddressForm>
+Address FORM {{ address }}
+<div *ngFor="let line of address;let index = index;" class="row">
+  <ng-container *ngIf="!address[index].result">
+    RESULT
+    <div *ngFor="let field of line.fields" class="col">
+      <label [for]="field"><small class="form-text text-muted" translate>{{field}}</small></label>
+      <input [name]="field" [id]="field" [placeholder]="getFieldTranslation(field)" />
     </div>
+  </ng-container>     
+  <span *ngIf="line.result">{{line.result}}</span>
+</div>
 </div>

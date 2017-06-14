@@ -14,7 +14,7 @@
 					</div>
 				</div>
 			</div>
-		<form #addressForm="ngForm" [hidden]="!isShowAddressForm">			
+		<form #addressNormalForm="ngForm" [hidden]="!isShowAddressForm">			
 			<div class="row">
 				<div class="col-12 col-sm-6 pr-sm-1">
 					<label for="route"><small class="form-text text-muted" translate>ADDRESS.route</small></label>
@@ -72,17 +72,18 @@
 				</div>
 			</div>			
 		</form>
-		<div *ngIf="addrService.address" class="alert alert-info justify-content-center mt-5">				
-				<address>
-					<strong>Authentic Russian Caviar</strong>
-					<br />Corso Venezia 3
-					<br />20133 Milano MI 
-					<br />ITALIA
-					<br /><abbr title="Phone">Tel.</abbr>: +39 0287159490
-				</address>
-				<button type="button" class="btn btn-outline-info">Address is all right!</button>
-			</div>
-	</div>
+		<address-form></address-form>
+		<div *ngIf="currentAddress" class="alert alert-info justify-content-center mt-5">				
+					<address>
+						<strong>Authentic Russian Caviar</strong>
+						<br />Corso Venezia 3
+						<br />20133 Milano MI 
+						<br />ITALIA
+						<br /><abbr title="Phone">Tel.</abbr>: +39 0287159490
+					</address>
+					<button type="button" class="btn btn-outline-info">Address is all right!</button>
+				</div>
+		</div>
 </div>
 <div style="height:100%">
     <router-outlet></router-outlet>

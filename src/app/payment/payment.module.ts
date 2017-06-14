@@ -7,21 +7,44 @@ import { routing } from "./payment.routing";
 import { HttpModule } from "@angular/http";
 import { ChoosePaymentComponent } from "./choose-payment.component";
 import { StripeComponent } from "./stripe.component";
+import { Secure3DStatusComponent } from "./secure-3d-status.component";
+import { PaypalComponent } from "./paypal.component";
 import { environment } from "../environment";
 import { StripeService } from "./stripe.service";
-
-export const Stripe = (<any>window).Stripe;
+import { PaypalService } from "./paypal.service";
+import { ThanksComponent } from "./thanks.component";
+import { Observable } from "rxjs/Observable";
 
 @NgModule({
     imports: [ HttpModule, FormsModule, ReactiveFormsModule, routing, SharedModule, LocalizationModule.forChild() ],
-    declarations: [ ChoosePaymentComponent, StripeComponent ],
+    declarations: [ ChoosePaymentComponent, StripeComponent, Secure3DStatusComponent, PaypalComponent, ThanksComponent ],
     exports: [],
-    providers: [ StripeService ]
+    providers: [ StripeService, PaypalService ]
 })
 export class PaymentModule{
       constructor(private translation: TranslationService,
                   private locale: LocaleService,
-                  private geocodingService : GeocodingService ){
+                  private geocodingService : GeocodingService,
+                  private paypalService : PaypalService ){
+
+        //<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+        //<script src="https://js.stripe.com/v3/"></script>              
+        
+        let stripe = document.createElement("script");
+        stripe.src = "https://js.stripe.com/v2/";
+        stripe.type = "text/javascript";
+
+        Observable.create( observer => {
+            stripe.onload = () => {
+                observer.next(true);
+                observer.complete();
+            }
+            document.getElementsByTagName("head")[0].appendChild(stripe);
+        }).subscribe( 
+            s => {},
+            error => {},
+            () => {(<any>window).Stripe.setPublishableKey(environment.stripe.apiKey);}
+        );
         
         this.locale.addConfiguration().defineDefaultLocale(
             this.geocodingService.getSharedLocale().getCurrentLanguage(),
@@ -36,7 +59,6 @@ export class PaymentModule{
         });
         this.translation.addConfiguration() 
             .addProvider("./assets/l10n/payment/locale-")
-        this.translation.init();
-        (<any>window).Stripe.setPublishableKey(environment.stripeApiKey);
+        this.translation.init();        
     }
 }

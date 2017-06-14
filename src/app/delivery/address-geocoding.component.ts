@@ -15,7 +15,6 @@ export class AddressGeocoding{
     constructor(private geocodingService: GeocodingService, private addressService: AddressService){}
     onSubmit(searchAddress: NgForm){
         let _address = searchAddress.value.addressToLocation;
-        console.log("Address submited", _address);
         this.geocodingService.getLocation(_address).first()
             .subscribe ( result => {
                 let geocodeResponse : GeocodeResponse = new GeocodeResponse(result);

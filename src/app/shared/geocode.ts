@@ -23,7 +23,7 @@ export class GeocodeBounds {
 }
 
 export class AddressObject {
-    constructor ( public geocodeResult? : GeocodeResult){}
+    constructor ( public geocodeResult? : GeocodeResult, public manualCoordinates? : LatLng){}
     get formattedAddress() : string {
         return this.geocodeResult ? this.geocodeResult.formatted_address : "";
     }

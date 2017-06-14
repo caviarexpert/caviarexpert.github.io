@@ -6,6 +6,13 @@ export const environment = {
   //https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
   //let osmTemplate = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
   mapTilesUrlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  stripeApiKey: "pk_test_ZvEKUPqFjIepuviNVuDVZJXN",
-  processCardUrl: "https://localhost:8443/charge"
+  stripe : {
+    apiKey: "pk_test_ZvEKUPqFjIepuviNVuDVZJXN",
+    processCardUrl: "https://localhost:8443/process-card",
+    chargeCardUrl: "https://localhost:8443/charge-card"
+  },
+  paypal : {
+    createPaymentUrl: "https://localhost:8443/paypal/create-payment",
+    executePaymentUrl: "https://localhost:8443/paypal/execute-payment"
+  }
 };

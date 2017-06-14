@@ -10,6 +10,7 @@ import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 import { TranslationService } from "angular-l10n";
 import { Subscription } from "rxjs/Subscription";
 import { environment } from "../environment";
+import { AddressObject } from "../shared/geocode";
 
 
 @Component({
@@ -34,20 +35,21 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
   addressPopupHtml: L.Popup;
   //geocodingService : GeocodingService;
   private _lang: string;
-  private clearMarkerSubscription : Subscription;
+  //private clearMarkerSubscription : Subscription;
+  private addressSubscription : Subscription;
 
   private markersLayer = new L.LayerGroup([]);
 
   ngOnInit() {
-    this.clearMarkerSubscription  = this.addressService.clearMarkerSubject$.subscribe ( r => {
-      this.markersLayer.clearLayers();
-    });    
+    //this.clearMarkerSubscription  = this.addressService.clearMarkerSubject$.subscribe ( r => {
+    //  this.markersLayer.clearLayers();
+    //}); 
     //this.addressFormatted.changes.subscribe(changes => console.log(changes));
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.    
   }
   ngOnDestroy(){
-    this.clearMarkerSubscription.unsubscribe();
+    //this.clearMarkerSubscription.unsubscribe();
   }
 
   ngAfterContentInit() {
@@ -87,15 +89,14 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
                   let geocodeResult : GeocodeResult = geocodeResponse.results[0];
                   let addr = geocodeResult.formatted_address;                  
                   console.log("results: ", results);
-                  addrService.coordinate = event.latlng;
-                  addrService.assignMapclick(geocodeResult);
-                  markersLayer.clearLayers();
-                  let marker = L.marker(addrService.coordinate);
-                  markersLayer.addLayer(marker);
-                  addressFormatted.restored = false;                 
-                  setTimeout(() => {
-                    marker.bindPopup(addressPopup.setContent(addressFormatted.getHtml())).openPopup();
-                  }, 0);
+                  //addrService.coordinate = event.latlng;
+                  addrService.assignAddress(geocodeResult, event.latlng);
+                  //markersLayer.clearLayers();
+                  //let marker = L.marker(addrService.coordinate);
+                  //markersLayer.addLayer(marker);                 
+                  //setTimeout(() => {
+                  //  marker.bindPopup(addressPopup.setContent(addressFormatted.getHtml())).openPopup();
+                  //}, 0);
                 });
             }else{              
               let newZoom = zoom < 10 ? zoom + 4 : zoom + 5;
@@ -111,15 +112,24 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
                 L.DomUtil.removeClass(L.DomUtil.get("map"), "pointer");
               }
           });
+          let currentAddress : AddressObject = null;
           map.on("load", () => {
-              this.addAddressMarker();
+              //this.addAddressMarker();
+              this.addressSubscription = this.addressService.addressAssigned$.subscribe ( address => {
+                this.markersLayer.clearLayers();
+                if(address!=null && address.geocodeResult!=null && address.geocodeResult.geometry.location_type=="ROOFTOP"){
+                      currentAddress = address;
+                      let latlng = address.manualCoordinates || address.geocodeResult.geometry.location;
+                      let marker = L.marker(latlng);
+                      this.markersLayer.addLayer(marker);
+                      this.addressFormatted.addressFromGoogleApi = address.formattedAddress;
+                      setTimeout(() => {
+                        marker.bindPopup(this.addressPopupHtml.setContent(this.addressFormatted.getHtml())).openPopup();
+                      }, 0);
+                  }
+              });
           });
-          //map.setView({lat:51.505, lng: -0.09}, 13, {animation:true});
-          //map.setView([52, 12], 4)
-          map.fitBounds(this.getViewport());
-          if(addrService.coordinate){
-              
-          }
+          map.fitBounds(MaptapComponent.getViewport(currentAddress));
     //});
   }
   private getControl(){
@@ -143,20 +153,7 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
 
           return new MyControl();    
   }
-
-  private _getAddressPopup = () : string => {
-    let _lang = this.geocodingService.getSharedLocale().getCurrentLanguage();
-    let localCountryName = this.geocodingService.getSharedTranslation().translate("COUNTRY." + this.addressService.address.countryCode);
-    console.log("Address popup for", localCountryName, _lang);
-    return `<p>${this.addressService.address.formattedAddress}</p>
-            <address>
-            ${this.addressService.address.route} ${this.addressService.address.buildingNumber}<br />
-            ${this.addressService.address.postalCode} ${this.addressService.address.locality} ${this.addressService.address.areaLevel2Short}<br />
-            ${localCountryName}
-            </address>
-            <button (click)="alert(111)">${this.translationService.translate("HELLO")}</button>`;
-  }
-
+/*
   private addAddressMarker() {
       let marker;
       if(this.addressService.coordinate){
@@ -176,13 +173,13 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
         }, 0);
       }
   }
-
-  private getViewport(){
-     if(this.addressService.address){
-       let sw = new L.LatLng(this.addressService.address.viewport.southwest.lat - 5,
-            this.addressService.address.viewport.southwest.lng - 5);
-       let ne = new L.LatLng(this.addressService.address.viewport.northeast.lat + 5,
-            this.addressService.address.viewport.northeast.lng + 5);
+*/
+  private static getViewport( address : AddressObject ){
+     if(!!address){
+       let sw = new L.LatLng(address.viewport.southwest.lat - 5,
+            address.viewport.southwest.lng - 5);
+       let ne = new L.LatLng(address.viewport.northeast.lat + 5,
+            address.viewport.northeast.lng + 5);
         return new L.LatLngBounds(sw, ne);              
      }else{
         return MaptapComponent.getEuViewport();

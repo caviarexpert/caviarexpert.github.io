@@ -6,7 +6,6 @@ import { DOCUMENT } from "@angular/platform-browser";
 
 import { StripeService } from "./stripe.service";
 
-import { Stripe } from "./payment.module";
 
 
 @Component({
@@ -19,7 +18,7 @@ export class StripeComponent implements OnInit {
  //   name: new FormControl()
  // });
 
-  cardNumber: string = "4242424242424242";
+  cardNumber: string = "4000000000003063";
   expiryMonth: string = "12"
   expiryYear: string = "20"
   cvc: string = "123"
@@ -40,8 +39,7 @@ export class StripeComponent implements OnInit {
 
   getToken() {
     this.message = 'Loading...';
-
-    Stripe.source.create({
+    (<any>window).Stripe.source.create({
         type: 'card',
         card: {
             number: this.cardNumber,
@@ -60,7 +58,8 @@ export class StripeComponent implements OnInit {
         this.changeDetector.detectChanges();//.markForCheck();
         this.stripeService.sendCardSource(response.id)
             .subscribe ( result => {
-                console.log("WORKING...");
+                console.log("redirecting to ....", result.redirect3dUrl);
+                window.location.href=result.redirect3dUrl;
             });
 
         //this.zone.run(() => this.message = JSON.stringify(response));        

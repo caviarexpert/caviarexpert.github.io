@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from "@angular/core";
 import {NgForm} from "@angular/forms";
 import { GeocodingService } from "../shared/geocoding.service";
 import { AddressService } from "../shared/address.service";
-import { GeocodeResponse, GeocodeResult } from "../shared/geocode";
+import { GeocodeResponse, GeocodeResult, AddressObject } from "../shared/geocode";
 import { UpuAddress, AddressTemplate, AddressLine } from "../shared/upu-address";
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from "rxjs/Subscription";
 import 'rxjs/add/operator/first';
 import { TranslationService } from "angular-l10n";
 
@@ -13,25 +14,24 @@ import { TranslationService } from "angular-l10n";
     selector: 'address-form',
     templateUrl: "./address-form.component.html"
 })
-export class AddressFormComponent {
+export class AddressFormComponent implements OnInit, OnDestroy {
   
   private addressLines : AddressLine[];
+
+  @ViewChild('finalAddressForm') finalAddressForm: ElementRef
   
-  constructor( private addressService : AddressService, private translationService: TranslationService ){
-    let address : UpuAddress = new UpuAddress();
-    let a = this.addressService.address;
-    address.streetNumber = a.streetNumber;
-    address.route = a.route;
-    address.locality = a.locality;
-    address.countryCode = a.countryCode;
-    address.postalCode = a.postalCode;
-    address.premise = a.premise;
-    address.country = this.translationService.translate("COUNTRY."+address.countryCode, {}, "en");
-    this.addressLines = AddressTemplate.formatAddress(address);
-  }
+  constructor( private addressService : AddressService, private translationService: TranslationService ){}
+
+  ngOnInit(){}
+  ngOnDestroy(){}
 
   get address() : AddressLine[] {
-    return this.addressLines;
+    let upuAddress = this.addressService.postalAddress;
+    if(!!upuAddress){
+      return AddressTemplate.formatAddress(upuAddress);
+    }else{
+      return null;
+    }    
   }
 
   public getFieldTranslation(fieldName : string) : string {

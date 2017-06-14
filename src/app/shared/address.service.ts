@@ -1,45 +1,37 @@
 import { Injectable } from "@angular/core";
 import { LatLng } from "leaflet";
 import { GeocodeResult, AddressObject } from "./geocode";
+import { UpuAddress } from "./upu-address";
 import { Subject } from "rxjs/Subject";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class AddressService {
-  private value : AddressObject;// = new AddressObject( new GeocodeResult ([], "", null, "", []) );
-  private latlng: LatLng;
+  //private value : AddressObject;// = new AddressObject( new GeocodeResult ([], "", null, "", []) );
   public addressToLocation: string;
-  private addressAssigned: Subject<boolean> = new Subject<boolean>();
+  private addressAssigned: BehaviorSubject<AddressObject> = new BehaviorSubject<AddressObject>(null);
   //private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
   public addressAssigned$ = this.addressAssigned.asObservable();
   //public mapclickAssigned$ = this.mapclickAssigned.asObservable();
 
-  public clearMarkerSubject: Subject<boolean> = new Subject<boolean>();
-  public clearMarkerSubject$ = this.clearMarkerSubject.asObservable();
+  //public clearMarkerSubject: Subject<boolean> = new Subject<boolean>();
+  //public clearMarkerSubject$ = this.clearMarkerSubject.asObservable();
 
-  get address(): AddressObject {
-    return this.value;
-  }
+  private _postalAddress : UpuAddress;
+
   cancelAddress(): void {
-    this.value = null;
-    this.addressAssigned.next(false);
+    this.addressAssigned.next(null);
   }
-  assignMapclick ( geocodeResult : GeocodeResult ) : void{
-    this.value = new AddressObject ( geocodeResult );
+  assignAddress( geocodingResult : GeocodeResult, coordinates? : LatLng){
+    this.addressAssigned.next(new AddressObject(geocodingResult, coordinates));
   }
-  assignAddress( geocodingResult : GeocodeResult ){
-    this.addressAssigned.next(true);
-    this.value = new AddressObject(geocodingResult);
+
+  set postalAddress( postalAddress : UpuAddress ){
+    this._postalAddress = postalAddress;
   }
-  
-  get coordinate(): LatLng {
-      return this.latlng;
+  get postalAddress() : UpuAddress {
+    return this._postalAddress;
   }
-  set coordinate(latLng : LatLng){
-      this.latlng = latLng;
-  }
-  
-  addressAsJson() : string {
-      return JSON.stringify(this.value);
-  }
+
 }

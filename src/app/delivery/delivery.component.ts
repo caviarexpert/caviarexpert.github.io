@@ -19,7 +19,7 @@ export class DeliveryComponent implements OnInit {
     @DefaultLocale() defaultLocale: string;
     @Currency() currency: string;
 
-    @ViewChild("addressNormalForm") addressNormalForm;
+    //@ViewChild("addressNormalForm") addressNormalForm;
     @ViewChild("searchAddress") searchAddressForm;
     
     private _addressSubscription: Subscription;
@@ -52,24 +52,9 @@ export class DeliveryComponent implements OnInit {
 
     ngOnInit(){
         this._addressSubscription = this.addrService.addressAssigned$
-            .subscribe( address => {
-              this.currentAddress = address;
-              //this.setPostalAddress(address);
-            });
+            .subscribe( address => this.currentAddress = address );
     }
     ngOnDestroy() {
         this._addressSubscription.unsubscribe();
     }
-
-    private setPostalAddress( address : AddressObject ) : void {
-      let upuAddress : UpuAddress = new UpuAddress();
-      upuAddress.streetNumber = address.streetNumber;
-      upuAddress.route = address.route;
-      upuAddress.locality = address.locality;
-      upuAddress.countryCode = address.countryCode;
-      upuAddress.postalCode = address.postalCode;
-      upuAddress.premise = address.premise;
-      upuAddress.country = this.translationService.translate("COUNTRY."+address.countryCode, {}, "en");
-      this.addrService.postalAddress = upuAddress;
-    }  
 }

@@ -19,15 +19,20 @@ export class UpuAddress {
 export class AddressLine {
   public pipes : PipeTransform[] = [];
   private dasFelder : string[];
+  private _optional : boolean;
   public result : string;
-  constructor(public template : string, pipes? : PipeTransform[]){
+  constructor(public template : string, pipes? : PipeTransform[], optional? : boolean){
     if(!!pipes) this.pipes = pipes;
+    if(!!optional) this._optional = optional;
   }
   get fields() : string[]{
     return !!this.dasFelder ? this.dasFelder : [];
   }
   set fields( theFields : string[]) {
       this.dasFelder = theFields;
+  }
+  get optional() : boolean {
+      return this._optional;
   }
 }
 
@@ -39,26 +44,26 @@ export class AddressTemplate {
 
     private static processAddressLines( lines : AddressLine[], upuAddress : UpuAddress) : AddressLine[] {
       return lines.map(line => {
-                    let theLine: string = _.template(line.template)({ "upuAddress": upuAddress });
-                    if(theLine.trim().length > 0){
-                      line.pipes.forEach ( pipe => {
-                        theLine = pipe.transform(theLine);
-                      });
-                      line.result = theLine;                   
-                    }
-                    let match = AddressTemplate.templateRegex.exec(line.template);
-                    let lineFields : string[] = [];
-                    while(match !== null) {
-                        lineFields.push(match[2]);
-                        match = AddressTemplate.templateRegex.exec(line.template);
-                    }
-                    line.fields = lineFields;
-                    return line;
-                })
-                .reduce ( (result, current, index) => {
-                    result.push(current);
-                    return result;
-                }, []);
+            let theLine: string = _.template(line.template)({ "upuAddress": upuAddress });
+            if(theLine.trim().length > 0){
+                line.pipes.forEach ( pipe => {
+                theLine = pipe.transform(theLine);
+                });
+                line.result = theLine;                   
+            }
+            let match = AddressTemplate.templateRegex.exec(line.template);
+            let lineFields : string[] = [];
+            while(match !== null) {
+                lineFields.push(match[2]);
+                match = AddressTemplate.templateRegex.exec(line.template);
+            }
+            line.fields = lineFields;
+            return line;
+        })
+        .reduce ( (result, current, index) => {
+            result.push(current);
+            return result;
+        }, []);
     }
 
     public static formatAddress (upuAddress : UpuAddress, translateCountryCode? : (countryCode:string) => string ) : AddressLine[] {
@@ -74,16 +79,17 @@ export class AddressTemplate {
     public static FR = {
         lines : [
             new AddressLine("<%-upuAddress.addressee%>"),
-            new AddressLine("<%-upuAddress.deliveryPoint%>"),
-            new AddressLine("<%-upuAddress.additionalGeoInfo%>"),
+            new AddressLine("<%-upuAddress.deliveryPoint%>", null, true),
+            new AddressLine("<%-upuAddress.additionalGeoInfo%>", null, true),
             new AddressLine ("<%-upuAddress.streetNumber%> <%-upuAddress.route%>", [ AddressTemplate.uppercase ]),
-            new AddressLine( "<%-upuAddress.poBox%>", [ AddressTemplate.uppercase ] ),
+            //new AddressLine( "<%-upuAddress.poBox%>", [ AddressTemplate.uppercase ] ),
             new AddressLine("<%-upuAddress.postalCode%> <%-upuAddress.locality%>", [ AddressTemplate.uppercase ]),
             new AddressLine("<%-upuAddress.country%>", [ AddressTemplate.uppercase ])
         ]
     }
 
     public static DE = {
+        /*
         formatAddress : function (upuAddress : UpuAddress, translateCountryCode? : (countryCode:string) => string ) : string {
             let countryName;
             if(translateCountryCode){
@@ -103,10 +109,11 @@ export class AddressTemplate {
                 });
             return address;
         },
+        */
         lines : [
             new AddressLine("<%-address.addressee%>"),
             new AddressLine ("<%-address.streetNumber%>&nbsp;<%-address.route%>", [ AddressTemplate.uppercase ]),
-            new AddressLine( "<%-address.poBox%>", [ AddressTemplate.uppercase ] ),
+            //new AddressLine( "<%-address.poBox%>", [ AddressTemplate.uppercase ] ),
             new AddressLine("<%-address.postalCode%>&nbsp;<%-address.locality%>", [ AddressTemplate.uppercase ])
         ]
     }

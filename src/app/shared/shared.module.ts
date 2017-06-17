@@ -4,6 +4,7 @@ import { AddressService } from "./address.service";
 import { GeocodingService } from "./geocoding.service";
 import { DeliveryService } from "../datasources/delivery.service";
 import { SharedComponent } from "./shared.component";
+import { SessionService } from "./session.service";
 //import { CommonModule }        from '@angular/common';
 //import { FormsModule }         from '@angular/forms';
 import { 
@@ -34,6 +35,7 @@ export class SharedModule {
                 AddressService,
                 GeocodingService,
                 DeliveryService,
+                SessionService,
                 Collator
                 //InjectorRef,
                 //LocaleConfig,

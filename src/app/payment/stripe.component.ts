@@ -11,13 +11,16 @@ import { StripeService } from "./stripe.service";
 @Component({
     moduleId: module.id,
     selector: 'stripe',
-    templateUrl: "./stripe.component.html"
+    templateUrl: "./stripe.component.html",
+    styleUrls: ["./stripe.component.css"]
 })
 export class StripeComponent implements OnInit {
  // heroForm = new FormGroup ({
  //   name: new FormControl()
  // });
-
+  public cardMask = [/[1-9]/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]
+  public cvcMask = [/\d/, /\d/, /\d/]
+  public twoDigitsMask = [/\d/, /\d/]
   cardNumber: string = "4000000000003063";
   expiryMonth: string = "12"
   expiryYear: string = "20"
@@ -31,7 +34,7 @@ export class StripeComponent implements OnInit {
       private stripeService : StripeService,
         private changeDetector: ChangeDetectorRef,
         private zone: NgZone,
-        @Inject(DOCUMENT) private theDocument: Document){}
+        @Inject(DOCUMENT) private theDocument: any ){}
 
   ngOnInit(){
 
@@ -90,8 +93,8 @@ export class StripeComponent implements OnInit {
 
   stripeTokenHandler(token) : void {
     	  // Insert the token ID into the form so it gets submitted to the server
-    	  var form = document.getElementById('payment-form');
-    	  var hiddenInput = document.createElement('input');
+    	  var form = this.theDocument.getElementById('payment-form');
+    	  var hiddenInput = this.theDocument.createElement('input');
     	  hiddenInput.setAttribute('type', 'hidden');
     	  hiddenInput.setAttribute('name', 'stripeToken');
     	  hiddenInput.setAttribute('value', token.id);

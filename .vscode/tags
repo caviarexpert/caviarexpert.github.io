@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+get-dhl-rate.py	../../postmen/get-dhl-rate.py	1;"	kind:file	line:1
+handler	../../terraform/src-python/main.py	/^def handler(event, context):$/;"	kind:function	line:1
+headers	../../postmen/get-dhl-rate.py	/^headers = {$/;"	kind:variable	line:81
+json	../../postmen/get-dhl-rate.py	/^import json$/;"	kind:namespace	line:4
+main.py	../../terraform/src-python/main.py	1;"	kind:file	line:1
+namedtuple	../../postmen/get-dhl-rate.py	/^from collections import namedtuple$/;"	kind:namespace	line:5
+post_handler	../../terraform/src-python/main.py	/^def post_handler(event, context):$/;"	kind:function	line:4
+requests	../../postmen/get-dhl-rate.py	/^import requests$/;"	kind:namespace	line:3
+rsp	../../postmen/get-dhl-rate.py	/^rsp = requests.post(url, payload, headers=headers)$/;"	kind:variable	line:90
+url	../../postmen/get-dhl-rate.py	/^url = 'https:\/\/sandbox-api.postmen.com\/v3\/rates'$/;"	kind:variable	line:7
+x	../../postmen/get-dhl-rate.py	/^x = json.loads(rsp.text, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))$/;"	kind:variable	line:93

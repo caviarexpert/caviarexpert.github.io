@@ -19,7 +19,6 @@ export class DeliveryComponent implements OnInit {
     @DefaultLocale() defaultLocale: string;
     @Currency() currency: string;
 
-    //@ViewChild("addressNormalForm") addressNormalForm;
     @ViewChild("searchAddress") searchAddressForm;
     
     private _addressSubscription: Subscription;

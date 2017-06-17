@@ -1,11 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Product } from "./model/product";
+import { SessionService, SessionData } from "../shared/session.service";
 
 @Injectable()
 export class Cart {
     public lines: CartLine[] = [];
     //public itemCount: number = 0;
     //public cartPrice: number = 0;
+
+    constructor(private sessionService : SessionService){
+        this.sessionService.registerProvider( () => {
+            return new SessionData("cart",  this.lines );
+        });
+    }
 
     addLine(product: Product, quantity: number = 1) {
         let line = this.lines.find(line => line.product.sku == product.sku);

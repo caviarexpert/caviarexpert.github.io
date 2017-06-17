@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { SessionService } from "../shared/session.service";
 
 
 @Component({
@@ -6,4 +7,10 @@ import { Component } from "@angular/core";
     selector: 'choose-payment',
     templateUrl: "./choose-payment.component.html"
 })
-export class ChoosePaymentComponent {}
+export class ChoosePaymentComponent implements OnInit {
+    constructor( private sessionService : SessionService ){}
+
+    ngOnInit(){
+        this.sessionService.saveSession();
+    }
+}

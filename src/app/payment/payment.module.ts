@@ -1,5 +1,6 @@
 import { NgModule, Inject } from "@angular/core";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
 import { GeocodingService } from "../shared/geocoding.service";
 import { TranslationService, TranslationModule, LocalizationModule, LocaleService } from "angular-l10n";
@@ -14,9 +15,10 @@ import { StripeService } from "./stripe.service";
 import { PaypalService } from "./paypal.service";
 import { ThanksComponent } from "./thanks.component";
 import { Observable } from "rxjs/Observable";
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
-    imports: [ HttpModule, FormsModule, ReactiveFormsModule, routing, SharedModule, LocalizationModule.forChild() ],
+    imports: [ HttpModule, FormsModule, CommonModule, routing, SharedModule, LocalizationModule.forChild(), TextMaskModule ],
     declarations: [ ChoosePaymentComponent, StripeComponent, Secure3DStatusComponent, PaypalComponent, ThanksComponent ],
     exports: [],
     providers: [ StripeService, PaypalService ]

@@ -1,0 +1,5 @@
+#ccCard { display:inline-block }
+#cardNumber {width: 11.5em;}
+#cvcNumber { width: 3.5em; }
+#ccExpiry { width: 6em; }
+.cc-expiry input { display:inline }

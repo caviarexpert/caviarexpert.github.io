@@ -4,11 +4,29 @@ import { Injectable } from "@angular/core";
 export class SessionService {
 
   private sessionId : string;
-  private dataProviders : any[];
+  private dataProviders : SessionDataProvider[] = [];
 
-  registerProvider( getDataFunction : Function ){
-
+  registerProvider( dataProvider : SessionDataProvider ){
+    this.dataProviders.push(dataProvider);
   }
 
+  saveSession() : void {
+    this.dataProviders.forEach( provider => {
+      console.log("Saving data from", provider().provider);
+    });
+  }
 
+}
+
+export interface SessionDataProvider {
+  () : SessionData;
+}
+export class SessionData {  
+  constructor(private providerName: string, private serviceData : any){}
+  get provider() : string {
+    return this.providerName;
+  }
+  get data() : any {
+    return this.serviceData;
+  }
 }

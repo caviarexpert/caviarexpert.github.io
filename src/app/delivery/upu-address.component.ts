@@ -11,10 +11,10 @@ import { TranslationService } from "angular-l10n";
 
 @Component({
     moduleId: module.id,
-    selector: 'address-form',
-    templateUrl: "./address-form.component.html"
+    selector: 'upu-address',
+    templateUrl: "./upu-address.component.html"
 })
-export class AddressFormComponent implements OnInit, OnDestroy {
+export class UpuAddressComponent implements OnInit, OnDestroy {
   
   private addressLines : AddressLine[];
   private _addressSubscription : Subscription;

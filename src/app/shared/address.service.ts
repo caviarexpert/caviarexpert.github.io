@@ -3,6 +3,7 @@ import { LatLng } from "leaflet";
 import { GeocodeResult, AddressObject } from "./geocode";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from "rxjs/Observable";
+import { SessionService, SessionDataProvider, SessionData } from "./session.service";
 
 @Injectable()
 export class AddressService {
@@ -16,10 +17,15 @@ export class AddressService {
   //public clearMarkerSubject: Subject<boolean> = new Subject<boolean>();
   //public clearMarkerSubject$ = this.clearMarkerSubject.asObservable();
 
+  constructor(private sessionService : SessionService){    
+    sessionService.registerProvider( () => new SessionData( "address",  this.addressAssigned.getValue()) );
+  }
+
   cancelAddress(): void {
     this.addressAssigned.next(null);
   }
   assignAddress( geocodingResult : GeocodeResult, coordinates? : LatLng){
     this.addressAssigned.next(new AddressObject(geocodingResult, coordinates));
   }
+  
 }

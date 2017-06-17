@@ -14,68 +14,10 @@
 					</div>
 				</div>
 			</div>
+		<street-address></street-address>
 		<!--
-		<form #addressNormalForm="ngForm" [hidden]="!isShowAddressForm">			
-			<div class="row">
-				<div class="col-12 col-sm-6 pr-sm-1">
-					<label for="route"><small class="form-text text-muted" translate>ADDRESS.route</small></label>
-					<input type="text" class="form-control" id="route" name="route"
-						placeholder="street name" aria-describedby="streetNameHelp"
-						[ngModel]="geocodeAddress.route" />
-				</div>
-				<div class="col-6 pr-1 col-sm-3 px-sm-1">
-					<label for="buildingNumber"><small class="form-text text-muted" translate>ADDRESS.building</small></label>
-					<input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
-						aria-describedby="buildingNumberHelp" placeholder="num." 
-						[ngModel]="geocodeAddress.buildingNumber" />
-				</div>
-				<div class="col-6 pl-1 col-sm-3 pl-sm-1 has-warning">
-					<label for="room_number"><small class="form-text text-muted" translate>ADDRESS.room</small></label>
-					<input type="text" class="form-control" id="room_number" name="room_number" placeholder="num." />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-5 col-sm-3 pr-1">
-					<label for="postalCode"><small class="form-text text-muted" translate>ADDRESS.postal_code</small></label>
-					<input type="text" class="form-control" id="postalCode" name="postalCode"
-						aria-describedby="postalCodeHelp" [placeholder]="translationService.translate('ADDRESS.postal_code')"
-						[ngModel]="geocodeAddress.postalCode" />
-				</div>
-				<div class="col-7 pl-1 col-sm-5 px-sm-1">
-					<label for="locality"><small class="form-text text-muted" translate>ADDRESS.locality</small></label>
-					<input type="text" class="form-control form-control-warning" id="locality" name="locality"
-						 [placeholder]="translationService.translate('ADDRESS.locality')"
-						 [ngModel]="geocodeAddress.locality" />
-				</div>
-				<div class="col col-sm-4 pl-sm-1">
-					<label for="areaLevel2"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_2</small></label>
-					<input type="text" class="form-control" id="areaLevel2" name="areaLevel2"
-						aria-describedby="areaLevel2Help" [placeholder]="translationService.translate('ADDRESS.administrative_area_level_2')"
-						[ngModel]="geocodeAddress.areaLevel2Short" />
-					<small id="areaLevel2Help" class="form-text text-muted single-line-truncated" *ngIf="geocodeAddress.areaLevel2" 
-						[hidden]="geocodeAddress.areaLevel2Short === geocodeAddress.areaLevel2">{{ geocodeAddress.areaLevel2 }}</small>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-sm-6 pr-sm-1">
-					<label for="areaLevel1"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_1</small></label>
-					<input type="text" class="form-control" id="areaLevel1" name="areaLevel1"
-						[placeholder]="translationService.translate('ADDRESS.administrative_area_level_1')"
-						[ngModel]="geocodeAddress.areaLevel1" />
-				</div>
-				<div class="col-12 col-sm-6 pl-sm-1">
-					<label for="country"><small class="form-text text-muted" translate>ADDRESS.country</small></label>
-					<select class="form-control form-control-warning" id="country" name="country"
-							[ngModel]="geocodeAddress.countryCode">						
-						<option *ngFor="let c of countries" [ngValue]="c.code">{{ c.name }}</option>
-						<option value="">EU/EFTA country</option>
-					</select>
-				</div>
-			</div>			
-		</form>
-		-->
-		<address-form></address-form>
-		<div *ngIf="currentAddress" class="alert alert-info justify-content-center mt-5">				
+		<upu-address></upu-address>
+		<div *ngIf="geocodeAddress" class="alert alert-info justify-content-center mt-5">				
 					<address>
 						<strong>Authentic Russian Caviar</strong>
 						<br />Corso Venezia 3
@@ -84,8 +26,10 @@
 						<br /><abbr title="Phone">Tel.</abbr>: +39 0287159490
 					</address>
 					<button type="button" class="btn btn-outline-info">Address is all right!</button>
-				</div>
 		</div>
+		-->
+	</div>
+		
 </div>
 <div style="height:100%">
     <router-outlet></router-outlet>

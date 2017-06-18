@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { environment } from "../environment";
 import { PaypalService } from "./paypal.service";
+import { SessionService } from "../shared/session.service";
 
 @Component({
     moduleId: module.id,
@@ -9,8 +10,9 @@ import { PaypalService } from "./paypal.service";
 })
 export class PaypalComponent implements OnInit {
 
-  constructor(private paypalService : PaypalService){}
+  constructor(private paypalService : PaypalService, private sessionService : SessionService){}
   ngOnInit(){
+    let theSession : SessionService = this.sessionService;
     this.paypalService.getPaypal().then( paypal => {
         paypal.Button.render({
           env: 'sandbox', // sandbox | production
@@ -21,7 +23,10 @@ export class PaypalComponent implements OnInit {
               // Set up a url on your server to create the payment
               var CREATE_URL = environment.paypal.createPaymentUrl;
               // Make a call to your server to set up the payment
-              return paypal.request.post(CREATE_URL)
+              //return paypal.request.post(CREATE_URL)
+              let dataJson = JSON.stringify(theSession.getSessionData());
+              console.log("Paypal data: ", dataJson );
+              return paypal.request({ method: 'post', url: CREATE_URL, json: dataJson })
                     .then(function(res) {
                             return res.paymentID;
                         });

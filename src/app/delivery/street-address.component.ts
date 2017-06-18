@@ -4,6 +4,7 @@ import { AddressService } from "../shared/address.service";
 import {Subscription} from "rxjs/Subscription";
 import { TranslationService } from "angular-l10n";
 import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
+import { PostmenService } from "../shared/postmen.service";
 
 @Component({
     moduleId: module.id,
@@ -14,14 +15,21 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     private _addressSubscription: Subscription;
     @ViewChild('streetAddressForm') finalAddressForm: ElementRef
     private currentAddress : AddressObject;
+    public deliveryQuotation : any;
+    public hideControls = false;
 
     constructor(private addrService : AddressService, 
         private deliveryService : DeliveryService,
+        private postmenService : PostmenService,
         public translationService: TranslationService ){}
 
     ngOnInit(){
         this._addressSubscription = this.addrService.addressAssigned$
-            .subscribe( address => this.currentAddress = address );
+            .subscribe( address => {
+                this.currentAddress = address;
+                this.hideControls = false;
+                this.deliveryQuotation = null;
+             });
     }
     ngOnDestroy() {
         this._addressSubscription.unsubscribe();
@@ -40,5 +48,12 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     }
     clearAddress() : void {
         this.addrService.cancelAddress();
+    }
+    getShipmentQuote() : void {
+        this.hideControls = true;
+        this.postmenService.getQuote(this.currentAddress)
+            .subscribe ( rate => {
+                this.deliveryQuotation = JSON.stringify(rate, null, 2);
+            });
     }
 }

@@ -5,6 +5,7 @@ import { GeocodingService } from "./geocoding.service";
 import { DeliveryService } from "../datasources/delivery.service";
 import { SharedComponent } from "./shared.component";
 import { SessionService } from "./session.service";
+import { PostmenService } from "./postmen.service";
 //import { CommonModule }        from '@angular/common';
 //import { FormsModule }         from '@angular/forms';
 import { 
@@ -36,6 +37,7 @@ export class SharedModule {
                 GeocodingService,
                 DeliveryService,
                 SessionService,
+                PostmenService,
                 Collator
                 //InjectorRef,
                 //LocaleConfig,

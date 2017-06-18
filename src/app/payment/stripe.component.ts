@@ -5,6 +5,7 @@ import {NgForm} from "@angular/forms";
 import { DOCUMENT } from "@angular/platform-browser";
 
 import { StripeService } from "./stripe.service";
+import { SessionService } from "../shared/session.service";
 
 
 
@@ -31,7 +32,8 @@ export class StripeComponent implements OnInit {
   cardError: string;
 
   constructor(
-      private stripeService : StripeService,
+        private stripeService : StripeService,
+        private sessionService: SessionService,
         private changeDetector: ChangeDetectorRef,
         private zone: NgZone,
         @Inject(DOCUMENT) private theDocument: any ){}
@@ -57,6 +59,7 @@ export class StripeComponent implements OnInit {
         }
     }, (status: number, response: any) => {
         console.log(response);
+        this.sessionService.getSessionData();
         this.message = JSON.stringify(response);
         this.changeDetector.detectChanges();//.markForCheck();
         this.stripeService.sendCardSource(response.id)

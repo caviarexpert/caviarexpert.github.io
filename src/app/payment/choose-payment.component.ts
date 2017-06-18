@@ -11,6 +11,6 @@ export class ChoosePaymentComponent implements OnInit {
     constructor( private sessionService : SessionService ){}
 
     ngOnInit(){
-        this.sessionService.saveSession();
+        //this.sessionService.getSessionData();
     }
 }

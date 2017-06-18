@@ -10,10 +10,12 @@ export class SessionService {
     this.dataProviders.push(dataProvider);
   }
 
-  saveSession() : void {
-    this.dataProviders.forEach( provider => {
-      console.log("Saving data from", provider().provider);
-    });
+  getSessionData() : SessionData[] {
+    return this.dataProviders.map ( provider => {
+      let sessionData : SessionData = provider();
+      console.log("Saving data from", sessionData.provider);
+      return sessionData;
+     });
   }
 
 }

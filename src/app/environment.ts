@@ -14,5 +14,8 @@ export const environment = {
   paypal : {
     createPaymentUrl: "https://localhost:8443/paypal/create-payment",
     executePaymentUrl: "https://localhost:8443/paypal/execute-payment"
+  },
+  postmen : {
+    quotationUrl : "https://localhost:8443/delivery-quote"
   }
 };

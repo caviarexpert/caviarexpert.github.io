@@ -10,7 +10,11 @@ export class Cart {
 
     constructor(private sessionService : SessionService){
         this.sessionService.registerProvider( () => {
-            return new SessionData("cart",  this.lines );
+            let cartLines : any = this.lines.map ( cl => {
+                let cartData : any = { sku: cl.product.sku, quantity: cl.quantity};
+                return cartData;
+             });
+            return new SessionData("cart",  cartLines );
         });
     }
 

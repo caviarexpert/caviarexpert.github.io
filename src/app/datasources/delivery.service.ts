@@ -3,7 +3,7 @@ import { TranslationService, Collator} from "angular-l10n";
 
 
 export const countries : string[] = ["GB", "DE", "FR", "IT", "ES", "PT", "NL", "BE", "LU", "DK",
-    "PL", "CZ", "EE", "LT", "LV"];
+    "PL", "CZ", "EE", "LT", "LV", "AT"];
 
 @Injectable()
 export class DeliveryService{

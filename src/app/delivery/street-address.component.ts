@@ -14,9 +14,10 @@ import { PostmenService } from "../shared/postmen.service";
 export class StreetAddressComponent implements OnInit, OnDestroy {
     private _addressSubscription: Subscription;
     @ViewChild('streetAddressForm') finalAddressForm: ElementRef
-    private currentAddress : AddressObject;
+    private _currentAddress : AddressObject;
     public deliveryQuotation : any;
     public hideControls = false;
+    public hideEditForm = true;
 
     constructor(private addrService : AddressService, 
         private deliveryService : DeliveryService,
@@ -26,16 +27,17 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     ngOnInit(){
         this._addressSubscription = this.addrService.addressAssigned$
             .subscribe( address => {
-                this.currentAddress = address;
+                this._currentAddress = address;
                 this.hideControls = false;
                 this.deliveryQuotation = null;
+                this.hideEditForm = true;
              });
     }
     ngOnDestroy() {
         this._addressSubscription.unsubscribe();
     }
-    get geocodeAddress() : AddressObject {
-        return this.currentAddress;
+    get currentAddress() : AddressObject {
+        return this._currentAddress;
     }
     get countries() : CountryEntity[] {
         return this.deliveryService.countries;
@@ -51,9 +53,15 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     }
     getShipmentQuote() : void {
         this.hideControls = true;
-        this.postmenService.getQuote(this.currentAddress)
-            .subscribe ( rate => {
-                this.deliveryQuotation = JSON.stringify(rate, null, 2);
-            });
+        this.postmenService.getQuotes(this.currentAddress)
+            .subscribe ( 
+                rate => {
+                    this.deliveryQuotation = JSON.stringify(rate, null, 2);
+                },
+                error => {
+                    console.error("AVE error:", error)
+                },
+                () => {}
+            );
     }
 }

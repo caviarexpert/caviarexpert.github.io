@@ -1,60 +1,74 @@
-<div #streetAddressForm *ngIf="geocodeAddress">			
-  <div class="row">
-    <div class="col-9 pr-1 col-sm-8">
-      <label for="route"><small class="form-text text-muted" translate>ADDRESS.route</small></label>
-      <input type="text" class="form-control" id="route" name="route"
-        placeholder="street name" aria-describedby="streetNameHelp"
-        [ngModel]="geocodeAddress.route" />
-    </div>
-    <div class="col-3 pl-1 col-sm-4">
-      <label for="buildingNumber"><small class="form-text text-muted" translate>ADDRESS.building</small></label>
-      <input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
-        aria-describedby="buildingNumberHelp" placeholder="num." 
-        [ngModel]="geocodeAddress.buildingNumber" />
-    </div>
-    <!--
-    <div class="col-6 pl-1 col-sm-3 pl-sm-1 has-warning">
-      <label for="room_number"><small class="form-text text-muted" translate>ADDRESS.room</small></label>
-      <input type="text" class="form-control" id="room_number" name="room_number" placeholder="num." />
-    </div>
-    -->
-  </div>
-  <div class="row">
-    <div class="col-5 col-sm-3 pr-1">
-      <label for="postalCode"><small class="form-text text-muted" translate>ADDRESS.postal_code</small></label>
-      <div>{{geocodeAddress.postalCode}}</div>
-    </div>
-    <div class="col-7 pl-1 col-sm-4 px-sm-1">
-      <label for="locality"><small class="form-text text-muted" translate>ADDRESS.locality</small></label>
-      <div>{{geocodeAddress.locality}}</div>
-    </div>
-    <div class="col col-sm-5 pl-sm-1">
-      <label for="areaLevel2"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_2</small></label>
-      <div>{{geocodeAddress.areaLevel2Short}}</div>
-      <small id="areaLevel2Help" class="form-text text-muted single-line-truncated" *ngIf="geocodeAddress.areaLevel2" 
-        [hidden]="geocodeAddress.areaLevel2Short === geocodeAddress.areaLevel2">{{ geocodeAddress.areaLevel2 }}</small>
+<div #streetAddressForm *ngIf="currentAddress">
+  <div class="row" [hidden]="!hideEditForm">
+    <div class="col">
+      <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+        <button type="button" (click)="hideEditForm=false" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ currentAddress.formattedAddress }}
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-6 pr-sm-1">
-      <label for="areaLevel1"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_1</small></label>
-      <div>{{geocodeAddress.areaLevel1}}</div>
-    </div>
-    <div class="col-6 pl-sm-1">
-      <label for="country"><small class="form-text text-muted" translate>ADDRESS.country</small></label>
-      <div *ngIf="findCountry(geocodeAddress.countryCode); let ce">{{ce.name}}</div>
-      <!--
-      <select class="form-control form-control-warning" id="country" name="country"
-          [ngModel]="geocodeAddress.countryCode">						
-        <option *ngFor="let c of countries" [ngValue]="c.code">{{ c.name }}</option>
-        <option value="">EU/EFTA country</option>
-      </select>
-      -->
+  <div class="row" [hidden]="hideEditForm">
+    <div class="col">	
+        <div class="row">
+          <div class="col-9 pr-1 col-sm-8">
+            <label for="route"><small class="form-text text-muted" translate>ADDRESS.route</small></label>
+            <input type="text" class="form-control" id="route" name="route"
+              placeholder="street name" aria-describedby="streetNameHelp"
+              [ngModel]="currentAddress.route" />
+          </div>
+          <div class="col-3 pl-1 col-sm-4">
+            <label for="buildingNumber"><small class="form-text text-muted" translate>ADDRESS.building</small></label>
+            <input type="text" class="form-control" id="buildingNumber" name="buildingNumber"
+              aria-describedby="buildingNumberHelp" placeholder="num." 
+              [ngModel]="currentAddress.buildingNumber" />
+          </div>
+          <!--
+          <div class="col-6 pl-1 col-sm-3 pl-sm-1 has-warning">
+            <label for="room_number"><small class="form-text text-muted" translate>ADDRESS.room</small></label>
+            <input type="text" class="form-control" id="room_number" name="room_number" placeholder="num." />
+          </div>
+          -->		
+        </div>
+        <div class="row">
+          <div class="col-5 col-sm-3 pr-1">
+            <label for="postalCode"><small class="form-text text-muted" translate>ADDRESS.postal_code</small></label>
+            <div>{{currentAddress.postalCode}}</div>
+          </div>
+          <div class="col-7 pl-1 col-sm-4 px-sm-1">
+            <label for="locality"><small class="form-text text-muted" translate>ADDRESS.locality</small></label>
+            <div>{{currentAddress.locality}}</div>
+          </div>
+          <div class="col col-sm-5 pl-sm-1">
+            <label for="areaLevel2"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_2</small></label>
+            <div>{{currentAddress.areaLevel2Short}}</div>
+            <small id="areaLevel2Help" class="form-text text-muted single-line-truncated" *ngIf="currentAddress.areaLevel2" 
+              [hidden]="currentAddress.areaLevel2Short === currentAddress.areaLevel2">{{ currentAddress.areaLevel2 }}</small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 pr-sm-1">
+            <label for="areaLevel1"><small class="form-text text-muted" translate>ADDRESS.administrative_area_level_1</small></label>
+            <div>{{currentAddress.areaLevel1}}</div>
+          </div>
+          <div class="col-6 pl-sm-1">
+            <label for="country"><small class="form-text text-muted" translate>ADDRESS.country</small></label>
+            <div *ngIf="findCountry(currentAddress.countryCode); let ce">{{ce.name}}</div>
+            <!--
+            <select class="form-control form-control-warning" id="country" name="country"
+                [ngModel]="currentAddress.countryCode">						
+              <option *ngFor="let c of countries" [ngValue]="c.code">{{ c.name }}</option>
+              <option value="">EU/EFTA country</option>
+            </select>
+            -->
+          </div>
+        </div>
     </div>
   </div>
   <div class="row" [hidden]="!!deliveryQuotation">
     <div class="col text-center mt-5" [hidden]="hideControls">
-      <button (click)="getShipmentQuote()" class="btn btn-primary">Quote delivery to this address</button>
+      <button (click)="getShipmentQuote()" class="btn btn-primary">Get shipment rate</button>
       <button (click)="clearAddress()" class="btn btn-outline-warning btn-sm">Clear</button>
     </div>
     <div class="col" [hidden]="!hideControls">

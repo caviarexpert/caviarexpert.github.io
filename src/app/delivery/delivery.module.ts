@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { DeliveryRoutingModule } from "./delivery-routing.module";
 import { DeliveryComponent } from "./delivery.component";
 import { UpuAddressComponent } from "./upu-address.component";
+import { RatesComponent } from "./rates.component"
 import { StreetAddressComponent } from "./street-address.component";
 import { AddressGeocoding } from "./address-geocoding.component";
 
@@ -20,7 +21,7 @@ import { LocalizationModule, TranslationService } from "angular-l10n";
     SharedModule,
     LocalizationModule
   ],
-  declarations: [ DeliveryComponent, AddressGeocoding, UpuAddressComponent, StreetAddressComponent ],
+  declarations: [ DeliveryComponent, AddressGeocoding, UpuAddressComponent, StreetAddressComponent, RatesComponent ],
   exports: [ DeliveryComponent ]
 })
 export class DeliveryModule {

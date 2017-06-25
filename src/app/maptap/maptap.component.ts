@@ -9,7 +9,7 @@ import { MapControlComponent } from "./map-control.component";
 import { GeocodeResult, GeocodeResponse } from "../shared/geocode";
 import { TranslationService } from "angular-l10n";
 import { Subscription } from "rxjs/Subscription";
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 import { AddressObject } from "../shared/geocode";
 
 

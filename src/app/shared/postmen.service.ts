@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Http, Request, RequestMethod, Headers, Response, RequestOptions, URLSearchParams } from "@angular/http";
 import { AddressObject } from "./geocode";
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { EmptyObservable } from "rxjs/observable/EmptyObservable"
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
@@ -12,7 +13,33 @@ import 'rxjs/add/operator/catch';
 export class PostmenService {
   constructor(private http: Http){}
 
-  getQuotes ( address : AddressObject ) : Observable<QuotationResponse> {
+  //private _quotes : QuotationResponse[] = [];
+
+  private ratesAssigned: BehaviorSubject<QuotationResponse> = new BehaviorSubject<QuotationResponse>(null);
+  //private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
+  public ratesAssigned$ = this.ratesAssigned.asObservable();
+
+  updateQuotes ( address : AddressObject ) : void {
+    this._getQuotes( address ).subscribe ( 
+        resp => {
+          //this._quotes = [...this._quotes, resp];
+          this.ratesAssigned.next(resp);
+        },
+        error => { console.error("AVE error:", error) },
+        () => {}
+      );
+  }
+
+  //clearQuotes () : void {
+  //  this._quotes = []
+    //this.ratesAssigned.next(null);
+  //}
+
+  //get quotations() : QuotationResponse[] {
+  //  return this._quotes;
+ // }
+
+  _getQuotes ( address : AddressObject ) : Observable<QuotationResponse> {
     console.log("Getting quotes")
     const quotationAddress : QuotationAddress = new QuotationAddress(
       address.route + ' ' + address.buildingNumber,
@@ -64,7 +91,6 @@ export class PostmenService {
     return this.http.request(req)
       .map ( resp =>  Object.assign( new QuotationResponse(), resp.json() ) );
   }
-
 }
 
 export class QuotationAddress {

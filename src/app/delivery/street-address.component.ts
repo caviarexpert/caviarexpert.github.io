@@ -1,10 +1,14 @@
 import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from "@angular/core";
+import {NgForm} from "@angular/forms";
 import { AddressObject } from "../shared/geocode";
 import { AddressService } from "../shared/address.service";
 import {Subscription} from "rxjs/Subscription";
 import { TranslationService } from "angular-l10n";
 import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
 import { PostmenService } from "../shared/postmen.service";
+import { GeocodingService } from "../shared/geocoding.service";
+import { GeocodeResponse, GeocodeResult } from "../shared/geocode";
+import { UpuAddress } from "../shared/upu-address";
 
 @Component({
     moduleId: module.id,
@@ -15,21 +19,18 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     private _addressSubscription: Subscription;
     @ViewChild('streetAddressForm') finalAddressForm: ElementRef
     private _currentAddress : AddressObject;
-    public deliveryQuotation : any;
-    public hideControls = false;
     public hideEditForm = true;
 
-    constructor(private addrService : AddressService, 
+    constructor(private addrService : AddressService,
+        private geocodingService : GeocodingService,
+        //private postmenService: PostmenService,
         private deliveryService : DeliveryService,
-        private postmenService : PostmenService,
         public translationService: TranslationService ){}
 
     ngOnInit(){
         this._addressSubscription = this.addrService.addressAssigned$
             .subscribe( address => {
                 this._currentAddress = address;
-                this.hideControls = false;
-                this.deliveryQuotation = null;
                 this.hideEditForm = true;
              });
     }
@@ -50,18 +51,36 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
     }
     clearAddress() : void {
         this.addrService.cancelAddress();
+        //this.postmenService.clearQuotes();
     }
-    getShipmentQuote() : void {
-        this.hideControls = true;
-        this.postmenService.getQuotes(this.currentAddress)
-            .subscribe ( 
-                rate => {
-                    this.deliveryQuotation = JSON.stringify(rate, null, 2);
-                },
-                error => {
-                    console.error("AVE error:", error)
-                },
-                () => {}
-            );
+    updateAddress(editAddressForm: NgForm) : void {        
+        const _route = editAddressForm.value.route
+        const _streetNum = editAddressForm.value.buildingNumber
+        if( this._currentAddress.route == _route && 
+            this._currentAddress.buildingNumber == _streetNum ){
+                this.hideEditForm = true
+                return
+            };
+        const _upuAddr = UpuAddress.fromAddress(this._currentAddress);
+        _upuAddr.route = _route
+        _upuAddr.streetNumber = _streetNum
+        _upuAddr.postalCode = null
+        const _addrString = _upuAddr.toString();
+        console.log("Address to geocode: ", _addrString);
+        this.geocodingService.getLocation(_addrString).first()
+            .subscribe ( result => {
+                let geocodeResponse : GeocodeResponse = new GeocodeResponse(result);
+                const geocodeResult : GeocodeResult = geocodeResponse.results[0];
+                const newAddr : AddressObject = new AddressObject(geocodeResult);
+                const isSamePostalArea = AddressObject.isSamePostalArea( this._currentAddress, newAddr );
+                if(!isSamePostalArea){
+                    //this.postmenService.clearQuotes();                   
+                }else{
+                    //FIXME alert in GUI... GeoRepsone may have partial postcode: W1D for example - just prefix
+                    //console.warn("Old or new address doesn't have postal code")                   
+                }                
+                console.log("results: ", result);
+                this.addrService.assignAddress(geocodeResult);
+            });
     }
 }

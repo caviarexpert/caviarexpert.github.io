@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 
 
 

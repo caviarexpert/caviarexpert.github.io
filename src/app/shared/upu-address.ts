@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import { UpperCasePipe } from "@angular/common";
 import { PipeTransform } from "@angular/core";
+import { AddressObject } from "./geocode";
 export class UpuAddress {
   public addressee : string;
   public deliveryPoint : string;
@@ -14,6 +15,24 @@ export class UpuAddress {
   public subLocality : string;
   public countryCode : string;
   public country : string;
+
+  public static fromAddress( address : AddressObject) : UpuAddress {
+    const upuAddress : UpuAddress = new UpuAddress();
+    upuAddress.route = address.route;
+    upuAddress.streetNumber = address.streetNumber;
+    upuAddress.premise = address.premise;
+    upuAddress.postalCode = address.postalCode;
+    upuAddress.locality = address.locality;
+    upuAddress.countryCode = address.countryCode;
+    upuAddress.subLocality = address.areaLevel2Short;
+    return upuAddress;
+  }
+  public toString() : string {
+      return AddressTemplate.formatAddress(this)
+        .map ( addrLine => addrLine.result)
+        .filter( result => !!result)
+        .reduce ( (prev, curr ) => prev.length > 0 ? prev + ", " + curr : curr, "")
+  }
 }
 
 export class AddressLine {

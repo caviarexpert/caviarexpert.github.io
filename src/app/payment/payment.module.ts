@@ -10,7 +10,7 @@ import { ChoosePaymentComponent } from "./choose-payment.component";
 import { StripeComponent } from "./stripe.component";
 import { Secure3DStatusComponent } from "./secure-3d-status.component";
 import { PaypalComponent } from "./paypal.component";
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 import { StripeService } from "./stripe.service";
 import { PaypalService } from "./paypal.service";
 import { ThanksComponent } from "./thanks.component";

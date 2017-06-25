@@ -16,6 +16,7 @@ export const environment = {
     executePaymentUrl: "https://localhost:8443/paypal/execute-payment"
   },
   postmen : {
+    //quotationUrl : "https://j0d288crui.execute-api.eu-west-1.amazonaws.com/Prod/delivery-quote"
     quotationUrl : "https://localhost:8443/delivery-quote"
   }
 };

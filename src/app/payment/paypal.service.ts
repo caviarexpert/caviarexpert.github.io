@@ -1,7 +1,7 @@
 import { Injectable, Inject } from "@angular/core";
 
 import { DOCUMENT } from "@angular/platform-browser";
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 
 
 @Injectable()

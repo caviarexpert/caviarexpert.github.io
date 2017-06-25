@@ -118,5 +118,13 @@ export class AddressObject {
     get viewport(): GeocodeBounds {
         if(!this.geocodeResult) return null;
         return this.geocodeResult.geometry.viewport;
-    }    
+    }
+
+    
+    public static isSamePostalArea( addr_1 : AddressObject , addr_2 : AddressObject ) : boolean {
+        if(!addr_1 || !addr_2) return false;
+        if(addr_1.countryCode !== addr_2.countryCode) return false;
+        if(addr_1.postalCode === addr_2.postalCode ) return true;
+        return false;
+    }   
 }

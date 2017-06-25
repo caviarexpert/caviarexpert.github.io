@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { environment } from "../environment";
+import { environment } from "../../environments/environment";
 import { PaypalService } from "./paypal.service";
 import { SessionService } from "../shared/session.service";
 

@@ -1,33 +1,74 @@
 import { Injectable } from "@angular/core";
 import { Http, Request, RequestMethod, Headers, Response, RequestOptions, URLSearchParams } from "@angular/http";
 import { AddressObject } from "./geocode";
+import { AddressService } from "./address.service"
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { EmptyObservable } from "rxjs/observable/EmptyObservable"
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/last';
 //import 'rxjs/add/operator/onErrorResumeNext';
 
 @Injectable()
 export class PostmenService {
-  constructor(private http: Http){}
 
-  //private _quotes : QuotationResponse[] = [];
+  private quotedAddress : AddressObject;
+  private addressForQuote : AddressObject;
 
-  private ratesAssigned: BehaviorSubject<QuotationResponse> = new BehaviorSubject<QuotationResponse>(null);
+
+  private _needToUpdateQuotes: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public needToUpdateQuotes$ = this._needToUpdateQuotes.asObservable();
+
+  private rates: BehaviorSubject<Quotation[]> = new BehaviorSubject<Quotation[]>([]);
   //private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
-  public ratesAssigned$ = this.ratesAssigned.asObservable();
+  public rates$ = this.rates.asObservable();
 
-  updateQuotes ( address : AddressObject ) : void {
-    this._getQuotes( address ).subscribe ( 
+  constructor(private http: Http, private addressService : AddressService ){
+    this.addressService.addressAssigned$.subscribe ( addr => {
+      if(addr===null){
+        this._needToUpdateQuotes.next(false)
+        this.rates.next([]);
+        return
+      }
+      if(this.quotedAddress==null){
+        this.addressForQuote = addr;
+        this._needToUpdateQuotes.next(true)        
+        return
+      }
+      const isNewArea : boolean = !AddressObject.isSamePostalArea(this.quotedAddress, addr)
+      if(isNewArea){
+        this.addressForQuote = addr;
+      }
+      this._needToUpdateQuotes.next(isNewArea);
+    });
+  }
+
+  get quotations() : Quotation[] { return this.rates.value }
+
+  updateQuotes ( ) : void {
+    if( this.addressForQuote == null ) return
+    const updatedQuotes : Quotation[] = [];
+    this._getQuotes( this.addressForQuote ).subscribe ( 
         resp => {
-          //this._quotes = [...this._quotes, resp];
-          this.ratesAssigned.next(resp);
+          console.log("Adding quote ", resp);
+          this.rates.next([...updatedQuotes, ...resp.rates]);
+          console.log("Now quotes: ", this.rates.value);
         },
         error => { console.error("AVE error:", error) },
-        () => {}
+        () => {
+          this.quotedAddress = this.addressForQuote;
+        }
       );
+  }
+
+  isQuotesUpdateRequired() : boolean {
+    return this._needToUpdateQuotes.value;
+  }
+
+  hasSomeAddress() : boolean {
+    return !!this.addressForQuote || !!this.quotedAddress;
   }
 
   //clearQuotes () : void {
@@ -104,6 +145,7 @@ export class QuotationAddress {
 
 export class QuotationResponse {
   slugs : string[];
+  errors: string[];
   rates : Quotation[];
 }
 

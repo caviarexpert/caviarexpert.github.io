@@ -7,7 +7,6 @@ const routes: Routes = [
     { path: "delivery", component: DeliveryComponent, children: [
            { path: "map", loadChildren: "../maptap/maptap.module#MaptapModule" }
        ] },
-    { path: "delivery-address", component: StreetAddressComponent },
     { path: "map", loadChildren: "../maptap/maptap.module#MaptapModule" }
   ];
 

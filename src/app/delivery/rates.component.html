@@ -1,7 +1,7 @@
-<ng-container *ngIf="address">
-<div class="row" [hidden]="quotesUpdated">
+<ng-container *ngIf="isVisible">
+<div class="row" [hidden]="disableQuoteButton">
   <div class="col text-center mt-5">
-    <button (click)="updateShipmentQuotes()" class="btn btn-primary">Get shipment rate</button>
+    <button (click)="updateShipmentQuotes()" class="btn btn-primary">Calculate shipment</button>
   </div>
 </div>
 <div class="row" [hidden]="true">
@@ -11,7 +11,7 @@
     </div>
   </div>
 </div>	
-<ng-container *ngIf="quotations.length>0">
+<ng-container *ngIf="disableQuoteButton && quotations.length > 0">
   <table class="table">
     <thead>
       <tr>
@@ -21,8 +21,8 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let quotation of quotations">
-      <tr *ngFor="let quote of quotation.rates">
+      <ng-container *ngFor="let quote of quotations">
+      <tr>
         <td>{{quote.price | localeCurrency:defaultLocale:quote.priceCurrency:true:"1.0-2" }}</td>
         <td>{{quote.deliveryDate}}</td>
         <td>{{quote.courierSlug}} {{quote.serviceName}}</td>

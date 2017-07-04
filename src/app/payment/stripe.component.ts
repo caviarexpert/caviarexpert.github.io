@@ -3,9 +3,11 @@ import {NgForm} from "@angular/forms";
 //import {  FormControl, FormGroup } from '@angular/forms';
 
 import { DOCUMENT } from "@angular/platform-browser";
+import { environment } from "../../environments/environment"
 
 import { StripeService } from "./stripe.service";
 import { SessionService } from "../shared/session.service";
+import { Subscription } from "rxjs/Subscription"
 
 
 
@@ -29,6 +31,8 @@ export class StripeComponent implements OnInit {
 
   message: string;
 
+  private stripeSubscription : Subscription
+
   cardError: string;
 
   constructor(
@@ -39,7 +43,11 @@ export class StripeComponent implements OnInit {
         @Inject(DOCUMENT) private theDocument: any ){}
 
   ngOnInit(){
-
+        // Create an instance of Elements
+        this.stripeSubscription = this.stripeService.stripeClient.asObservable().subscribe( stripeInitialized => {
+            console.log("Stripe initialization", stripeInitialized);
+            if(stripeInitialized) this._initElements();
+        });
   }
 
   getToken() {
@@ -127,5 +135,60 @@ export class StripeComponent implements OnInit {
             }, stripeResponseHandler);
         }
         */
+    }
+
+    private _initElements() : void {
+        const stripe = (<any>window).Stripe(environment.stripe.apiKey)
+        console.log("_initElements");
+        var elements = stripe.elements();
+        console.log("Elements");
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                lineHeight: '24px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+        // Create an instance of the card Element
+        var card = elements.create('card', {style: style});
+        // Add an instance of the card Element into the `card-element` <div>
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+        });
+
+        // Handle form submission
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+            // Inform the user if there was an error
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            } else {
+            // Send the token to your server
+            this.stripeTokenHandler(result.token);
+            }
+        });
+        });        
     }
 }

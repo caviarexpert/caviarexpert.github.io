@@ -117,7 +117,9 @@ export class MaptapComponent implements OnInit, OnDestroy, AfterViewInit, AfterC
               //this.addAddressMarker();
               this.addressSubscription = this.addressService.addressAssigned$.subscribe ( address => {
                 this.markersLayer.clearLayers();
-                if(address!=null && address.geocodeResult!=null && address.geocodeResult.geometry.location_type=="ROOFTOP"){
+                if(address!=null && address.geocodeResult!=null && 
+                    (address.geocodeResult.geometry.location_type=="ROOFTOP" || 
+                          address.geocodeResult.geometry.location_type == "RANGE_INTERPOLATED")){
                       currentAddress = address;
                       let latlng = address.manualCoordinates || address.geocodeResult.geometry.location;
                       let marker = L.marker(latlng);

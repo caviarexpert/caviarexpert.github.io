@@ -27,8 +27,8 @@ resource "aws_api_gateway_rest_api" "postmen_api" {
  * The API requires at least one "endpoint", or "resource" in AWS terminology.
  * The endpoint created here is: /hello
 */
-resource "aws_api_gateway_resource" "postment_hello" {
-  rest_api_id = "${aws_api_gateway_rest_api.postment_api.id}"
+resource "aws_api_gateway_resource" "postmen_hello" {
+  rest_api_id = "${aws_api_gateway_rest_api.postmen_api.id}"
   parent_id   = "${aws_api_gateway_rest_api.postmen_api.root_resource_id}"
   path_part   = "postmen"
 }

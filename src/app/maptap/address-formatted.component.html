@@ -3,8 +3,8 @@
         <p>{{ addressFromGoogleApi }}</p>
     </address>    
     <div [hidden]="restored" class="text-center">
-        <a routerLink="/delivery-address" class="btn btn-outline-success btn-sm" role="button">OK</a>
-        <a routerLink="/cart" class="btn btn-outline-danger btn-sm" role="button">Cancel</a>
-        <button (click)="clearAddress()" class="btn btn-outline-warning btn-sm">Clear</button>
+        <a routerLink="/delivery" class="hidden-md-up btn btn-outline-success btn-sm" role="button">OK</a>
+        <button class="hidden-sm-down btn btn-outline-success btn-sm" role="button">Delivery rate</button>
+        <button (click)="clearAddress()" class="btn btn-outline-warning btn-sm">Cancel</button>
     </div>
 </div>

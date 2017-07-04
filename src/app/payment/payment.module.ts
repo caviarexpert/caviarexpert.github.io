@@ -25,6 +25,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 })
 export class PaymentModule{
       constructor(private translation: TranslationService,
+                  private stripeService: StripeService,
                   private locale: LocaleService,
                   private geocodingService : GeocodingService,
                   private paypalService : PaypalService ){
@@ -32,8 +33,8 @@ export class PaymentModule{
         //<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         //<script src="https://js.stripe.com/v3/"></script>              
         
-        let stripe = document.createElement("script");
-        stripe.src = "https://js.stripe.com/v2/";
+        const stripe = document.createElement("script");
+        stripe.src = "https://js.stripe.com/v3/";
         stripe.type = "text/javascript";
 
         Observable.create( observer => {
@@ -45,7 +46,10 @@ export class PaymentModule{
         }).subscribe( 
             s => {},
             error => {},
-            () => {(<any>window).Stripe.setPublishableKey(environment.stripe.apiKey);}
+            () => { 
+                //(<any>window).Stripe.setPublishableKey(environment.stripe.apiKey);
+                this.stripeService.stripeClient.next( (<any>window).Stripe(environment.stripe.apiKey) )
+            }
         );
         
         this.locale.addConfiguration().defineDefaultLocale(

@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, OnDestroy} from "@angular/core"
 import { Observable } from "rxjs/Observable"
 import { Subscription } from "rxjs/Subscription"
-import { Quotation } from "../shared/postmen.service";
 import "rxjs/add/observable/interval"
-import { PostmenService, QuotationResponse } from "../shared/postmen.service";
+import { PostmenService, Quotation } from "../shared/postmen.service";
 import { AddressService } from "../shared/address.service"
 import { AddressObject } from "../shared/geocode"
 import {
@@ -23,44 +22,43 @@ export class RatesComponent implements OnInit, OnDestroy {
 
   @Language() lang: string;
   @DefaultLocale() defaultLocale: string;
-  @Currency() currency: string;
+  //@Currency() currency: string;
 
-  public address : AddressObject;
-  private _addressSubscription : Subscription
-  private _rateSubscription : Subscription
+  public disableQuoteButton : boolean;
 
-  private _quotations : QuotationResponse[] = [];
-  public quotesUpdated : boolean = false;
+  private _needQuoteUpdateSubscription : Subscription;
+  private _quotesSubscription : Subscription;
+  private _quotations : Quotation[]
 
-  constructor( private postmen : PostmenService,
-      private addrService : AddressService){
-  }
+  constructor( private postmen : PostmenService){}
 
   ngOnInit() {
-    this._addressSubscription = this.addrService.addressAssigned$
-      .subscribe( address => {
-        const isSameArea : boolean = AddressObject.isSamePostalArea(this.address, address);
-        this.quotesUpdated = isSameArea;
-        if(!this.quotesUpdated){
-          this._quotations = [];
-        }
-        this.address = address
+    this._needQuoteUpdateSubscription = this.postmen.needToUpdateQuotes$
+      .subscribe( needUpdataQuotes => {
+        this.disableQuoteButton = !needUpdataQuotes;
       });
-    this._rateSubscription = this.postmen.ratesAssigned$
-      .subscribe( qr => {
-        this._quotations.push(qr);
-      });
+    this.disableQuoteButton = this.postmen.isQuotesUpdateRequired()
+    this._quotesSubscription = this.postmen.rates$
+      .subscribe( quotes => {
+        this._quotations = quotes;
+      })
+    this._quotations = this.postmen.quotations
   }
   ngOnDestroy() {
-    this._addressSubscription.unsubscribe();
+    this._needQuoteUpdateSubscription.unsubscribe();
+    this._quotesSubscription.unsubscribe();
   }
 
-  get quotations() : QuotationResponse[] {
-    return this._quotations;
+  get quotations() : Quotation[] {
+    return this.postmen.quotations;
+  }
+
+  get isVisible() : boolean {
+    return this.postmen.hasSomeAddress()
   }
 
   updateShipmentQuotes() : void {
-    this.quotesUpdated = true;
-    this.postmen.updateQuotes( this.address );
+    this.disableQuoteButton = true;
+    this.postmen.updateQuotes();
   }
 }

@@ -1,5 +1,22 @@
-<div class="card" id="ccCard">
+<br />
+<br />
+<form action="/charge" method="post" id="payment-form">
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- a Stripe Element will be inserted here. -->
+    </div>
 
+    <!-- Used to display form errors -->
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <button>Pay</button>
+</form>
+<!--
+<div class="card" id="ccCard">
   <div class="card-block">
     <h4 class="card-title" translate>Pay with card</h4>
     <div>
@@ -40,4 +57,5 @@
 
 
 </div>
+-->
 <span class="payment-message">{{message}}</span>

@@ -14,12 +14,15 @@ import { environment } from "../../environments/environment";
 import { StripeService } from "./stripe.service";
 import { PaypalService } from "./paypal.service";
 import { ThanksComponent } from "./thanks.component";
+import { InvoiceComponent } from "./invoice.component";
 import { Observable } from "rxjs/Observable";
 import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
     imports: [ HttpModule, FormsModule, CommonModule, routing, SharedModule, LocalizationModule.forChild(), TextMaskModule ],
-    declarations: [ ChoosePaymentComponent, StripeComponent, Secure3DStatusComponent, PaypalComponent, ThanksComponent ],
+    declarations: [ ChoosePaymentComponent, StripeComponent, 
+        Secure3DStatusComponent, PaypalComponent, 
+        ThanksComponent, InvoiceComponent ],
     exports: [],
     providers: [ StripeService, PaypalService ]
 })

@@ -2,6 +2,7 @@
   "STORE": {
     "addToCart": "buy",
     "deliveryButton": "delivery",
+    "pay": "pay",
     "PRODUCTS": {
       "salmon_cav_200g": "Salmon caviar, 200g",
       "salmon_keta_cav_200g": "Salmon caviar (Keta), 200g"

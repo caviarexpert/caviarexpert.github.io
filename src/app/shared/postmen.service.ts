@@ -24,6 +24,7 @@ export class PostmenService {
   private rates: BehaviorSubject<Quotation[]> = new BehaviorSubject<Quotation[]>([]);
   //private mapclickAssigned: Subject<boolean> = new Subject<boolean>();
   public rates$ = this.rates.asObservable();
+  private static API_URL = environment.apiUrl + environment.postmen.quotationUrl;
 
   constructor(private http: Http, private addressService : AddressService ){
     this.addressService.addressAssigned$.subscribe ( addr => {
@@ -63,9 +64,9 @@ export class PostmenService {
       );
   }
 
-  isQuotesUpdateRequired() : boolean {
-    return this._needToUpdateQuotes.value;
-  }
+  //isQuotesUpdateRequired() : boolean {
+  //  return this._needToUpdateQuotes.value;
+  //}
 
   hasSomeAddress() : boolean {
     return !!this.addressForQuote || !!this.quotedAddress;
@@ -107,7 +108,7 @@ export class PostmenService {
 
     const requestOptions : RequestOptions = new RequestOptions({
             method: RequestMethod.Post,
-            url: environment.postmen.quotationUrl,
+            url: PostmenService.API_URL,
             headers: postHeaders,
             body: quotationAddress,
             search: searchParams
@@ -124,7 +125,7 @@ export class PostmenService {
     postHeaders.append("Accept", "application/json");
     const requestOptions : RequestOptions = new RequestOptions({
             method: RequestMethod.Post,
-            url: environment.postmen.quotationUrl,
+            url: PostmenService.API_URL,
             headers: postHeaders,
             body: quotationAddress
     })

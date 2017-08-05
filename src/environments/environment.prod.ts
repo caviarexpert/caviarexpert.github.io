@@ -1,5 +1,8 @@
+import * as aws from "./aws.json";
+
 export const environment = {
   production: true,
+  apiUrl: (<any>aws).api_url.value,
   googleMapApiKey: "AIzaSyCT8piTVujZwgJctZBoS8HHSYkXg20xyos",
   googleMapApiUrl: "https://maps.googleapis.com/maps/api/geocode/json",
   //http://{s}.osm.maptiles.xyz/{z}/{x}/{y}.png
@@ -12,10 +15,12 @@ export const environment = {
     chargeCardUrl: "https://localhost:8443/charge-card"
   },
   paypal : {
-    createPaymentUrl: "https://localhost:8443/paypal/create-payment",
-    executePaymentUrl: "https://localhost:8443/paypal/execute-payment"
+    paymentUrl: "/paypal"
   },
   postmen : {
-    quotationUrl : "https://j0d288crui.execute-api.eu-west-1.amazonaws.com/Prod/delivery-quote"
+    quotationUrl : "/postmen"
+  },
+  invoice : {
+    path : "/invoice"
   }
 };

@@ -10,6 +10,8 @@ import { SessionService } from "../shared/session.service";
 })
 export class PaypalComponent implements OnInit {
 
+  private static PAYPAL_URL = environment.apiUrl + environment.paypal.paymentUrl;
+
   constructor(private paypalService : PaypalService, private sessionService : SessionService){}
   ngOnInit(){
     let theSession : SessionService = this.sessionService;
@@ -21,12 +23,15 @@ export class PaypalComponent implements OnInit {
           // payment() is called when the button is clicked
           payment: function() {
               // Set up a url on your server to create the payment
-              var CREATE_URL = environment.paypal.createPaymentUrl;
+              //var CREATE_URL = environment.paypal.createPaymentUrl;
               // Make a call to your server to set up the payment
               //return paypal.request.post(CREATE_URL)
-              let dataJson = JSON.stringify(theSession.getSessionData());
+              //TODO let dataJson = JSON.stringify(theSession.getSessionData());
+              let data : any = {}
+              data.invoiceId = "FIXME IN IN PAYPAL.COMPONENT";
+              let dataJson = JSON.stringify(data)
               console.log("Paypal data: ", dataJson );
-              return paypal.request({ method: 'post', url: CREATE_URL, json: dataJson })
+              return paypal.request({ method: 'post', url: PaypalComponent.PAYPAL_URL, json: dataJson })
                     .then(function(res) {
                             return res.paymentID;
                         });
@@ -34,7 +39,7 @@ export class PaypalComponent implements OnInit {
           // onAuthorize() is called when the buyer approves the payment
           onAuthorize: function(data, actions) {
                 // Set up a url on your server to execute the payment
-                let EXECUTE_URL = environment.paypal.executePaymentUrl;
+                //let EXECUTE_URL = environment.paypal.executePaymentUrl;
                 // Set up the data you need to pass to your server
                 console.log(data);
                 let newData = {
@@ -42,7 +47,7 @@ export class PaypalComponent implements OnInit {
                     payerID: data.payerID
                 };
                 // Make a call to your server to execute the payment
-                return paypal.request.post(EXECUTE_URL, newData)
+                return paypal.request.post(PaypalComponent.PAYPAL_URL, newData)
                     .then(function (res) {
                         window.alert('Payment Complete!');
                     });

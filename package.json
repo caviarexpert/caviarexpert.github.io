@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --ssl 1 --ssl-key \"ssl/ivan60.link.1c.ru.key\" --ssl-cert \"ssl/ivan60.link.1c.ru.crt\"",
-    "build": "ng build -prod --aot",
+    "start": "npm run aws && npm run ssl",
+    "ssl": "ng serve -prod --ssl 1 --ssl-key \"ssl/ivan60.link.1c.ru.key\" --ssl-cert \"ssl/ivan60.link.1c.ru.crt\"",
+    "build": "npm run aws && npm run aot",
+    "aot": "ng build -prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "i18n": "ng-xi18n"
+    "i18n": "ng-xi18n",
+    "aws": "node ./releng/aws-state.js"
   },
   "private": true,
   "dependencies": {

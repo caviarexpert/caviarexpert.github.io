@@ -35,7 +35,7 @@ export class CartDetailComponent implements OnInit, OnDestroy {
     ngOnInit() : void {}
     ngOnDestroy(): void {}
 
-    private validateQuantity(obj:any): void{
+    private validateQuantity(obj:any): void {
         Object.keys(obj).forEach( key => {
                 
                 if(obj[key]!=null && !isNaN(obj[key])){

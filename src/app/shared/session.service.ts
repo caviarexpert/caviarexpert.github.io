@@ -13,10 +13,17 @@ export class SessionService {
   getSessionData() : SessionData[] {
     return this.dataProviders.map ( provider => {
       let sessionData : SessionData = provider();
-      console.log("Saving data from", sessionData.provider);
       return sessionData;
      });
   }
+  
+  getSessionObject() : SessionObject {
+    return this.getSessionData().reduce( 
+      (sessionObject, currentSessionData ) => sessionObject.addData(currentSessionData.provider, currentSessionData.data),
+      new SessionObject()
+    )
+  }
+
 
 }
 
@@ -24,11 +31,22 @@ export interface SessionDataProvider {
   () : SessionData;
 }
 export class SessionData {  
-  constructor(private providerName: string, private serviceData : any){}
-  get provider() : string {
-    return this.providerName;
-  }
-  get data() : any {
-    return this.serviceData;
+  constructor(public provider: string, public data : any){}
+}
+export class SessionObject {
+  public cart : any;
+  public address : any;
+  addData( provider: string, data : any){
+    switch ( provider) {
+      case "cart" : {
+        this.cart = data
+        break
+      }
+      case "address" : {
+        this.address = data
+        break
+      }
+    }
+    return this;
   }
 }

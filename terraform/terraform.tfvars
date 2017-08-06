@@ -1,5 +1,0 @@
-aws_access_key = "AKIAIJF3BANFL5VE35TA"
-aws_secret_key = "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"
-aws_region = "eu-west-1"
-aws_simpledb_domain = "products"
-aws_account_id = "088305202849"

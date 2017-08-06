@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/app
 
 # dependencies
 /node_modules
@@ -32,8 +33,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/terraform/.tmp/
-/terraform/.terraform/
+/terraform/
+releng/.terraform/
+aws/.terraform/
+aws/terraform.tfstate.backup
 
 yarn-error.log
-/aws/.*
+src/environments/aws.json

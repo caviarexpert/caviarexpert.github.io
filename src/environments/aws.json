@@ -1,7 +1,0 @@
-{
-    "api_url": {
-        "sensitive": false,
-        "type": "string",
-        "value": "https://m6ug2fcq0m.execute-api.eu-west-1.amazonaws.com/production"
-    }
-}

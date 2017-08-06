@@ -27,5 +27,9 @@ export class AddressService {
   assignAddress( geocodingResult : GeocodeResult, coordinates? : LatLng){
     this.addressAssigned.next(new AddressObject(geocodingResult, coordinates));
   }
+
+  getCurrentAddress(): AddressObject {
+    return this.addressAssigned.getValue();
+  }
   
 }

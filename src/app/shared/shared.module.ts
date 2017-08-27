@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from "@angular/core";
 import { HttpModule } from '@angular/http';
 import { AddressService } from "./address.service";
 import { GeocodingService } from "./geocoding.service";
-import { DeliveryService } from "../datasources/delivery.service";
+import { DeliveryService } from "../shared/delivery.service";
 import { SharedComponent } from "./shared.component";
 import { SessionService } from "./session.service";
 import { PostmenService } from "./postmen.service";

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Product } from "./model/product";
-import { ProductDataSourceService } from "../datasources/product-data-source.service"
+import { Product } from './model/product';
+import { ProductDataSourceService } from '../datasources/product-data-source.service';
 
 @Injectable()
 export class ProductService {
-    
     private productsArray: Product[] = [];
 
     constructor(private productDataSource: ProductDataSourceService) {
@@ -12,8 +11,8 @@ export class ProductService {
             this.productsArray = data;
         });
     }
-    
-    get products():Product[] {
+
+    get products(): Product[] {
         return this.productsArray;
     }
 

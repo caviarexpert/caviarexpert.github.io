@@ -11,8 +11,8 @@ import { RatesComponent } from './rates.component';
 import { StreetAddressComponent } from './street-address.component';
 import { AddressGeocoding } from './address-geocoding.component';
 import { SharedModule } from '../shared/shared.module';
-//import { AppModule } from "../app.module";
-//import { TranslateModule, TranslateService } from "@ngx-translate/core";
+// import { AppModule } from "../app.module";
+// import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 
 @NgModule({
@@ -27,9 +27,9 @@ import { SharedModule } from '../shared/shared.module';
   providers: [ DeliveryComponentService ]
 })
 export class DeliveryModule {
-  constructor(private translation: TranslationService){
-        this.translation.addConfiguration() 
-            .addProvider("./assets/l10n/delivery/delivery-");
-        this.translation.init();    
+  constructor(private translation: TranslationService) {
+        this.translation.addConfiguration()
+            .addProvider('./assets/l10n/delivery/delivery-');
+        this.translation.init();
     }
 }

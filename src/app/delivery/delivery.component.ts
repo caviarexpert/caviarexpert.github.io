@@ -1,25 +1,25 @@
-import {Component, ViewChild, OnInit } from "@angular/core";
-import { AddressService } from "../shared/address.service";
-import { AddressObject } from "../shared/geocode";
-import { UpuAddress } from "../shared/upu-address";
-import { DeliveryService, CountryEntity } from "../datasources/delivery.service";
-import { Language, DefaultLocale, Currency, TranslationService } from "angular-l10n";
-import {Subscription} from "rxjs/Subscription";
-import { GeocodeResult } from "../shared/geocode";
+import {Component, ViewChild, OnInit } from '@angular/core';
+import { AddressService } from '../shared/address.service';
+import { AddressObject } from '../shared/geocode';
+import { UpuAddress } from '../shared/upu-address';
+import { DeliveryService, CountryEntity } from '../shared/delivery.service';
+import { Language, DefaultLocale, Currency, TranslationService } from 'angular-l10n';
+import {Subscription} from 'rxjs/Subscription';
+import { GeocodeResult } from '../shared/geocode';
 
 
 @Component({
     moduleId: module.id,
     selector: 'delivery-details',
-    templateUrl: "./delivery.component.html",
-    styleUrls: ["./delivery.component.css"]
+    templateUrl: './delivery.component.html',
+    styleUrls: ['./delivery.component.css']
 })
 export class DeliveryComponent implements OnInit {
     @Language() lang: string;
     @DefaultLocale() defaultLocale: string;
     @Currency() currency: string;
 
-    @ViewChild("searchAddress") searchAddressForm;
+    @ViewChild('searchAddress') searchAddressForm;
     
     private _addressSubscription: Subscription;
     private currentAddress : AddressObject = null;

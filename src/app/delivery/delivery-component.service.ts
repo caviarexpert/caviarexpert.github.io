@@ -8,7 +8,7 @@ import { PostmenService } from '../shared/postmen.service';
 
 @Injectable()
 export class DeliveryComponentService {
-    //public disableQuoteButton: boolean;
+    // public disableQuoteButton: boolean;
     private _needQuoteUpdateSubscription: Subscription;
     private disableRequestQuotation: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public disableQuotation$ = this.disableRequestQuotation.asObservable();

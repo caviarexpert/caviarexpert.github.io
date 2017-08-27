@@ -1,26 +1,26 @@
-import { Injectable } from "@angular/core";
-import { Product } from "./model/product";
-import { SessionService, SessionData } from "../shared/session.service";
+import { Injectable } from '@angular/core';
+import { Product } from './model/product';
+import { SessionService, SessionData } from '../shared/session.service';
 
 @Injectable()
 export class Cart {
     public lines: CartLine[] = [];
-    //public itemCount: number = 0;
-    //public cartPrice: number = 0;
+    // public itemCount: number = 0;
+    // public cartPrice: number = 0;
 
-    constructor(private sessionService : SessionService){
+    constructor(private sessionService: SessionService){
         this.sessionService.registerProvider( () => {
-            let cartLines : any = this.lines.map ( cl => {
-                let cartData : any = { sku: cl.product.sku, quantity: cl.quantity};
+            const cartLines: any = this.lines.map ( cl => {
+                const cartData: any = { sku: cl.product.sku, quantity: cl.quantity};
                 return cartData;
              });
-            return new SessionData("cart",  cartLines );
+            return new SessionData('cart',  cartLines );
         });
     }
 
     addLine(product: Product, quantity: number = 1) {
-        let line = this.lines.find(line => line.product.sku == product.sku);
-        if (line != undefined) {
+        const line = this.lines.find( aline => aline.product.sku === product.sku);
+        if (line !== undefined) {
             line.quantity += quantity;
         } else {
             this.lines.push(new CartLine(product, quantity));
@@ -28,8 +28,8 @@ export class Cart {
     }
 
     removeLine(sku: string) {
-        let index = this.lines.findIndex(line => line.product.sku == sku);
-        if(index>=0){
+        const index = this.lines.findIndex(line => line.product.sku === sku);
+        if (index >= 0) {
             this.lines.splice(index, 1);
         }
     }
@@ -42,8 +42,8 @@ export class Cart {
 
     clear() {
         this.lines = [];
-        //this.itemCount = 0;
-        //this.cartPrice = 0;
+        // this.itemCount = 0;
+        // this.cartPrice = 0;
     }
 }
 

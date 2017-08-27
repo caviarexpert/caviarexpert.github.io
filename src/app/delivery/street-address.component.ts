@@ -6,7 +6,7 @@ import { TranslationService } from 'angular-l10n';
 import { AddressObject } from '../shared/geocode';
 import { AddressService } from '../shared/address.service';
 import { DeliveryComponentService } from './delivery-component.service';
-import { DeliveryService, CountryEntity } from '../datasources/delivery.service';
+import { DeliveryService, CountryEntity } from '../shared/delivery.service';
 import { PostmenService } from '../shared/postmen.service';
 import { GeocodingService } from '../shared/geocoding.service';
 import { GeocodeResponse, GeocodeResult } from '../shared/geocode';
@@ -30,7 +30,7 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
         private deliveryService: DeliveryService,
         public translationService: TranslationService ) {}
 
-    ngOnInit(){
+    ngOnInit() {
         this._addressSubscription = this.addrService.addressAssigned$
             .subscribe( address => {
                 this._currentAddress = address;
@@ -47,13 +47,13 @@ export class StreetAddressComponent implements OnInit, OnDestroy {
         this.deliveryComponentService.quotationDisabled = !val;
         this._hideEditForm = val;
     }
-    get currentAddress() : AddressObject {
+    get currentAddress(): AddressObject {
         return this._currentAddress;
     }
-    get countries() : CountryEntity[] {
+    get countries(): CountryEntity[] {
         return this.deliveryService.countries;
     }
-    findCountry(code : string) : CountryEntity {
+    findCountry(code: string): CountryEntity {
         return this.deliveryService.countries
             .filter (ce => ce.code === code)
             .reduce ( (prev, current) => current);

@@ -1,50 +1,49 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SessionService {
 
-  private sessionId : string;
-  private dataProviders : SessionDataProvider[] = [];
+  private sessionId: string;
+  private dataProviders: SessionDataProvider[] = [];
 
-  registerProvider( dataProvider : SessionDataProvider ){
+  registerProvider( dataProvider: SessionDataProvider ) {
     this.dataProviders.push(dataProvider);
   }
 
-  getSessionData() : SessionData[] {
+  getSessionData(): SessionData[] {
     return this.dataProviders.map ( provider => {
-      let sessionData : SessionData = provider();
+      const sessionData: SessionData = provider();
       return sessionData;
      });
   }
-  
-  getSessionObject() : SessionObject {
-    return this.getSessionData().reduce( 
+
+  getSessionObject(): SessionObject {
+    return this.getSessionData().reduce(
       (sessionObject, currentSessionData ) => sessionObject.addData(currentSessionData.provider, currentSessionData.data),
       new SessionObject()
-    )
+    );
   }
 
 
 }
 
-export interface SessionDataProvider {
-  () : SessionData;
-}
-export class SessionData {  
-  constructor(public provider: string, public data : any){}
+export type SessionDataProvider = () => SessionData;
+
+export class SessionData {
+  constructor(public provider: string, public data: any) {}
 }
 export class SessionObject {
-  public cart : any;
-  public address : any;
-  addData( provider: string, data : any){
+  public cart: any;
+  public address: any;
+  addData( provider: string, data: any) {
     switch ( provider) {
-      case "cart" : {
-        this.cart = data
-        break
+      case 'cart' : {
+        this.cart = data;
+        break;
       }
-      case "address" : {
-        this.address = data
-        break
+      case 'address' : {
+        this.address = data;
+        break;
       }
     }
     return this;

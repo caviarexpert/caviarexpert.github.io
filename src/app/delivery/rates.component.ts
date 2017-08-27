@@ -35,7 +35,7 @@ export class RatesComponent implements OnInit, OnDestroy {
   private _addressSubscription: Subscription;
   private _quotationEnabledSubscription: Subscription;
 
-  private _quotations: Quotation[]
+  private _quotations: Quotation[];
 
   constructor (
     private addrService: AddressService,

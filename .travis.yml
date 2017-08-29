@@ -15,10 +15,11 @@ env:
   - PUSH_GIT_REPO: github.com/cavairexpert/caviarexpert.github.io.git
   - PUSH_GIT_BRANCH: master
   - secure_desc: GH_TOKEN=[TOKEN]
-  - secure: F50tQYEWnqp1upMUABVI1N/JTds/I/UWMiN1H/HkMa667FYJLnnd7ztVu21MMVF4QmYbUo2UlIAyFc91TQmnozYC4Pc0AhilE45M3OV6bbjPYWeiD1nU3NvUVWhahssIU+32TTK34/S0Nd2NUYgg5tWrhOVNFq79703lrKZqq5OSv6b+QEW7efcNXGiH1T3EGZvbaesumSzXIRmeCqlqnwHZqrUi9B6z6aFraQMzhd3OUfDMMkWdkOj6fj3boep/rTVShrwhkyAGRcTOpvfGrlFLHmnIlmSsWbMeIksKmcme8BSg7pn9gQ3f/rbABf17UIgjO4zj0Zv7r+pd1wL8KDhafDFvgtYc7Qh4+d44d8uPQffZjE0pqS4GpUNGze1uCSug+akovlvodGMxNIxvLpwsnMlxeD76NUdTYpxRUd5P1iDX7s3djVUVzqLsj4CZgKun0GZ2o6rHWMPnGzz4anOiPtdZIgtICELkbRN6MFwhQctf9BZy3Ynzipzyq3752K0iphbT7jw/BPOWbyCd3B/VKDKV3CNe+aSFgMArzL8CxkhcDXNbLURJRwatGVvd4YVFPRLKl1bMdCC3kxaW5+yG6ruLpfPTREVnIAYIhqzALXQtTAdhWPzoDop5IQwd4UllVRY9Mm46zM9AGWM3R1Sbfstf64dqg8MvVtsbwcs=
+  - secure: Pb5RRgTS7lcWkXNMCBJlxPt31Nu1DPwu51xxItic+ZvHVuBglciTYe3SohoQ/9xo9VCgsZRiIoRxTMOsqJ2GQSHkrvQE3vVAffb8PvQAnVlsVuD+OLKZIv4rSuJiZ9NyoR3cTXs6dUYKJZnflL+zMM8K40+vVrpMRG95K8IJxnzhFJSdNSLgPCVfb1pRnbycSIWQyL6lCozz8oKa7z6ZJftIhAarSwZku8mEFgLZDc+ygfO+ltYqLbfJAee+8vDtmnUHKKusOZDhhBWARGcf9dV9TrSA+MXRuZhZ1WDdcrLuhUd8joAg1p/2J+WpTGAtdi2RfBBtPtVk0qwJhhqt5TSurS00PjmnAWrX+Y7jLfbr3wGgzzRZPwd/RJyxRCR06P2TNGaauJu/kILdaIKw/YCTbBkgpETJLk6nQPRNQ+BGHuJLNCP+9mkjIk2WCHNPHJgzI+qTjHBOrUgVmav114jTM4vyJDVDgE7P+xaCJi8QOeKA4V0KW6dYRFDfGNmpVcZcQQAy9upK9RxMN1k8W8t9y1fAyiM4aAw7r3SUup42YCtXLFFURo0K+ZjfFWv7HRFHyJ9jySBQGG7/8ZmEw5tSXy1AgypT8RPQDPlU8cafYg/pM9aa4mfOXa94QXTkV22QNL049EpT1B7cIOOvI9M/+8TQB77kgVqTzPP9BB4=
 before_install:
 - cat /dev/null > .yarnrc
-- curl -fSL "https://releases.hashicorp.com/terraform/0.10.2/terraform_0.10.2_linux_amd64.zip" -o terraform.zip
+- curl -fSL "https://releases.hashicorp.com/terraform/0.10.2/terraform_0.10.2_linux_amd64.zip"
+  -o terraform.zip
 - sudo unzip terraform.zip -d /opt/terraform
 - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
 - rm -f terraform.zip
@@ -33,5 +34,4 @@ deploy:
   on:
     branch: ng-cli
   target_branch: master
-  github_token:
-    secure: zC7+eY9CovhP4xF2+86tsrkhKsnLNx2I6K/U78TSjQtT4RLt0mZm/47ZhTlenOyOGuLMdYqg3VRQIt2oo4Mv8PqS8pw5fMJgxwjIKP3Jr3zxDxUiMk2g6RmUlKn95A9xnarD2FR7eZsLhPZr66zv6r6kQdkYHo/Rlpz1OescSPL3J4VOQfFpoqMK2j/DO9eEJ0CQNS66kNGFFwNxYnUPEyRK8ruSMHvv6RgxqoQMdL21Z6N+VyW7Blltl51YQvyjMBKcklZNqGioZ54cY99nrf+Nt2g7k+WqpVYvKYzs4sf51WwBWng3urMw0cMJPgC2OmDCIXOXqE1R/Ghk/5GvKMsR79JYCytlODgRr0xRV/rp0AVzFFIRGvmR7XBlMpc2lMPdpS/1um9oYAOLyspDLeqFyo2TAbaNxQHvdAjk9MthTsWU3zU2NBFtULuq6p4qigy4m5Jsd63gNf6VBdB1Q13k9abEIXSpQx3tAP9UGTSqEjwfwAXKETzWRp3KStlTkE8k+Rebl8bcBDxsVlaS+VizJSei/s8fY9JqAnBS4uuEl9Iqj7UFnA9cQjQ8jApsLkaIEXYJZu7WTilfiqUb0Q1f1X9EuLi1nWCGwj9c4nIrvqrOTbZ4UIRn/xV+lIEsYAHGiKHxpwO+Cje0Du+wKuptyQp5lbk21KOTV1rTuZs=
+  github_token: $GH_TOKEN

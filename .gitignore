@@ -39,4 +39,5 @@ aws/.terraform/
 aws/terraform.tfstate.backup
 
 yarn-error.log
-src/environments/aws.json
+/src/environments/aws.json
+/postmen

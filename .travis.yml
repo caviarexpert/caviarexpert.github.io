@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- "6"
+- '6'
 cache: yarn
 branches:
   only:
@@ -15,30 +15,17 @@ env:
   - PUSH_GIT_REPO: github.com/cavairexpert/caviarexpert.github.io.git
   - PUSH_GIT_BRANCH: master
   - secure_desc: GH_TOKEN=[TOKEN]
-  - secure: yWL8DMPrNyKS5jKwfjKWPSrZ3USOkK5xzNNyuVEGoYkqcgEo+RdwrfwmgksvG9dlktq3lkLqPckEPZOc4KwlkU/p/F8j+MKiszm4yXhebnJI5nEjDm9p0Dqx015M2fKalNxQfI8Mf0XyVKb6N7O+Gt6g7FCuviQAatDtNhRjw7RW8pLzgd5SbHshuBrM1qzWzBbQarwcFRvDHb2X4/4RHpEqX0ApSlyFvHWqvQVvcJya6uMU2hRePTcaplAgpYfKrM9Wk19m9VKhswxoApP91cEgMNAuHIQyTuZue714DYoG9T3FrGAexZ08SQUZNJ65WWOYBTcmXmJKN2lbzUHVAhE4jSpykC5HclZuTmUN7W5ukKQRmorK/JiMQrd8nA9BDbtpfdU6IqaK71WOqnJQ9zPDUOLJFRHKVNN7E6+SfT2fgxAunpfx/kc/3yTm25kQyLQduHVgjvbpmGw9GqrjFQYIpqqr3DbwYtY2u05FUWgqa/0e8AWB2DOq/oH53tTrqMo0m//ZMNyQEh83sf3yXEnQuWdI0oQbck9weSm/aAoP5crSXlp7WjvNGbnyJ/TmjAEfAxj3LIfndbaUvIzGCP4s2swwXoS+UnfedXGU/5V2POYyQpdycjFIYg5RPIL9xF9djNxxJBddHCGdN3vFAGaoI3Iu9G4DBxhw8UZAtNk=
-
+  - secure: F50tQYEWnqp1upMUABVI1N/JTds/I/UWMiN1H/HkMa667FYJLnnd7ztVu21MMVF4QmYbUo2UlIAyFc91TQmnozYC4Pc0AhilE45M3OV6bbjPYWeiD1nU3NvUVWhahssIU+32TTK34/S0Nd2NUYgg5tWrhOVNFq79703lrKZqq5OSv6b+QEW7efcNXGiH1T3EGZvbaesumSzXIRmeCqlqnwHZqrUi9B6z6aFraQMzhd3OUfDMMkWdkOj6fj3boep/rTVShrwhkyAGRcTOpvfGrlFLHmnIlmSsWbMeIksKmcme8BSg7pn9gQ3f/rbABf17UIgjO4zj0Zv7r+pd1wL8KDhafDFvgtYc7Qh4+d44d8uPQffZjE0pqS4GpUNGze1uCSug+akovlvodGMxNIxvLpwsnMlxeD76NUdTYpxRUd5P1iDX7s3djVUVzqLsj4CZgKun0GZ2o6rHWMPnGzz4anOiPtdZIgtICELkbRN6MFwhQctf9BZy3Ynzipzyq3752K0iphbT7jw/BPOWbyCd3B/VKDKV3CNe+aSFgMArzL8CxkhcDXNbLURJRwatGVvd4YVFPRLKl1bMdCC3kxaW5+yG6ruLpfPTREVnIAYIhqzALXQtTAdhWPzoDop5IQwd4UllVRY9Mm46zM9AGWM3R1Sbfstf64dqg8MvVtsbwcs=
 before_install:
-  - cat /dev/null > .yarnrc
-
+- cat /dev/null > .yarnrc
 script: yarn run build
-
-#after_success:
-# - bash deploy/deploy.sh
 before_deploy:
-  - cat /dev/null > .gitignore
-#  - touch .nojekyll
-#  - mkdir ../output
-  - cp ./deploy/404.html ./dist
-#  - echo 'output dir created'
-#  - cd ../output
-#  - echo `ls .`
-#  - echo `ls deploy`
-#  - cp deploy/README.md README.md
-#  - cp deploy/deploy.gitignore .gitignore  
+- cat /dev/null > .gitignore
+- cp ./deploy/404.html ./dist
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: ./dist
+  local_dir: "./dist"
   on:
     branch: ng-cli
   target_branch: master

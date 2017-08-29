@@ -18,6 +18,10 @@ env:
   - secure: F50tQYEWnqp1upMUABVI1N/JTds/I/UWMiN1H/HkMa667FYJLnnd7ztVu21MMVF4QmYbUo2UlIAyFc91TQmnozYC4Pc0AhilE45M3OV6bbjPYWeiD1nU3NvUVWhahssIU+32TTK34/S0Nd2NUYgg5tWrhOVNFq79703lrKZqq5OSv6b+QEW7efcNXGiH1T3EGZvbaesumSzXIRmeCqlqnwHZqrUi9B6z6aFraQMzhd3OUfDMMkWdkOj6fj3boep/rTVShrwhkyAGRcTOpvfGrlFLHmnIlmSsWbMeIksKmcme8BSg7pn9gQ3f/rbABf17UIgjO4zj0Zv7r+pd1wL8KDhafDFvgtYc7Qh4+d44d8uPQffZjE0pqS4GpUNGze1uCSug+akovlvodGMxNIxvLpwsnMlxeD76NUdTYpxRUd5P1iDX7s3djVUVzqLsj4CZgKun0GZ2o6rHWMPnGzz4anOiPtdZIgtICELkbRN6MFwhQctf9BZy3Ynzipzyq3752K0iphbT7jw/BPOWbyCd3B/VKDKV3CNe+aSFgMArzL8CxkhcDXNbLURJRwatGVvd4YVFPRLKl1bMdCC3kxaW5+yG6ruLpfPTREVnIAYIhqzALXQtTAdhWPzoDop5IQwd4UllVRY9Mm46zM9AGWM3R1Sbfstf64dqg8MvVtsbwcs=
 before_install:
 - cat /dev/null > .yarnrc
+- curl -fSL "https://releases.hashicorp.com/terraform/0.10.2/terraform_0.10.2_linux_amd64.zip" -o terraform.zip
+- sudo unzip terraform.zip -d /opt/terraform
+- sudo ln -s /opt/terraform/terraform /usr/bin/terraform
+- rm -f terraform.zip
 script: yarn run build
 before_deploy:
 - cat /dev/null > .gitignore

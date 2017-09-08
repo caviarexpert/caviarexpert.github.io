@@ -60,13 +60,7 @@ module "postmen" {
   lambda_handler = "com.itranga.cav.aws.lambda.postmen.ShipmentQuotation"
   api_path_part = "postmen"
   lambda_environment = {
-    POSTMEN_API_KEY = "${data.aws_s3_bucket_object.postmen_api_key.body}",
-    POSTMEN_REGION = "sandbox",
-    PAYPAL_CLIENT_ID = "AZ997XVWtiXBQAvpK97XJP9oSSXUoTXjIMQZD2B-qVJFoiQQ_FAF0eS_3innrhjnlDKBFNX3CGc30uU5",
-    PAYPAL_CLIENT_SECRET = "${data.aws_s3_bucket_object.paypal_secret.body}",
-    PAYPAL_MODE = "sandbox",
-    PAYPAL_CANCEL_URL = "https://caviarexpert.github.io/payment/paypal/canceled",
-    PAYPAL_RETURN_URL = "https://caviarexpert.github.io/payment/paypal/done"
+    POSTMEN_CONFIG = "${data.aws_s3_bucket_object.postmen_config.body}"
   }
 }
 
@@ -106,11 +100,8 @@ module "paypal" {
   lambda_handler = "com.itranga.cav.aws.lambda.paypal.PayFunction"
   api_path_part = "paypal"
   lambda_environment = {
-    PAYPAL_CLIENT_ID = "AZ997XVWtiXBQAvpK97XJP9oSSXUoTXjIMQZD2B-qVJFoiQQ_FAF0eS_3innrhjnlDKBFNX3CGc30uU5",
-    PAYPAL_CLIENT_SECRET = "${data.aws_s3_bucket_object.paypal_secret.body}",
-    PAYPAL_MODE = "sandbox",
-    PAYPAL_CANCEL_URL = "https://caviarexpert.github.io/payment/paypal/canceled",
-    PAYPAL_RETURN_URL = "https://caviarexpert.github.io/payment/paypal/done"
+    PAYPAL_CONFIG = "${data.aws_s3_bucket_object.paypal_config.body}"
+    PAYPAL_IPN_URL_PART = "${var.paypal_ipn_url_part}"
   }
 }
 
@@ -127,13 +118,9 @@ module "paypal_ipn" {
   //lambda_zip_hash = "${base64sha256(file(var.lambda_zip_file))}"
   lambda_function_name = "paypal-ipn"
   lambda_handler = "com.itranga.cav.aws.lambda.paypal.IPNListener"
-  api_path_part = "paypal-ipn"
+  api_path_part = "${var.paypal_ipn_url_part}"
   lambda_environment = {
-    PAYPAL_CLIENT_ID = "AZ997XVWtiXBQAvpK97XJP9oSSXUoTXjIMQZD2B-qVJFoiQQ_FAF0eS_3innrhjnlDKBFNX3CGc30uU5",
-    PAYPAL_CLIENT_SECRET = "${data.aws_s3_bucket_object.paypal_secret.body}",
-    PAYPAL_MODE = "sandbox",
-    PAYPAL_CANCEL_URL = "https://caviarexpert.github.io/payment/paypal/canceled",
-    PAYPAL_RETURN_URL = "https://caviarexpert.github.io/payment/paypal/done"
+    PAYPAL_CONFIG = "${data.aws_s3_bucket_object.paypal_config.body}"
   }
 }
 /*

@@ -34,10 +34,10 @@ testem.log
 Thumbs.db
 
 /terraform/
-releng/.terraform/
-aws/.terraform/
-aws/terraform.tfstate.backup
+/releng/.terraform/
+/aws/.terraform/
+/aws/terraform.tfstate.backup
 
-yarn-error.log
+/yarn-error.log
 /src/environments/aws.json
 /postmen

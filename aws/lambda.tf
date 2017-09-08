@@ -24,10 +24,12 @@ data "aws_iam_policy_document" "policy" {
     sid = ""
     effect = "Allow"
     actions = [
-      "sdb:*"
+      "sdb:*",
+      "logs:*"
     ]
     resources = [
       "arn:aws:sdb:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*",
+      "arn:aws:logs:*:*:*"
     ]
   }
 }

@@ -1,12 +1,14 @@
-data "aws_s3_bucket_object" "paypal_secret" {
+/* PAYPAL */
+data "aws_s3_bucket_object" "paypal_config" {
   bucket = "caviarexpert-vault"
-  key    = "paypal-secret"
+  key    = "paypal-config.json.txt"
 }
-data "aws_s3_bucket_object" "postmen_api_key" {
+/* POSTMEN */
+data "aws_s3_bucket_object" "postmen_config" {
   bucket = "caviarexpert-vault"
-  key    = "postmen-api-key"
+  key    = "postmen-config.json.txt"
 }
-
+/* S3 bucket where all Lambda artifacts reside */
 data "aws_s3_bucket_object" "lambdas_bucket" {
   bucket = "caviarexpert-vault"
   key    = "lambdas-bucket"

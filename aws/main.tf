@@ -79,6 +79,7 @@ module "invoice" {
   api_path_part = "invoice"
   lambda_environment = {
     SIMPLE_DB = "mysimpledb-2"
+    SIMPLEDB_REGION = "${data.aws_region.current.name}"
   }
 }
 
@@ -102,6 +103,7 @@ module "paypal" {
   lambda_environment = {
     PAYPAL_CONFIG = "${data.aws_s3_bucket_object.paypal_config.body}"
     PAYPAL_IPN_URL_PART = "${var.paypal_ipn_url_part}"
+    SIMPLEDB_REGION = "${data.aws_region.current.name}"
   }
 }
 
@@ -121,6 +123,7 @@ module "paypal_ipn" {
   api_path_part = "${var.paypal_ipn_url_part}"
   lambda_environment = {
     PAYPAL_CONFIG = "${data.aws_s3_bucket_object.paypal_config.body}"
+    SIMPLEDB_REGION = "${data.aws_region.current.name}"
   }
 }
 /*

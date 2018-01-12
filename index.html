@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CaviarExpert</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <!-- link href="styles.css" type="text/css" rel="stylesheet" / -->
+  <!-- link href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" type="text/css" rel="stylesheet" /-->
+<link href="styles.4a113ffab0e1e2596bdd.bundle.css" rel="stylesheet"/></head>
+<body>
+  <script type="text/javascript">
+    (function(l) {
+      if (l.search) {
+        var q = {};
+        l.search.slice(1).split('&').forEach(function(v) {
+          var a = v.split('=');
+          q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (q.p !== undefined) {
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + (q.p || '') + (q.q ? ('?' + q.q) : '') + l.hash );
+        }
+      }
+    }(window.location))
+    window.__theme = 'bs4';
+  </script>
+  <app-root>
+  <style>
+  app-root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: pink;
+    text-transform: uppercase;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  }
+  body { background: salmon; margin: 0; padding: 0; }
+  @keyframes dots {
+    50% { transform: translateY(-.4rem); }
+    100% { transform: translateY(0); }
+  }
+  .d { animation: dots 1.5s ease-out infinite; }
+  .d-2 { animation-delay: .5s; }
+  .d-3 { animation-delay: 1s; }
+
+.bubble {
+   width:100px; /* Our bubble will be 200px wide and 200px tall */
+   height:100px;
+   margin:50px auto 50px auto;
+   box-shadow:inset 30px 30px 75px rgba(0,0,0,.1), /* this gives us our subtle light gray background gradient */
+              inset 0px 0px 15px rgba(0,0,0,.5), /* this gives us the darker gray border around the whole bubble */
+              inset 0px 0px 55px rgba(255,255,255,.5), /* this gives us the more subtle white gradient all around the edge of the bubble */
+              inset 3px 3px 5px rgba(0,0,0,.5), /* this gives us the slightly darker top left edge */
+              0 0 50px rgba(255,255,255,.75); /* this puts a white glow all around the outside of the bubble to better contrast the edge */
+   border-radius:100px; /* making our border-radius half the width/height ensures a perfectly round circle */
+   /*background:rgba(255,255,255,.4); /* makes our bubble slightly lighter in color than the background */
+   background: rgba(250,83,47,.8);
+   position:absolute; /* allows us to absolutely position the pseudo elements within the bubble */
+   top: 50px;
+}
+
+.bubble:before { /* adds the white highlight on the top left of the bubble */
+   content:"";
+   display:block;position:absolute;width:50px;height:50px;top:15px;left:15px;
+   border-radius: 75px 25px;
+   box-shadow:inset 10px 10px 50px rgba(255,255,255,.6);
+}
+
+.bubble:after { /* adds the darker lowlight on the bottom of the bubble */
+   content:"";
+   display:block;position:absolute;width:85px;height:85px;border-radius:85px;left:15px;top:15px;
+   box-shadow:inset 0px -10px 10px rgba(0,0,0,.05);
+}
+  </style>
+  <div class="bubble"></div>
+  Loading<span class="d">.</span><span class="d d-2">.</span><span class="d d-3">.</span>
+  
+  </app-root>
+<script type="text/javascript" src="inline.ed651b19d9403abc151e.bundle.js"></script><script type="text/javascript" src="polyfills.d11962ac02a6ff887c2f.bundle.js"></script><script type="text/javascript" src="vendor.84a0aa36e9ab2aa46dba.bundle.js"></script><script type="text/javascript" src="main.c705ecb525411afda6a7.bundle.js"></script></body>
+</html>

@@ -1,0 +1,27 @@
+{
+    "we deliver to EU only": "&ndash; we deliver to <strong>EU only</strong>",
+    "ADDRESS": {        
+        "addressToLocation": "street address",
+        "route": "street",
+        "building": "building",
+        "room": "room",
+        "country": "country",
+        "postal_code": "postal code",
+        "locality": "locality",
+        "administrative_area_level_1": "region",
+        "administrative_area_level_2": "district",
+        
+        "HELP": {
+            "addressToLocation": "for example <code>Oxford street 5 London </code> and we'll figure out other details ourselves"
+        }        
+    },
+    "ChooseMap": {
+        "OR": "or"        
+    },
+    "point on map": "point on map",
+    "TypeDeliveryAddress": "Type delivery address",
+    "upuAddress": {
+        "addressee": "addressee",
+        "deliveryPoint": "appartement/room/office"
+    }
+}

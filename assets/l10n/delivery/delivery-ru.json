@@ -1,0 +1,23 @@
+{
+    "we deliver to EU only": " &ndash; отправляем <strong>только</strong> в страны EC",
+    "ADDRESS": {
+        "addressToLocation": "адрес",
+        "route": "улица",
+        "building": "дом",
+        "room": "№ квартиры",
+        "country": "страна",
+        "postal_code": "индекс",
+        "locality": "город, посёлок",
+        "administrative_area_level_1": "область",
+        "administrative_area_level_2": "район",
+
+        "HELP": {
+            "addressToLocation": "например <code>Репина 3 Урюпинск</code> и остальное мы заполним сами"
+        } 
+    },
+    "ChooseMap": {
+        "OR": "или"        
+    },
+    "point on map": "на карте",
+    "Type delivery address": "укажите адрес"
+}
